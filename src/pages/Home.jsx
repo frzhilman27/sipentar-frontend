@@ -1,12 +1,16 @@
+import { Link } from "react-router-dom";
+
 function Home() {
   return (
-    <div className="text-center mt-20">
-      <h2 className="text-5xl font-bold mb-6">
-        Sistem Pengaduan Terpadu
-      </h2>
-      <p className="text-gray-400 text-lg">
-        Platform digital untuk laporan masyarakat secara cepat dan transparan.
-      </p>
+    <div style={{ padding: "40px", textAlign: "center" }}>
+      <h1>Sistem Pengaduan Terpadu</h1>
+      <p>Platform digital untuk laporan masyarakat</p>
+
+      <Link to="/login">
+        <button style={{ padding: "10px 20px" }}>
+          Login Admin
+        </button>
+      </Link>
     </div>
   );
 }
