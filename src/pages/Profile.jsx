@@ -40,8 +40,9 @@ function Profile() {
     const [loadingDelete, setLoadingDelete] = useState(false);
     const [deleteMessage, setDeleteMessage] = useState({ type: "", text: "" });
 
-    const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
-    const userPhotoUrl = fotoProfilLocal ? `${API_BASE_URL}${fotoProfilLocal}` : null;
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+    const BASE_URL = API_URL.replace(/\/api\/?$/, "");
+    const userPhotoUrl = fotoProfilLocal ? `${BASE_URL}${fotoProfilLocal}` : null;
 
     useEffect(() => {
         fetchProfile();
