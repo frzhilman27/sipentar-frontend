@@ -135,7 +135,7 @@ function Dashboard() {
 
               {/* Notification Dropdown Aesthetic */}
               {showNotifications && (
-                <div className="absolute right-0 mt-4 w-80 sm:w-96 bg-white/95 backdrop-blur-2xl rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] border border-slate-100/60 overflow-hidden transform origin-top-right transition-all">
+                <div className="fixed sm:absolute inset-x-4 top-20 sm:inset-auto sm:top-auto sm:right-0 sm:mt-4 sm:w-96 bg-white/95 backdrop-blur-2xl rounded-3xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] border border-slate-100/60 overflow-hidden transform origin-top sm:origin-top-right transition-all z-50">
                   <div className="px-6 py-4 border-b border-slate-50 bg-white flex justify-between items-center">
                     <h3 className="text-sm font-extrabold text-slate-800">Pemberitahuan</h3>
                     {unreadCount > 0 && <span className="text-[10px] font-bold uppercase tracking-wider text-rose-600 bg-rose-50 px-3 py-1 rounded-full">{unreadCount} Baru</span>}
@@ -327,14 +327,17 @@ function Dashboard() {
 
                     {/* Gambar Opsional Bento Style */}
                     {r.image_url && (
-                      <div className="mt-2 mb-6 rounded-2xl overflow-hidden border border-slate-200/40 shadow-sm sm:max-w-md relative group/img cursor-zoom-in">
+                      <div
+                        className="mt-2 mb-6 rounded-2xl overflow-hidden border border-slate-200/40 shadow-sm sm:max-w-md relative group/img cursor-zoom-in"
+                        onClick={() => window.open(`${API_URL}/uploads/${r.image_url}`, "_blank")}
+                      >
                         <img
                           src={`${API_URL}/uploads/${r.image_url}`}
                           alt="Bukti Laporan"
                           className="w-full h-auto object-cover group-hover/img:scale-105 group-hover/img:rotate-1 transition-all duration-500"
-                          onClick={() => window.open(`${API_URL}/uploads/${r.image_url}`, "_blank")}
                         />
-                        <div className="absolute inset-0 bg-indigo-900/10 opacity-0 group-hover/img:opacity-100 transition-opacity"></div>
+                        {/* Overlay shadow (pointer-events-none mencegah halangan ketukan sentuh UI HP) */}
+                        <div className="absolute inset-0 bg-indigo-900/10 opacity-0 group-hover/img:opacity-100 transition-opacity pointer-events-none"></div>
                       </div>
                     )}
 
