@@ -180,16 +180,16 @@ function Profile() {
     const theme = "blue";
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-900 font-sans pb-12 selection:bg-blue-100 dark:selection:bg-blue-900 transition-colors duration-300">
+        <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] font-sans pb-16 selection:bg-indigo-200 dark:selection:bg-indigo-900 transition-colors duration-500">
             {/* Header Premium & Identitas Kompak */}
-            <header className="sticky top-0 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
+            <header className="sticky top-0 z-40 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border-b border-white/40 dark:border-slate-800/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)] transition-all duration-300">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
                     <div className="flex items-center gap-4">
                         <button
                             onClick={handleBackNavigation}
-                            className="p-2 text-slate-400 dark:text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none"
+                            className="p-2.5 text-slate-400 dark:text-slate-500 hover:bg-white dark:hover:bg-slate-800 rounded-full hover:text-indigo-600 dark:hover:text-indigo-400 transition-all duration-300 hover:shadow-md hover:scale-105 active:scale-95 focus:outline-none"
                         >
-                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" /></svg>
+                            <svg className="w-5 h-5 lg:w-6 lg:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" /></svg>
                         </button>
 
                         {/* Identitas Terpadu / Judul Halaman di Header */}
@@ -246,54 +246,56 @@ function Profile() {
 
                     {/* VIEW: MENU NAVIGASI GRID (DEFAULT "Ringkasan") */}
                     {activeTab === "ringkasan" && (
-                        <div className="w-full animate-in fade-in zoom-in-95 duration-300">
+                        <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
                             {/* Sambutan Pribadi & Identitas */}
-                            <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700/50 p-8 flex flex-col items-center justify-center text-center transition-colors mb-8 relative overflow-hidden">
-                                <div className="absolute top-0 right-0 -mt-8 -mr-8 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl"></div>
-                                <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl"></div>
+                            <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-3xl rounded-[2.5rem] shadow-2xl shadow-indigo-500/5 dark:shadow-none border border-white/60 dark:border-slate-700/50 p-10 flex flex-col items-center justify-center text-center transition-all duration-500 hover:shadow-indigo-500/10 mb-10 relative overflow-hidden group">
+                                {/* Decorative Orbs */}
+                                <div className="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-[3rem] group-hover:blur-[4rem] group-hover:scale-110 transition-all duration-700 ease-in-out"></div>
+                                <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-56 h-56 bg-gradient-to-tr from-indigo-500/20 to-teal-400/20 rounded-full blur-[3rem] group-hover:blur-[4rem] group-hover:scale-110 transition-all duration-700 ease-in-out"></div>
 
-                                <div className="w-28 h-28 mb-6 relative z-10">
+                                <div className="w-32 h-32 mb-6 relative z-10">
+                                    <div className="absolute inset-0 bg-indigo-500/20 rounded-full blur-2xl scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                                     {userPhotoUrl ? (
-                                        <img src={userPhotoUrl} alt="Profil Atas" className="w-full h-full rounded-full object-cover border-4 border-white dark:border-slate-800 shadow-xl transition-colors" />
+                                        <img src={userPhotoUrl} alt="Profil Atas" className="w-full h-full rounded-full object-cover border-[5px] border-white dark:border-slate-800 shadow-2xl transition-transform duration-500 group-hover:scale-105 relative z-10" />
                                     ) : (
-                                        <div className={`w-full h-full rounded-full flex items-center justify-center text-4xl font-extrabold text-white shadow-xl border-4 border-white dark:border-slate-800 bg-gradient-to-br from-cyan-400 to-blue-600`}>
+                                        <div className={`w-full h-full rounded-full flex items-center justify-center text-5xl font-black text-white shadow-2xl border-[5px] border-white dark:border-slate-800 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 transition-transform duration-500 group-hover:scale-105 relative z-10`}>
                                             {user.name.charAt(0).toUpperCase()}
                                         </div>
                                     )}
                                 </div>
-                                <h3 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-2 transition-colors relative z-10 tracking-tight">Halo, {user.name || "Kawan"}!</h3>
-                                <p className="text-slate-500 dark:text-slate-400 max-w-lg leading-relaxed transition-colors relative z-10 text-base font-medium">
-                                    Selamat datang di pusat kendali akun Sipentar Anda.
+                                <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-3 transition-colors relative z-10 tracking-tight">Halo, <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">{user.name || "Kawan"}</span>!</h3>
+                                <p className="text-slate-500 dark:text-slate-400 max-w-lg leading-relaxed transition-colors relative z-10 text-base md:text-lg font-medium">
+                                    Sipentar Identity Center. Kelola lapis ganda privasi masa depan Anda dengan cerdas dan eksklusif.
                                 </p>
                             </div>
 
-                            <div className="flex flex-col gap-3 w-full max-w-lg mx-auto">
+                            <div className="flex flex-col gap-4 w-full max-w-lg mx-auto">
                                 {/* Text List Menu: Kelola Profil */}
                                 <button
                                     onClick={() => { handleTabChange("profil"); setProfileMessage({ type: '', text: '' }); }}
-                                    className="flex items-center justify-between w-full px-5 py-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                                    className="group flex items-center justify-between w-full px-6 py-5 bg-white/90 dark:bg-slate-800/90 backdrop-blur-lg rounded-[1.5rem] border border-white/60 dark:border-slate-700/50 shadow-lg shadow-slate-200/40 dark:shadow-none hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
                                 >
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-10 h-10 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center">
-                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                                    <div className="flex items-center gap-5">
+                                        <div className="w-12 h-12 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-700 dark:to-slate-800 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform duration-300">
+                                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                                         </div>
-                                        <span className="text-base font-bold text-slate-700 dark:text-white">Kelola Identitas Profil</span>
+                                        <span className="text-[17px] font-bold text-slate-800 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">Kelola Identitas Profil</span>
                                     </div>
-                                    <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
+                                    <svg className="w-5 h-5 text-slate-400 group-hover:translate-x-1 group-hover:text-indigo-500 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
                                 </button>
 
                                 {/* Text List Menu: Pengaturan */}
                                 <button
                                     onClick={() => { handleTabChange("pengaturan"); setPasswordMessage({ type: '', text: '' }); setDeleteMessage({ type: '', text: '' }); }}
-                                    className="flex items-center justify-between w-full px-5 py-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+                                    className="group flex items-center justify-between w-full px-6 py-5 bg-white/90 dark:bg-slate-800/90 backdrop-blur-lg rounded-[1.5rem] border border-white/60 dark:border-slate-700/50 shadow-lg shadow-slate-200/40 dark:shadow-none hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
                                 >
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-10 h-10 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-xl flex items-center justify-center">
-                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                    <div className="flex items-center gap-5">
+                                        <div className="w-12 h-12 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-slate-700 dark:to-slate-800 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform duration-300">
+                                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                                         </div>
-                                        <span className="text-base font-bold text-slate-700 dark:text-white">Pengaturan Keamanan</span>
+                                        <span className="text-[17px] font-bold text-slate-800 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">Pengaturan Keamanan</span>
                                     </div>
-                                    <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
+                                    <svg className="w-5 h-5 text-slate-400 group-hover:translate-x-1 group-hover:text-purple-500 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
                                 </button>
                             </div>
                         </div>
@@ -304,11 +306,12 @@ function Profile() {
 
                         {/* VIEW: KELOLA PROFIL (Dual-Mode: Read vs Edit) */}
                         {activeTab === "profil" && (
-                            <div className="bg-white dark:bg-slate-800 border-t border-b sm:border sm:rounded-3xl shadow-sm border-slate-200 dark:border-slate-700/50 overflow-hidden animate-in slide-in-from-right-8 fade-in duration-300 transition-colors">
+                            <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-3xl border-t border-b sm:border sm:rounded-[2.5rem] shadow-2xl shadow-indigo-500/5 dark:shadow-none border-white/60 dark:border-slate-700/50 overflow-hidden animate-in slide-in-from-right-8 fade-in duration-500 transition-all relative">
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl"></div>
                                 {isEditingProfile && (
-                                    <div className="px-6 sm:px-8 py-5 border-b border-slate-100 dark:border-slate-700/50 transition-colors">
-                                        <h3 className="text-lg font-bold text-slate-800 dark:text-white transition-colors">Ubah Informasi Identitas</h3>
-                                        <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-0.5 transition-colors">Mutakhirkan jejak identitas keanggotaan publik Anda.</p>
+                                    <div className="px-6 sm:px-10 py-7 border-b border-slate-100 dark:border-slate-700/50 transition-colors relative z-10">
+                                        <h3 className="text-2xl font-extrabold text-slate-800 dark:text-white transition-colors tracking-tight">Ubah Informasi Identitas</h3>
+                                        <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mt-1.5 transition-colors">Mutakhirkan jejak identitas keanggotaan publik Anda dengan akurat.</p>
                                     </div>
                                 )}
 
@@ -320,54 +323,54 @@ function Profile() {
                                     )}
 
                                     {!isEditingProfile ? (
-                                        /* ================= READ MODE (VIEW COMPACT) ================= */
-                                        <div className="flex flex-col animate-in fade-in duration-300">
+                                        /* ================= READ MODE (VIEW COMPACT PREMIUM) ================= */
+                                        <div className="flex flex-col animate-in fade-in duration-500 relative z-10">
                                             {/* Top Centered Profile Header */}
-                                            <div className="flex flex-col items-center justify-center pt-10 pb-8 px-6 text-center">
-                                                <div className="w-24 h-24 mb-5 relative group">
-                                                    <div className="absolute inset-0 bg-green-500/20 rounded-full blur-xl scale-110 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                            <div className="flex flex-col items-center justify-center pt-12 pb-10 px-6 text-center">
+                                                <div className="w-28 h-28 mb-5 relative group cursor-default">
+                                                    <div className="absolute inset-0 bg-green-500/20 rounded-full blur-2xl scale-125 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                                                     {userPhotoUrl ? (
-                                                        <img src={userPhotoUrl} alt="Profil" className="w-full h-full rounded-full object-cover border-4 border-white dark:border-slate-800 shadow-md relative z-10" />
+                                                        <img src={userPhotoUrl} alt="Profil" className="w-full h-full rounded-full object-cover border-[4px] border-white dark:border-slate-800 shadow-xl ring-4 ring-slate-50 dark:ring-slate-800 ring-offset-4 ring-offset-white dark:ring-offset-slate-900 transition-transform duration-500 group-hover:scale-105 relative z-10" />
                                                     ) : (
-                                                        <div className="w-full h-full rounded-full flex items-center justify-center text-4xl font-black text-white shadow-md border-4 border-white dark:border-slate-800 bg-gradient-to-br from-green-400 to-emerald-600 relative z-10">
+                                                        <div className="w-full h-full rounded-full flex items-center justify-center text-4xl font-black text-white shadow-xl border-[4px] border-white dark:border-slate-800 ring-4 ring-green-50 dark:ring-green-900/30 ring-offset-4 ring-offset-white dark:ring-offset-slate-900 bg-gradient-to-br from-emerald-400 to-teal-600 transition-transform duration-500 group-hover:scale-105 relative z-10">
                                                             {user.name.charAt(0).toUpperCase()}
                                                         </div>
                                                     )}
                                                 </div>
-                                                <h2 className="text-[17px] font-black tracking-widest uppercase text-slate-800 dark:text-white mb-1.5">{user.name}</h2>
+                                                <h2 className="text-[19px] font-black tracking-widest uppercase text-slate-800 dark:text-white mb-2">{user.name}</h2>
                                                 {isUser ? (
-                                                    <p className="text-[15px] font-medium text-slate-400 dark:text-slate-500 tracking-wide mb-1">Politeknik Negeri Indramayu</p>
+                                                    <p className="text-[15px] font-semibold text-slate-500 dark:text-slate-400 tracking-wide mb-1.5">Politeknik Negeri Indramayu</p>
                                                 ) : (
-                                                    <p className="text-[15px] font-medium text-slate-400 dark:text-slate-500 tracking-wide mb-1">Pusat Sistem Sipentar</p>
+                                                    <p className="text-[15px] font-semibold text-slate-500 dark:text-slate-400 tracking-wide mb-1.5">Pusat Sistem Sipentar</p>
                                                 )}
-                                                <p className="text-[15px] font-medium text-slate-400 dark:text-slate-500 tracking-wide mb-2">{isUser ? 'Mahasiswa' : 'Administrator'}</p>
-                                                <div className="inline-flex px-3 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800/80 text-slate-500 tracking-wider text-[11px] font-bold">
+                                                <p className="text-[15px] font-medium text-slate-400 dark:text-slate-500 tracking-wide mb-3">{isUser ? 'Mahasiswa' : 'Administrator'}</p>
+                                                <div className="inline-flex px-4 py-1 rounded-full bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-800/80 text-slate-600 dark:text-slate-400 tracking-widest text-[11px] font-black shadow-inner border border-white dark:border-slate-700/50">
                                                     PROFESSIONAL
                                                 </div>
                                             </div>
 
-                                            {/* Details List */}
-                                            <div className="px-6 md:px-10 pb-8 space-y-5">
-                                                <div className="border-b border-slate-100 dark:border-slate-700/30 pb-3">
-                                                    <span className="block text-[13px] font-medium text-slate-400 mb-0.5">Email</span>
-                                                    <span className="block text-[15px] text-slate-800 dark:text-slate-200">{user.email}</span>
+                                            {/* Details List Premium */}
+                                            <div className="px-6 md:px-12 pb-10 space-y-2">
+                                                <div className="group hover:bg-slate-50/80 dark:hover:bg-slate-700/30 rounded-2xl p-4 -mx-4 transition-colors duration-300 border border-transparent hover:border-slate-100 dark:hover:border-slate-700/50">
+                                                    <span className="block text-[13px] font-semibold text-slate-400 mb-1 group-hover:text-indigo-500 transition-colors">Alamat Surel (Email)</span>
+                                                    <span className="block text-[16px] font-medium text-slate-800 dark:text-slate-200">{user.email}</span>
                                                 </div>
 
-                                                <div className="border-b border-slate-100 dark:border-slate-700/30 pb-3">
-                                                    <span className="block text-[13px] font-medium text-slate-400 mb-0.5">Jenis Kelamin</span>
-                                                    <span className="block text-[15px] text-slate-800 dark:text-slate-200">{jenisKelamin || " - "}</span>
+                                                <div className="group hover:bg-slate-50/80 dark:hover:bg-slate-700/30 rounded-2xl p-4 -mx-4 transition-colors duration-300 border border-transparent hover:border-slate-100 dark:hover:border-slate-700/50">
+                                                    <span className="block text-[13px] font-semibold text-slate-400 mb-1 group-hover:text-indigo-500 transition-colors">Jenis Kelamin</span>
+                                                    <span className="block text-[16px] font-medium text-slate-800 dark:text-slate-200">{jenisKelamin || " - "}</span>
                                                 </div>
 
-                                                <div className="border-b border-slate-100 dark:border-slate-700/30 pb-3">
-                                                    <span className="block text-[13px] font-medium text-slate-400 mb-0.5">Nomor Handphone</span>
-                                                    <span className="block text-[15px] text-slate-800 dark:text-slate-200">{noHp || " - "}</span>
+                                                <div className="group hover:bg-slate-50/80 dark:hover:bg-slate-700/30 rounded-2xl p-4 -mx-4 transition-colors duration-300 border border-transparent hover:border-slate-100 dark:hover:border-slate-700/50">
+                                                    <span className="block text-[13px] font-semibold text-slate-400 mb-1 group-hover:text-indigo-500 transition-colors">Nomor Handphone</span>
+                                                    <span className="block text-[16px] font-medium text-slate-800 dark:text-slate-200">{noHp || " - "}</span>
                                                 </div>
 
-                                                {/* Full Width Green Button */}
+                                                {/* Full Width Green Button Premium */}
                                                 <div className="pt-8">
                                                     <button
                                                         onClick={() => setIsEditingProfile(true)}
-                                                        className="w-full bg-[#00a82d] hover:bg-green-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition-all active:scale-[0.98] outline-none"
+                                                        className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white font-bold tracking-wide py-4 px-4 rounded-[1.25rem] shadow-xl shadow-green-500/20 hover:shadow-green-500/40 transition-all duration-300 hover:-translate-y-1 active:scale-[0.98] outline-none focus:ring-4 focus:ring-green-500/30 border border-green-400/20"
                                                     >
                                                         Ubah Profil
                                                     </button>
@@ -376,25 +379,28 @@ function Profile() {
                                         </div>
                                     ) : (
                                         /* ================= EDIT MODE ================= */
-                                        <form onSubmit={handleUpdateProfileInfo} className="divide-y divide-slate-100 animate-in fade-in slide-in-from-top-2 duration-300">
+                                        <form onSubmit={handleUpdateProfileInfo} className="divide-y divide-slate-100/60 dark:divide-slate-700/30 animate-in fade-in slide-in-from-top-2 duration-500 relative z-10">
 
                                             {/* Field Unggah Foto */}
-                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 py-6 bg-blue-50/20 border-b border-slate-100">
+                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 md:px-10 py-7 bg-blue-50/10 dark:bg-slate-800/30 border-b border-transparent">
                                                 <div className="pt-2">
-                                                    <label className="block text-sm font-semibold text-slate-700">Ganti Foto Profil</label>
-                                                    <p className="text-[11px] text-slate-500 mt-1 max-w-[180px]">Disarankan menggunakan rasio 1:1, maks (2MB).</p>
+                                                    <label className="block text-[15px] font-bold text-slate-800 dark:text-slate-200">Ganti Foto Profil</label>
+                                                    <p className="text-[12px] text-slate-500 mt-1.5 max-w-[200px] leading-relaxed">Disarankan rasio 1:1, berukuran maks (2MB).</p>
                                                 </div>
                                                 <div>
-                                                    <div className="flex items-center gap-4">
-                                                        {(imagePreview || userPhotoUrl) ? (
-                                                            <img src={imagePreview || userPhotoUrl} alt="Preview" className="w-16 h-16 rounded-full object-cover border border-slate-200 shadow-sm" />
-                                                        ) : (
-                                                            <div className={`w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-slate-400 bg-slate-100 shadow-inner border border-slate-200`}>
-                                                                {user.name.charAt(0).toUpperCase()}
-                                                            </div>
-                                                        )}
-                                                        <label className="cursor-pointer px-4 py-2 text-xs font-bold text-blue-700 bg-white border border-blue-200 hover:bg-blue-50 rounded-lg shadow-sm transition-colors">
-                                                            Pilih Berkas Gambar
+                                                    <div className="flex items-center gap-5">
+                                                        <div className="relative group">
+                                                            <div className="absolute inset-0 bg-indigo-500/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                                            {(imagePreview || userPhotoUrl) ? (
+                                                                <img src={imagePreview || userPhotoUrl} alt="Preview" className="w-20 h-20 rounded-full object-cover border-[3px] border-white dark:border-slate-700 shadow-md relative z-10" />
+                                                            ) : (
+                                                                <div className={`w-20 h-20 rounded-full flex items-center justify-center text-3xl font-black text-white bg-gradient-to-br from-indigo-400 to-blue-600 shadow-md border-[3px] border-white dark:border-slate-700 relative z-10`}>
+                                                                    {user.name.charAt(0).toUpperCase()}
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                        <label className="cursor-pointer px-5 py-2.5 text-sm font-bold text-indigo-700 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-800/50 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 rounded-xl shadow-sm transition-colors active:scale-95 focus:ring-4 focus:ring-indigo-500/20">
+                                                            Pilih Berkas
                                                             <input type="file" className="hidden" accept="image/*" onChange={handleImageChange} />
                                                         </label>
                                                     </div>
@@ -402,15 +408,15 @@ function Profile() {
                                             </div>
 
                                             {/* Field Email: Layout Mendatar */}
-                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 py-6 hover:bg-slate-50/50 transition-colors">
-                                                <div className="pt-2">
-                                                    <label className="block text-sm font-semibold text-slate-700">Alamat Email Baru</label>
+                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 md:px-10 py-7 hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition-colors">
+                                                <div className="pt-3">
+                                                    <label className="block text-[15px] font-bold text-slate-800 dark:text-slate-200">Alamat Email Baru</label>
                                                 </div>
                                                 <div>
                                                     <input
                                                         type="email"
                                                         required
-                                                        className={`appearance-none bg-white border border-slate-200 text-slate-800 text-sm font-medium rounded-lg focus:ring-2 focus:ring-${theme}-500/20 focus:border-${theme}-500 block w-full max-w-sm px-3.5 py-2.5 outline-none transition-all shadow-sm`}
+                                                        className={`appearance-none bg-slate-50/50 dark:bg-slate-900/50 hover:bg-white dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white text-[15px] font-medium rounded-xl focus:bg-white dark:focus:bg-slate-900 focus:ring-4 focus:ring-indigo-500/15 focus:border-indigo-500 block w-full max-w-md px-4 py-3 outline-none transition-all shadow-sm`}
                                                         value={newEmail}
                                                         onChange={(e) => setNewEmail(e.target.value)}
                                                     />
@@ -418,13 +424,13 @@ function Profile() {
                                             </div>
 
                                             {/* Field Kelamin: Layout Mendatar */}
-                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 py-6 hover:bg-slate-50/50 transition-colors">
-                                                <div className="pt-2">
-                                                    <label className="block text-sm font-semibold text-slate-700">Jenis Kelamin</label>
+                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 md:px-10 py-7 hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition-colors">
+                                                <div className="pt-3">
+                                                    <label className="block text-[15px] font-bold text-slate-800 dark:text-slate-200">Jenis Kelamin</label>
                                                 </div>
                                                 <div>
                                                     <select
-                                                        className={`appearance-none bg-white border border-slate-200 text-slate-800 text-sm font-medium rounded-lg focus:ring-2 focus:ring-${theme}-500/20 focus:border-${theme}-500 block w-full max-w-xs px-3.5 py-2.5 outline-none transition-all shadow-sm cursor-pointer`}
+                                                        className={`appearance-none bg-slate-50/50 dark:bg-slate-900/50 hover:bg-white dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white text-[15px] font-medium rounded-xl focus:bg-white dark:focus:bg-slate-900 focus:ring-4 focus:ring-indigo-500/15 focus:border-indigo-500 block w-full max-w-[12rem] px-4 py-3 outline-none transition-all shadow-sm cursor-pointer`}
                                                         value={jenisKelamin}
                                                         onChange={(e) => setJenisKelamin(e.target.value)}
                                                     >
@@ -436,14 +442,14 @@ function Profile() {
                                             </div>
 
                                             {/* Field Nomor HP: Layout Mendatar */}
-                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 py-6 hover:bg-slate-50/50 transition-colors">
-                                                <div className="pt-2">
-                                                    <label className="block text-sm font-semibold text-slate-700">Nomor Telepon</label>
+                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 md:px-10 py-7 hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition-colors border-b border-transparent">
+                                                <div className="pt-3">
+                                                    <label className="block text-[15px] font-bold text-slate-800 dark:text-slate-200">Nomor Telepon</label>
                                                 </div>
                                                 <div>
                                                     <input
                                                         type="tel"
-                                                        className={`appearance-none bg-white border border-slate-200 text-slate-800 text-sm font-medium rounded-lg focus:ring-2 focus:ring-${theme}-500/20 focus:border-${theme}-500 block w-full max-w-sm px-3.5 py-2.5 outline-none transition-all shadow-sm`}
+                                                        className={`appearance-none bg-slate-50/50 dark:bg-slate-900/50 hover:bg-white dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white text-[15px] font-medium rounded-xl focus:bg-white dark:focus:bg-slate-900 focus:ring-4 focus:ring-indigo-500/15 focus:border-indigo-500 block w-full max-w-sm px-4 py-3 outline-none transition-all shadow-sm`}
                                                         value={noHp}
                                                         placeholder="0812xxxxx (Boleh dikosongkan)"
                                                         onChange={(e) => setNoHp(e.target.value)}
@@ -452,18 +458,18 @@ function Profile() {
                                             </div>
 
                                             {/* Area Tombol Aksi Simpan */}
-                                            <div className="bg-slate-50/80 px-6 py-5 flex justify-end gap-3 rounded-b-2xl">
+                                            <div className="bg-slate-50/50 dark:bg-slate-800/30 px-6 md:px-10 py-6 flex justify-end gap-3 sm:rounded-b-[2.5rem]">
                                                 <button
                                                     type="button"
                                                     onClick={cancelEditing}
-                                                    className={`px-5 py-2.5 text-sm font-bold text-slate-600 bg-white border border-slate-200 hover:bg-slate-50 rounded-lg transition-all shadow-sm`}
+                                                    className={`px-6 py-3 text-sm font-bold text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800/80 rounded-xl transition-all shadow-sm active:scale-95`}
                                                 >
                                                     Batal
                                                 </button>
                                                 <button
                                                     type="submit"
                                                     disabled={loadingProfile}
-                                                    className={`px-6 py-2.5 text-sm font-bold text-white rounded-lg transition-all shadow-sm disabled:opacity-50 bg-slate-800 hover:bg-slate-900 whitespace-nowrap`}
+                                                    className={`px-7 py-3 text-sm font-bold text-white rounded-xl transition-all shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 disabled:opacity-50 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 active:scale-95 border border-indigo-400/20 whitespace-nowrap`}
                                                 >
                                                     {loadingProfile ? "Meyimpan..." : "Simpan Berkas"}
                                                 </button>
@@ -476,14 +482,19 @@ function Profile() {
 
                         {/* VIEW: PENGATURAN (MAIN MENU) */}
                         {activeTab === "pengaturan" && (
-                            <div className="bg-white dark:bg-slate-800 border-t border-b sm:border sm:rounded-3xl border-slate-200 dark:border-slate-700/50 overflow-hidden animate-in slide-in-from-right-8 fade-in duration-300 transition-colors">
-                                <div className="flex flex-col">
+                            <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-3xl border-t border-b sm:border sm:rounded-[2.5rem] shadow-2xl shadow-indigo-500/5 dark:shadow-none border-white/60 dark:border-slate-700/50 overflow-hidden animate-in slide-in-from-right-8 fade-in duration-500 transition-all p-3 sm:p-5">
+                                <div className="flex flex-col gap-2">
                                     <button
                                         onClick={() => handleTabChange("pengaturan_akun")}
-                                        className="flex items-center justify-between w-full px-6 py-5 border-b border-slate-100 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors text-left focus:outline-none"
+                                        className="group flex items-center justify-between w-full px-5 py-5 sm:px-7 sm:py-6 bg-white dark:bg-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-700/80 rounded-2xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700 transition-all duration-300 text-left focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
                                     >
-                                        <span className="text-[15px] font-medium text-slate-700 dark:text-slate-200">Akun</span>
-                                        <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400 group-hover:bg-indigo-50 dark:group-hover:bg-indigo-900/40 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                                            </div>
+                                            <span className="text-[17px] font-bold text-slate-700 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors tracking-tight">Akun Spesifik</span>
+                                        </div>
+                                        <svg className="w-5 h-5 text-slate-300 dark:text-slate-600 group-hover:translate-x-1 group-hover:text-indigo-500 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
                                     </button>
                                 </div>
                             </div>
@@ -491,21 +502,32 @@ function Profile() {
 
                         {/* VIEW: PENGATURAN -> AKUN */}
                         {activeTab === "pengaturan_akun" && (
-                            <div className="bg-white dark:bg-slate-800 border-t border-b sm:border sm:rounded-3xl border-slate-200 dark:border-slate-700/50 overflow-hidden animate-in slide-in-from-right-8 fade-in duration-300 transition-colors">
-                                <div className="flex flex-col">
+                            <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-3xl border-t border-b sm:border sm:rounded-[2.5rem] shadow-2xl shadow-indigo-500/5 dark:shadow-none border-white/60 dark:border-slate-700/50 overflow-hidden animate-in slide-in-from-right-8 fade-in duration-500 transition-all p-3 sm:p-5">
+                                <div className="flex flex-col gap-2">
                                     <button
                                         onClick={() => handleTabChange("pengaturan_sandi")}
-                                        className="flex items-center justify-between w-full px-6 py-5 border-b border-slate-100 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors text-left focus:outline-none"
+                                        className="group flex items-center justify-between w-full px-5 py-4 sm:px-7 sm:py-5 bg-white dark:bg-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-700/80 rounded-2xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700 transition-all duration-300 text-left focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
                                     >
-                                        <span className="text-[15px] font-medium text-slate-700 dark:text-slate-200">Mengubah Sandi</span>
-                                        <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-orange-600 dark:text-orange-400 group-hover:bg-orange-100 transition-colors">
+                                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" /></svg>
+                                            </div>
+                                            <span className="text-[16px] font-bold text-slate-700 dark:text-slate-200 group-hover:text-orange-600 transition-colors">Ubah Kata Sandi Kunci</span>
+                                        </div>
+                                        <svg className="w-5 h-5 text-slate-300 dark:text-slate-600 group-hover:translate-x-1 group-hover:text-orange-500 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
                                     </button>
+
                                     <button
                                         onClick={() => handleTabChange("pengaturan_hapus")}
-                                        className="flex items-center justify-between w-full px-6 py-5 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors text-left focus:outline-none"
+                                        className="group flex items-center justify-between w-full px-5 py-4 sm:px-7 sm:py-5 bg-white dark:bg-slate-800/50 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-2xl border border-transparent hover:border-red-100 dark:hover:border-red-900/50 transition-all duration-300 text-left focus:outline-none focus:ring-4 focus:ring-red-500/10"
                                     >
-                                        <span className="text-[15px] font-medium text-slate-700 dark:text-slate-200">Hapus Akun</span>
-                                        <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-10 h-10 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-red-600 dark:text-red-400 group-hover:bg-red-100 transition-colors">
+                                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                            </div>
+                                            <span className="text-[16px] font-bold text-slate-700 dark:text-slate-200 group-hover:text-red-600 transition-colors">Musnahkan Keanggotaan</span>
+                                        </div>
+                                        <svg className="w-5 h-5 text-slate-300 dark:text-slate-600 group-hover:translate-x-1 group-hover:text-red-500 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
                                     </button>
                                 </div>
                             </div>
@@ -513,26 +535,27 @@ function Profile() {
 
                         {/* VIEW: PENGATURAN -> GANTI SANDI FORM */}
                         {activeTab === "pengaturan_sandi" && (
-                            <div className="animate-in slide-in-from-right-8 fade-in duration-300">
-                                <div className="bg-white dark:bg-slate-800 border-t border-b sm:border sm:rounded-3xl shadow-sm sm:shadow-lg shadow-slate-200/50 dark:shadow-none border-slate-200 dark:border-slate-700/50 overflow-hidden transition-colors">
-                                    <div className="p-0">
+                            <div className="animate-in slide-in-from-right-8 fade-in duration-500 relative z-10">
+                                <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-3xl border-t border-b sm:border sm:rounded-[2.5rem] shadow-2xl shadow-indigo-500/5 dark:shadow-none border-white/60 dark:border-slate-700/50 overflow-hidden transition-all duration-300 relative">
+                                    <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl"></div>
+                                    <div className="p-0 relative z-10">
                                         {passwordMessage.text && (
-                                            <div className={`m-6 p-4 rounded-xl flex items-center text-sm ${passwordMessage.type === 'success' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' : 'bg-red-50 text-red-600 border border-red-100'}`}>
+                                            <div className={`m-6 p-4 rounded-xl flex items-center text-sm ${passwordMessage.type === 'success' ? 'bg-emerald-50/80 text-emerald-700 border border-emerald-200/50' : 'bg-red-50/80 text-red-600 border border-red-200/50'}`}>
                                                 <p className="font-semibold">{passwordMessage.text}</p>
                                             </div>
                                         )}
 
-                                        <form onSubmit={handleUpdatePassword} className="divide-y divide-slate-100 dark:divide-slate-700/50">
+                                        <form onSubmit={handleUpdatePassword} className="divide-y divide-slate-100/60 dark:divide-slate-700/40">
                                             {/* Sandi Lama Mendatar */}
-                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 sm:px-8 py-6 hover:bg-slate-50/50 dark:hover:bg-slate-700/20 transition-colors">
-                                                <div className="pt-2">
-                                                    <label className="block text-sm font-semibold text-slate-800 dark:text-slate-300">Sandi Saat Ini</label>
+                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 md:px-10 py-7 hover:bg-slate-50/50 dark:hover:bg-slate-700/20 transition-colors">
+                                                <div className="pt-3">
+                                                    <label className="block text-[15px] font-bold text-slate-800 dark:text-slate-200">Sandi Saat Ini</label>
                                                 </div>
                                                 <div>
                                                     <input
                                                         type="password"
                                                         required
-                                                        className={`appearance-none bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white text-sm font-medium rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 dark:focus:border-indigo-500 block w-full max-w-sm px-4 py-3 outline-none transition-all`}
+                                                        className={`appearance-none bg-slate-50/50 dark:bg-slate-900/50 hover:bg-white dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white text-[15px] font-medium rounded-xl focus:bg-white dark:focus:bg-slate-900 focus:ring-4 focus:ring-indigo-500/15 focus:border-indigo-500 block w-full max-w-sm px-4 py-3 outline-none transition-all shadow-sm`}
                                                         value={oldPassword}
                                                         onChange={(e) => setOldPassword(e.target.value)}
                                                     />
@@ -540,15 +563,15 @@ function Profile() {
                                             </div>
 
                                             {/* Sandi Baru Mendatar */}
-                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 sm:px-8 py-6 hover:bg-slate-50/50 dark:hover:bg-slate-700/20 transition-colors">
-                                                <div className="pt-2">
-                                                    <label className="block text-sm font-semibold text-slate-800 dark:text-slate-300">Sandi Baru</label>
+                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 md:px-10 py-7 hover:bg-slate-50/50 dark:hover:bg-slate-700/20 transition-colors border-b border-transparent">
+                                                <div className="pt-3">
+                                                    <label className="block text-[15px] font-bold text-slate-800 dark:text-slate-200">Sandi Baru</label>
                                                 </div>
-                                                <div className="space-y-3">
+                                                <div className="space-y-4">
                                                     <input
                                                         type="password"
                                                         required
-                                                        className={`appearance-none bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white text-sm font-medium rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 dark:focus:border-indigo-500 block w-full max-w-sm px-4 py-3 outline-none transition-all`}
+                                                        className={`appearance-none bg-slate-50/50 dark:bg-slate-900/50 hover:bg-white dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white text-[15px] font-medium rounded-xl focus:bg-white dark:focus:bg-slate-900 focus:ring-4 focus:ring-indigo-500/15 focus:border-indigo-500 block w-full max-w-sm px-4 py-3 outline-none transition-all shadow-sm`}
                                                         placeholder="Ketik rahasia baru..."
                                                         value={newPassword}
                                                         onChange={(e) => setNewPassword(e.target.value)}
@@ -556,7 +579,7 @@ function Profile() {
                                                     <input
                                                         type="password"
                                                         required
-                                                        className={`appearance-none bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white text-sm font-medium rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 dark:focus:border-indigo-500 block w-full max-w-sm px-4 py-3 outline-none transition-all`}
+                                                        className={`appearance-none bg-slate-50/50 dark:bg-slate-900/50 hover:bg-white dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white text-[15px] font-medium rounded-xl focus:bg-white dark:focus:bg-slate-900 focus:ring-4 focus:ring-indigo-500/15 focus:border-indigo-500 block w-full max-w-sm px-4 py-3 outline-none transition-all shadow-sm`}
                                                         placeholder="Ulangi sekali lagi..."
                                                         value={confirmPassword}
                                                         onChange={(e) => setConfirmPassword(e.target.value)}
@@ -564,11 +587,11 @@ function Profile() {
                                                 </div>
                                             </div>
 
-                                            <div className="bg-slate-50/80 dark:bg-slate-800/80 px-6 sm:px-8 py-5 flex justify-end">
+                                            <div className="bg-slate-50/50 dark:bg-slate-800/30 px-6 md:px-10 py-6 flex justify-end">
                                                 <button
                                                     type="submit"
                                                     disabled={loadingPassword}
-                                                    className={`px-6 py-3 text-sm font-bold text-white rounded-xl transition-all shadow-sm disabled:opacity-50 bg-indigo-600 hover:bg-indigo-700 border border-indigo-600 hover:border-indigo-700`}
+                                                    className={`px-7 py-3 text-sm font-bold text-white rounded-xl transition-all shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 disabled:opacity-50 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 active:scale-95 border border-indigo-400/20 whitespace-nowrap`}
                                                 >
                                                     {loadingPassword ? "Memvalidasi..." : "Terapkan Keamanan"}
                                                 </button>
@@ -581,70 +604,70 @@ function Profile() {
 
                         {/* VIEW: PENGATURAN -> HAPUS AKUN FORM */}
                         {activeTab === "pengaturan_hapus" && (
-                            <div className="animate-in slide-in-from-right-8 fade-in duration-300">
-                                <div className="bg-white dark:bg-slate-800 border-t border-b sm:border sm:rounded-3xl shadow-lg shadow-red-900/5 dark:shadow-none border-red-200 dark:border-red-900/30 overflow-hidden transition-colors relative">
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/5 rounded-bl-[100px] pointer-events-none"></div>
-                                    <div className="px-6 sm:px-8 py-6 border-b border-red-50 dark:border-red-900/20 flex items-center gap-4 transition-colors relative z-10">
-                                        <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/50 text-red-600 dark:text-red-400 flex items-center justify-center shrink-0">
-                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                            <div className="animate-in slide-in-from-right-8 fade-in duration-500 relative z-10">
+                                <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-3xl border-t border-b sm:border sm:rounded-[2.5rem] shadow-2xl shadow-red-900/10 dark:shadow-none border-white/60 dark:border-red-900/30 overflow-hidden transition-all duration-300 relative">
+                                    <div className="absolute top-0 right-0 w-48 h-48 bg-red-500/10 rounded-bl-full pointer-events-none blur-3xl"></div>
+                                    <div className="px-6 md:px-10 py-7 border-b border-red-50/50 dark:border-red-900/20 flex flex-col sm:flex-row sm:items-center gap-5 transition-colors relative z-10">
+                                        <div className="w-14 h-14 rounded-2xl bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center shrink-0 shadow-inner border border-red-100 dark:border-red-800/50">
+                                            <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                                         </div>
                                         <div>
-                                            <h3 className="text-xl font-bold text-red-600 dark:text-red-400">Pemusnahan Permanen</h3>
-                                            <p className="text-sm font-medium text-red-500/80 dark:text-red-500 mt-1">Tindakan ini tidak dapat dibatalkan.</p>
+                                            <h3 className="text-2xl font-extrabold text-red-600 dark:text-red-400 tracking-tight">Pemusnahan Permanen</h3>
+                                            <p className="text-[15px] font-medium text-red-500/80 dark:text-red-500 mt-1">Tindakan ini menghapus akses Anda seutuhnya dari ekosistem.</p>
                                         </div>
                                     </div>
 
                                     <div className="p-0 relative z-10">
                                         {deleteMessage.text && (
-                                            <div className={`m-6 p-4 rounded-xl flex items-center text-sm ${deleteMessage.type === 'success' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' : 'bg-red-50 text-red-600 border border-red-100'}`}>
+                                            <div className={`m-6 p-4 rounded-xl flex items-center text-sm ${deleteMessage.type === 'success' ? 'bg-emerald-50/80 text-emerald-700 border border-emerald-200/50' : 'bg-red-50/80 text-red-600 border border-red-200/50'}`}>
                                                 <p className="font-semibold">{deleteMessage.text}</p>
                                             </div>
                                         )}
 
-                                        <div className="px-6 sm:px-8 py-8">
-                                            <p className="text-base text-slate-600 dark:text-slate-400 font-medium mb-6 leading-relaxed flex flex-col gap-2">
+                                        <div className="px-6 md:px-10 py-8">
+                                            <p className="text-[15px] text-slate-600 dark:text-slate-400 font-medium mb-6 leading-relaxed flex flex-col gap-2">
                                                 <span>Jika Anda memilih menghapus akun, seluruh data yang melampirkan identitas Anda: profil, gambar wajah, beserta laporan kejadian yang pernah Anda rekam, akan dibumi-hanguskan selamanya dari pangkalan pusat.</span>
-                                                <span className="font-bold text-red-600 dark:text-red-400">Pertimbangkan baik-baik.</span>
+                                                <span className="font-bold text-red-600 dark:text-red-400 uppercase tracking-widest text-xs mt-1">Pertimbangkan hal ini sebaik-baiknya.</span>
                                             </p>
 
                                             {!showDeleteConfirm ? (
                                                 <button
                                                     onClick={() => setShowDeleteConfirm(true)}
-                                                    className="px-6 py-3.5 text-sm font-bold text-red-600 bg-red-50 border border-red-100 hover:bg-red-100 dark:bg-red-900/20 dark:border-red-900/30 dark:hover:bg-red-900/40 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 w-full sm:w-auto"
+                                                    className="px-6 py-4 text-[15px] font-bold text-red-600 bg-red-50/50 border border-red-200 hover:bg-red-100 hover:border-red-300 dark:bg-red-900/20 dark:border-red-900/30 dark:hover:bg-red-900/40 rounded-2xl transition-all shadow-sm flex items-center justify-center gap-3 w-full sm:w-auto focus:ring-4 focus:ring-red-500/15"
                                                 >
-                                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                                                     Hapus Akun Sipentar
                                                 </button>
                                             ) : (
-                                                <form onSubmit={handleDeleteAccount} className="bg-red-50/50 dark:bg-red-900/10 p-6 rounded-2xl border border-red-100 dark:border-red-900/30 space-y-5 animate-in fade-in transition-colors">
+                                                <form onSubmit={handleDeleteAccount} className="bg-red-50/30 dark:bg-red-900/10 p-6 md:p-8 rounded-[1.5rem] border border-red-100 dark:border-red-900/30 space-y-6 animate-in fade-in transition-colors shadow-inner">
                                                     <div>
-                                                        <label className="block text-base font-bold text-slate-700 dark:text-slate-300 mb-2 transition-colors">
+                                                        <label className="block text-[16px] font-bold text-slate-800 dark:text-slate-200 mb-2 transition-colors">
                                                             Konfirmasi Penghapusan
                                                         </label>
-                                                        <p className="text-sm text-red-600/80 dark:text-red-400 mb-4 font-medium">Buktikan keabsahan ini dengan menginput kata sandi akun Anda.</p>
+                                                        <p className="text-[13px] text-slate-500 dark:text-slate-400 mb-5 font-medium leading-relaxed">Buktikan keabsahan ini dengan menginput kata sandi akun Anda.</p>
                                                         <input
                                                             type="password"
                                                             required
-                                                            placeholder="••••••••"
+                                                            placeholder="Sandi Anda..."
                                                             value={deletePassword}
                                                             onChange={(e) => setDeletePassword(e.target.value)}
-                                                            className="w-full max-w-sm px-4 py-3 bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-red-500/20 focus:border-red-500 dark:focus:border-red-500 outline-none transition-all text-slate-800 dark:text-white font-medium"
+                                                            className="w-full max-w-md px-4 py-3.5 bg-white/80 dark:bg-slate-900/50 border border-red-200 dark:border-red-800 rounded-xl focus:ring-4 focus:ring-red-500/15 focus:border-red-500 outline-none transition-all text-slate-800 dark:text-white font-medium shadow-sm hover:bg-white"
                                                         />
                                                     </div>
-                                                    <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
+                                                    <div className="flex flex-col sm:flex-row items-center gap-3 pt-4">
                                                         <button
                                                             type="button"
                                                             onClick={() => setShowDeleteConfirm(false)}
-                                                            className="w-full sm:w-auto px-6 py-3 text-sm font-bold text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-xl transition-all shadow-sm"
+                                                            className="w-full sm:w-auto px-6 py-3.5 text-sm font-bold text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-xl transition-all shadow-sm active:scale-95"
                                                         >
                                                             Batal
                                                         </button>
                                                         <button
                                                             type="submit"
                                                             disabled={loadingDelete}
-                                                            className="w-full sm:w-auto px-6 py-3 text-sm font-bold text-white bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl transition-all shadow-sm border border-red-600 hover:border-red-700"
+                                                            className="w-full sm:w-auto px-7 py-3.5 text-sm font-bold text-white transition-all shadow-lg shadow-red-500/30 hover:shadow-red-500/50 disabled:opacity-50 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 active:scale-95 border border-red-500/20 rounded-xl"
                                                         >
-                                                            {loadingDelete ? "Sedang Mengunci..." : "Yakin, Hapus!"}
+                                                            {loadingDelete ? "Sedang Mengunci..." : "Yakin, Hancurkan!"}
                                                         </button>
                                                     </div>
                                                 </form>
