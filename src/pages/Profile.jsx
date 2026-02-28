@@ -161,6 +161,12 @@ function Profile() {
     const handleBackNavigation = () => {
         if (activeTab === 'ringkasan') {
             navigate('/dashboard');
+        } else if (activeTab === 'profil') {
+            if (isEditingProfile) {
+                setIsEditingProfile(false);
+            } else {
+                handleTabChange('ringkasan');
+            }
         } else if (activeTab === 'pengaturan_akun') {
             handleTabChange('pengaturan');
         } else if (activeTab === 'pengaturan_sandi' || activeTab === 'pengaturan_hapus') {
@@ -188,7 +194,7 @@ function Profile() {
 
                         {/* Identitas Terpadu / Judul Halaman di Header */}
                         <div className="flex items-center gap-4 pl-2 border-l border-slate-200 dark:border-slate-700 transition-colors">
-                            {activeTab === 'ringkasan' || activeTab === 'profil' ? (
+                            {activeTab === 'ringkasan' ? (
                                 <>
                                     {userPhotoUrl ? (
                                         <img src={userPhotoUrl} alt="Profil Atas" className="w-10 h-10 rounded-full object-cover border border-slate-200 dark:border-slate-600 shadow-sm transition-colors" />
@@ -207,10 +213,11 @@ function Profile() {
                                 </>
                             ) : (
                                 <h1 className="text-lg font-bold text-slate-800 dark:text-white tracking-tight leading-none transition-colors">
-                                    {activeTab === 'pengaturan' ? 'Pengaturan' :
-                                        activeTab === 'pengaturan_akun' ? 'Akun' :
-                                            activeTab === 'pengaturan_sandi' ? 'Mengubah Sandi' :
-                                                activeTab === 'pengaturan_hapus' ? 'Hapus Akun' : ''}
+                                    {activeTab === 'profil' ? (isEditingProfile ? 'MENGUBAH PROFIL' : 'Profil') :
+                                        activeTab === 'pengaturan' ? 'Pengaturan' :
+                                            activeTab === 'pengaturan_akun' ? 'Akun' :
+                                                activeTab === 'pengaturan_sandi' ? 'Mengubah Sandi' :
+                                                    activeTab === 'pengaturan_hapus' ? 'Hapus Akun' : ''}
                                 </h1>
                             )}
                         </div>
@@ -297,23 +304,13 @@ function Profile() {
 
                         {/* VIEW: KELOLA PROFIL (Dual-Mode: Read vs Edit) */}
                         {activeTab === "profil" && (
-                            <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg shadow-blue-900/5 dark:shadow-none border border-slate-200 dark:border-slate-700/50 overflow-hidden animate-in slide-in-from-right-8 fade-in duration-300 transition-colors">
-                                <div className="px-6 sm:px-8 py-6 border-b border-slate-100 dark:border-slate-700/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors">
-                                    <div className="flex items-center gap-4">
-                                        <div>
-                                            <h3 className="text-xl font-extrabold text-slate-800 dark:text-white transition-colors tracking-tight">Kelola Identitas Publik</h3>
-                                            <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mt-1 transition-colors">Identitas otentik yang terafiliasi dengan akun Sipentar Anda.</p>
-                                        </div>
+                            <div className="bg-white dark:bg-slate-800 border-t border-b sm:border sm:rounded-3xl shadow-sm border-slate-200 dark:border-slate-700/50 overflow-hidden animate-in slide-in-from-right-8 fade-in duration-300 transition-colors">
+                                {isEditingProfile && (
+                                    <div className="px-6 sm:px-8 py-5 border-b border-slate-100 dark:border-slate-700/50 transition-colors">
+                                        <h3 className="text-lg font-bold text-slate-800 dark:text-white transition-colors">Ubah Informasi Identitas</h3>
+                                        <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-0.5 transition-colors">Mutakhirkan jejak identitas keanggotaan publik Anda.</p>
                                     </div>
-                                    {!isEditingProfile && (
-                                        <button
-                                            onClick={() => setIsEditingProfile(true)}
-                                            className="w-full sm:w-auto px-5 py-2.5 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-md shadow-blue-500/20 transform hover:-translate-y-0.5 transition-all"
-                                        >
-                                            Mode Ubah Data
-                                        </button>
-                                    )}
-                                </div>
+                                )}
 
                                 <div className="p-0">
                                     {profileMessage.text && (
@@ -323,46 +320,58 @@ function Profile() {
                                     )}
 
                                     {!isEditingProfile ? (
-                                        /* ================= READ MODE ================= */
-                                        <div className="divide-y divide-slate-50">
-                                            {/* Foto Profil View */}
-                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 py-5">
-                                                <div className="pt-2">
-                                                    <span className="block text-sm font-semibold text-slate-500">Foto Profil</span>
-                                                </div>
-                                                <div className="flex items-center gap-4">
+                                        /* ================= READ MODE (VIEW COMPACT) ================= */
+                                        <div className="flex flex-col animate-in fade-in duration-300">
+                                            {/* Top Centered Profile Header */}
+                                            <div className="flex flex-col items-center justify-center pt-10 pb-8 px-6 text-center">
+                                                <div className="w-24 h-24 mb-5 relative group">
+                                                    <div className="absolute inset-0 bg-green-500/20 rounded-full blur-xl scale-110 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                                     {userPhotoUrl ? (
-                                                        <img src={userPhotoUrl} alt="Profil" className="w-16 h-16 rounded-full object-cover border border-slate-200 shadow-sm" />
+                                                        <img src={userPhotoUrl} alt="Profil" className="w-full h-full rounded-full object-cover border-4 border-white dark:border-slate-800 shadow-md relative z-10" />
                                                     ) : (
-                                                        <div className={`w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-slate-400 bg-slate-100 shadow-inner border border-slate-200`}>
+                                                        <div className="w-full h-full rounded-full flex items-center justify-center text-4xl font-black text-white shadow-md border-4 border-white dark:border-slate-800 bg-gradient-to-br from-green-400 to-emerald-600 relative z-10">
                                                             {user.name.charAt(0).toUpperCase()}
                                                         </div>
                                                     )}
                                                 </div>
+                                                <h2 className="text-[17px] font-black tracking-widest uppercase text-slate-800 dark:text-white mb-1.5">{user.name}</h2>
+                                                {isUser ? (
+                                                    <p className="text-[15px] font-medium text-slate-400 dark:text-slate-500 tracking-wide mb-1">Politeknik Negeri Indramayu</p>
+                                                ) : (
+                                                    <p className="text-[15px] font-medium text-slate-400 dark:text-slate-500 tracking-wide mb-1">Pusat Sistem Sipentar</p>
+                                                )}
+                                                <p className="text-[15px] font-medium text-slate-400 dark:text-slate-500 tracking-wide mb-2">{isUser ? 'Mahasiswa' : 'Administrator'}</p>
+                                                <div className="inline-flex px-3 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800/80 text-slate-500 tracking-wider text-[11px] font-bold">
+                                                    PROFESSIONAL
+                                                </div>
                                             </div>
 
-                                            {/* Nama View */}
-                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 py-5">
-                                                <div><span className="block text-sm font-semibold text-slate-500">Nama Lengkap</span></div>
-                                                <div className="text-sm font-bold text-slate-800">{user.name}</div>
-                                            </div>
+                                            {/* Details List */}
+                                            <div className="px-6 md:px-10 pb-8 space-y-5">
+                                                <div className="border-b border-slate-100 dark:border-slate-700/30 pb-3">
+                                                    <span className="block text-[13px] font-medium text-slate-400 mb-0.5">Email</span>
+                                                    <span className="block text-[15px] text-slate-800 dark:text-slate-200">{user.email}</span>
+                                                </div>
 
-                                            {/* Email View */}
-                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 py-5">
-                                                <div><span className="block text-sm font-semibold text-slate-500">Alamat Surel (Email)</span></div>
-                                                <div className="text-sm font-bold text-slate-800">{user.email}</div>
-                                            </div>
+                                                <div className="border-b border-slate-100 dark:border-slate-700/30 pb-3">
+                                                    <span className="block text-[13px] font-medium text-slate-400 mb-0.5">Jenis Kelamin</span>
+                                                    <span className="block text-[15px] text-slate-800 dark:text-slate-200">{jenisKelamin || " - "}</span>
+                                                </div>
 
-                                            {/* Kelamin View */}
-                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 py-5">
-                                                <div><span className="block text-sm font-semibold text-slate-500">Jenis Kelamin</span></div>
-                                                <div className="text-sm font-bold text-slate-800">{jenisKelamin || " - "}</div>
-                                            </div>
+                                                <div className="border-b border-slate-100 dark:border-slate-700/30 pb-3">
+                                                    <span className="block text-[13px] font-medium text-slate-400 mb-0.5">Nomor Handphone</span>
+                                                    <span className="block text-[15px] text-slate-800 dark:text-slate-200">{noHp || " - "}</span>
+                                                </div>
 
-                                            {/* HP View */}
-                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 py-5">
-                                                <div><span className="block text-sm font-semibold text-slate-500">Nomor Telepon</span></div>
-                                                <div className="text-sm font-bold text-slate-800">{noHp || " - "}</div>
+                                                {/* Full Width Green Button */}
+                                                <div className="pt-8">
+                                                    <button
+                                                        onClick={() => setIsEditingProfile(true)}
+                                                        className="w-full bg-[#00a82d] hover:bg-green-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition-all active:scale-[0.98] outline-none"
+                                                    >
+                                                        Ubah Profil
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     ) : (
