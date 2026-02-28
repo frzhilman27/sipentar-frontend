@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../services/api";
+import useDarkMode from "../hooks/useDarkMode";
 
 function Profile() {
     const [user, setUser] = useState({ name: "", role: "", email: "", nik: "" });
+    const [isDarkMode, toggleDarkMode] = useDarkMode();
 
     // State Profil Dasar (Email, Kelamin, No HP) & Unggah Foto
     const [isEditingProfile, setIsEditingProfile] = useState(false);
@@ -180,8 +182,23 @@ function Profile() {
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
+                    <div className="flex items-center gap-5 sm:gap-7">
+                        {/* Dark Mode Toggle */}
+                        <button
+                            onClick={toggleDarkMode}
+                            className="relative p-2.5 rounded-full text-slate-400 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-900"
+                            title="Ganti Tema Warna"
+                        >
+                            {isDarkMode ? (
+                                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                            ) : (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                            )}
+                        </button>
+                    </div>
+
                 </div>
             </header>
 
