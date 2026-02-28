@@ -13,6 +13,8 @@ function Dashboard() {
   const role = localStorage.getItem("role");
   const name = localStorage.getItem("name");
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+  // Menghilangkan sisipan trailing "/api" agar rute uploads langsung mengarah ke akar peladen Node
+  const IMAGE_BASE_URL = API_URL.endsWith("/api") ? API_URL.slice(0, -4) : API_URL;
 
   const fetchReports = async () => {
     try {
@@ -329,10 +331,10 @@ function Dashboard() {
                     {r.image_url && (
                       <div
                         className="mt-2 mb-6 rounded-2xl overflow-hidden border border-slate-200/40 shadow-sm sm:max-w-md relative group/img cursor-zoom-in"
-                        onClick={() => window.open(`${API_URL}/uploads/${r.image_url}`, "_blank")}
+                        onClick={() => window.open(`${IMAGE_BASE_URL}/uploads/${r.image_url}`, "_blank")}
                       >
                         <img
-                          src={`${API_URL}/uploads/${r.image_url}`}
+                          src={`${IMAGE_BASE_URL}/uploads/${r.image_url}`}
                           alt="Bukti Laporan"
                           className="w-full h-auto object-cover group-hover/img:scale-105 group-hover/img:rotate-1 transition-all duration-500"
                         />
