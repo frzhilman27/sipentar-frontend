@@ -158,6 +158,18 @@ function Profile() {
         }
     };
 
+    const handleBackNavigation = () => {
+        if (activeTab === 'ringkasan') {
+            navigate('/dashboard');
+        } else if (activeTab === 'pengaturan_akun') {
+            handleTabChange('pengaturan');
+        } else if (activeTab === 'pengaturan_sandi' || activeTab === 'pengaturan_hapus') {
+            handleTabChange('pengaturan_akun');
+        } else {
+            handleTabChange('ringkasan');
+        }
+    };
+
     const isUser = user.role === "user";
     const theme = "blue";
 
@@ -168,28 +180,39 @@ function Profile() {
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
                     <div className="flex items-center gap-4">
                         <button
-                            onClick={() => activeTab === 'ringkasan' ? navigate('/dashboard') : handleTabChange('ringkasan')}
+                            onClick={handleBackNavigation}
                             className="p-2 text-slate-400 dark:text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none"
                         >
-                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" /></svg>
                         </button>
 
-                        {/* Identitas Terpadu di Header */}
+                        {/* Identitas Terpadu / Judul Halaman di Header */}
                         <div className="flex items-center gap-4 pl-2 border-l border-slate-200 dark:border-slate-700 transition-colors">
-                            {userPhotoUrl ? (
-                                <img src={userPhotoUrl} alt="Profil Atas" className="w-10 h-10 rounded-full object-cover border border-slate-200 dark:border-slate-600 shadow-sm transition-colors" />
+                            {activeTab === 'ringkasan' || activeTab === 'profil' ? (
+                                <>
+                                    {userPhotoUrl ? (
+                                        <img src={userPhotoUrl} alt="Profil Atas" className="w-10 h-10 rounded-full object-cover border border-slate-200 dark:border-slate-600 shadow-sm transition-colors" />
+                                    ) : (
+                                        <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold text-white shadow-inner bg-gradient-to-br from-cyan-400 to-blue-600`}>
+                                            {user.name.charAt(0).toUpperCase()}
+                                        </div>
+                                    )}
+                                    <div>
+                                        <h1 className="text-base font-bold text-slate-800 dark:text-white tracking-tight leading-none transition-colors">{user.name}</h1>
+                                        <div className="mt-1 flex items-center gap-2">
+                                            <span className="text-[10px] font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider transition-colors">{isUser ? 'Warga' : 'Admin'}</span>
+                                            <span className="text-[10px] font-medium text-slate-400 dark:text-slate-500 transition-colors">&bull;&nbsp; {isUser ? `NIK: ${user.nik}` : 'Sipentar Sistem'}</span>
+                                        </div>
+                                    </div>
+                                </>
                             ) : (
-                                <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold text-white shadow-inner bg-gradient-to-br from-cyan-400 to-blue-600`}>
-                                    {user.name.charAt(0).toUpperCase()}
-                                </div>
+                                <h1 className="text-lg font-bold text-slate-800 dark:text-white tracking-tight leading-none transition-colors">
+                                    {activeTab === 'pengaturan' ? 'Pengaturan' :
+                                        activeTab === 'pengaturan_akun' ? 'Akun' :
+                                            activeTab === 'pengaturan_sandi' ? 'Mengubah Sandi' :
+                                                activeTab === 'pengaturan_hapus' ? 'Hapus Akun' : ''}
+                                </h1>
                             )}
-                            <div>
-                                <h1 className="text-base font-bold text-slate-800 dark:text-white tracking-tight leading-none transition-colors">{user.name}</h1>
-                                <div className="mt-1 flex items-center gap-2">
-                                    <span className="text-[10px] font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider transition-colors">{isUser ? 'Warga' : 'Admin'}</span>
-                                    <span className="text-[10px] font-medium text-slate-400 dark:text-slate-500 transition-colors">&bull;&nbsp; {isUser ? `NIK: ${user.nik}` : 'Sipentar Sistem'}</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -442,48 +465,65 @@ function Profile() {
                             </div>
                         )}
 
-                        {/* VIEW: PENGATURAN (AKUN) */}
+                        {/* VIEW: PENGATURAN (MAIN MENU) */}
                         {activeTab === "pengaturan" && (
-                            <div className="space-y-8 animate-in slide-in-from-right-8 fade-in duration-300">
-
-                                {/* Header Kembali Navigasi Pengaturan */}
-                                <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg shadow-indigo-900/5 dark:shadow-none border border-slate-200 dark:border-slate-700/50 overflow-hidden transition-colors">
-                                    <div className="px-6 sm:px-8 py-6 flex items-center gap-4 transition-colors">
-                                        <div>
-                                            <h3 className="text-xl font-extrabold text-slate-800 dark:text-white transition-colors tracking-tight">Pusat Keamanan & Pengaturan Terpadu</h3>
-                                            <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mt-1 transition-colors">Kelola lapis dinding pelindung akun digital Sipentar Anda.</p>
-                                        </div>
-                                    </div>
+                            <div className="bg-white dark:bg-slate-800 border-t border-b sm:border sm:rounded-3xl border-slate-200 dark:border-slate-700/50 overflow-hidden animate-in slide-in-from-right-8 fade-in duration-300 transition-colors">
+                                <div className="flex flex-col">
+                                    <button
+                                        onClick={() => handleTabChange("pengaturan_akun")}
+                                        className="flex items-center justify-between w-full px-6 py-5 border-b border-slate-100 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors text-left focus:outline-none"
+                                    >
+                                        <span className="text-[15px] font-medium text-slate-700 dark:text-slate-200">Akun</span>
+                                        <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
+                                    </button>
                                 </div>
+                            </div>
+                        )}
 
-                                {/* KARTU 1: GANTI SANDI */}
-                                <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg shadow-slate-200/50 dark:shadow-none border border-slate-200 dark:border-slate-700/50 overflow-hidden transition-colors">
-                                    <div className="px-6 sm:px-8 py-5 border-b border-slate-100 dark:border-slate-700/50 flex items-center justify-between transition-colors">
-                                        <div>
-                                            <h3 className="text-lg font-bold text-slate-800 dark:text-white transition-colors">Keamanan Kredensial</h3>
-                                            <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-0.5 transition-colors">Perbarui perlindungan kata sandi secara berkala.</p>
-                                        </div>
-                                    </div>
+                        {/* VIEW: PENGATURAN -> AKUN */}
+                        {activeTab === "pengaturan_akun" && (
+                            <div className="bg-white dark:bg-slate-800 border-t border-b sm:border sm:rounded-3xl border-slate-200 dark:border-slate-700/50 overflow-hidden animate-in slide-in-from-right-8 fade-in duration-300 transition-colors">
+                                <div className="flex flex-col">
+                                    <button
+                                        onClick={() => handleTabChange("pengaturan_sandi")}
+                                        className="flex items-center justify-between w-full px-6 py-5 border-b border-slate-100 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors text-left focus:outline-none"
+                                    >
+                                        <span className="text-[15px] font-medium text-slate-700 dark:text-slate-200">Mengubah Sandi</span>
+                                        <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
+                                    </button>
+                                    <button
+                                        onClick={() => handleTabChange("pengaturan_hapus")}
+                                        className="flex items-center justify-between w-full px-6 py-5 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors text-left focus:outline-none"
+                                    >
+                                        <span className="text-[15px] font-medium text-slate-700 dark:text-slate-200">Hapus Akun</span>
+                                        <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        )}
 
+                        {/* VIEW: PENGATURAN -> GANTI SANDI FORM */}
+                        {activeTab === "pengaturan_sandi" && (
+                            <div className="animate-in slide-in-from-right-8 fade-in duration-300">
+                                <div className="bg-white dark:bg-slate-800 border-t border-b sm:border sm:rounded-3xl shadow-sm sm:shadow-lg shadow-slate-200/50 dark:shadow-none border-slate-200 dark:border-slate-700/50 overflow-hidden transition-colors">
                                     <div className="p-0">
                                         {passwordMessage.text && (
-                                            <div className={`m-6 p-3 rounded-lg flex items-center text-sm ${passwordMessage.type === 'success' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' : 'bg-red-50 text-red-600 border border-red-100'}`}>
+                                            <div className={`m-6 p-4 rounded-xl flex items-center text-sm ${passwordMessage.type === 'success' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' : 'bg-red-50 text-red-600 border border-red-100'}`}>
                                                 <p className="font-semibold">{passwordMessage.text}</p>
                                             </div>
                                         )}
 
-                                        <form onSubmit={handleUpdatePassword} className="divide-y divide-slate-100">
-
+                                        <form onSubmit={handleUpdatePassword} className="divide-y divide-slate-100 dark:divide-slate-700/50">
                                             {/* Sandi Lama Mendatar */}
-                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 py-6 hover:bg-slate-50/50 transition-colors">
+                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 sm:px-8 py-6 hover:bg-slate-50/50 dark:hover:bg-slate-700/20 transition-colors">
                                                 <div className="pt-2">
-                                                    <label className="block text-sm font-semibold text-slate-700">Sandi Saat Ini</label>
+                                                    <label className="block text-sm font-semibold text-slate-800 dark:text-slate-300">Sandi Saat Ini</label>
                                                 </div>
                                                 <div>
                                                     <input
                                                         type="password"
                                                         required
-                                                        className={`appearance-none bg-white border border-slate-200 text-slate-800 text-sm font-medium rounded-lg focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 block w-full max-w-sm px-3.5 py-2.5 outline-none transition-all shadow-sm`}
+                                                        className={`appearance-none bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white text-sm font-medium rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 dark:focus:border-indigo-500 block w-full max-w-sm px-4 py-3 outline-none transition-all`}
                                                         value={oldPassword}
                                                         onChange={(e) => setOldPassword(e.target.value)}
                                                     />
@@ -491,15 +531,15 @@ function Profile() {
                                             </div>
 
                                             {/* Sandi Baru Mendatar */}
-                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 py-6 hover:bg-slate-50/50 transition-colors">
+                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 sm:px-8 py-6 hover:bg-slate-50/50 dark:hover:bg-slate-700/20 transition-colors">
                                                 <div className="pt-2">
-                                                    <label className="block text-sm font-semibold text-slate-700">Sandi Baru</label>
+                                                    <label className="block text-sm font-semibold text-slate-800 dark:text-slate-300">Sandi Baru</label>
                                                 </div>
                                                 <div className="space-y-3">
                                                     <input
                                                         type="password"
                                                         required
-                                                        className={`appearance-none bg-white border border-slate-200 text-slate-800 text-sm font-medium rounded-lg focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 block w-full max-w-sm px-3.5 py-2.5 outline-none transition-all shadow-sm`}
+                                                        className={`appearance-none bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white text-sm font-medium rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 dark:focus:border-indigo-500 block w-full max-w-sm px-4 py-3 outline-none transition-all`}
                                                         placeholder="Ketik rahasia baru..."
                                                         value={newPassword}
                                                         onChange={(e) => setNewPassword(e.target.value)}
@@ -507,7 +547,7 @@ function Profile() {
                                                     <input
                                                         type="password"
                                                         required
-                                                        className={`appearance-none bg-white border border-slate-200 text-slate-800 text-sm font-medium rounded-lg focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 block w-full max-w-sm px-3.5 py-2.5 outline-none transition-all shadow-sm`}
+                                                        className={`appearance-none bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white text-sm font-medium rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 dark:focus:border-indigo-500 block w-full max-w-sm px-4 py-3 outline-none transition-all`}
                                                         placeholder="Ulangi sekali lagi..."
                                                         value={confirmPassword}
                                                         onChange={(e) => setConfirmPassword(e.target.value)}
@@ -515,11 +555,11 @@ function Profile() {
                                                 </div>
                                             </div>
 
-                                            <div className="bg-slate-50/80 px-6 py-4 flex justify-end rounded-b-2xl">
+                                            <div className="bg-slate-50/80 dark:bg-slate-800/80 px-6 sm:px-8 py-5 flex justify-end">
                                                 <button
                                                     type="submit"
                                                     disabled={loadingPassword}
-                                                    className={`px-6 py-2.5 text-sm font-bold text-white rounded-lg transition-all shadow-sm disabled:opacity-50 bg-indigo-600 hover:bg-indigo-700`}
+                                                    className={`px-6 py-3 text-sm font-bold text-white rounded-xl transition-all shadow-sm disabled:opacity-50 bg-indigo-600 hover:bg-indigo-700 border border-indigo-600 hover:border-indigo-700`}
                                                 >
                                                     {loadingPassword ? "Memvalidasi..." : "Terapkan Keamanan"}
                                                 </button>
@@ -527,68 +567,73 @@ function Profile() {
                                         </form>
                                     </div>
                                 </div>
+                            </div>
+                        )}
 
-                                {/* KARTU 2: HAPUS AKUN (DANGER ZONE) */}
-                                <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg shadow-red-900/5 dark:shadow-none border border-red-200 dark:border-red-900/30 overflow-hidden transition-colors relative">
+                        {/* VIEW: PENGATURAN -> HAPUS AKUN FORM */}
+                        {activeTab === "pengaturan_hapus" && (
+                            <div className="animate-in slide-in-from-right-8 fade-in duration-300">
+                                <div className="bg-white dark:bg-slate-800 border-t border-b sm:border sm:rounded-3xl shadow-lg shadow-red-900/5 dark:shadow-none border-red-200 dark:border-red-900/30 overflow-hidden transition-colors relative">
                                     <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/5 rounded-bl-[100px] pointer-events-none"></div>
-                                    <div className="px-6 sm:px-8 py-5 border-b border-red-50 dark:border-red-900/20 flex items-center gap-3 transition-colors relative z-10">
-                                        <div className="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/50 text-red-600 dark:text-red-400 flex items-center justify-center shrink-0">
-                                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                                    <div className="px-6 sm:px-8 py-6 border-b border-red-50 dark:border-red-900/20 flex items-center gap-4 transition-colors relative z-10">
+                                        <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/50 text-red-600 dark:text-red-400 flex items-center justify-center shrink-0">
+                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                                         </div>
                                         <div>
-                                            <h3 className="text-lg font-bold text-red-600 dark:text-red-400">Zona Berbahaya</h3>
-                                            <p className="text-xs font-medium text-red-500/80 dark:text-red-500 mt-0.5">Tindakan ini permanen dan berisiko tinggi.</p>
+                                            <h3 className="text-xl font-bold text-red-600 dark:text-red-400">Pemusnahan Permanen</h3>
+                                            <p className="text-sm font-medium text-red-500/80 dark:text-red-500 mt-1">Tindakan ini tidak dapat dibatalkan.</p>
                                         </div>
                                     </div>
 
                                     <div className="p-0 relative z-10">
                                         {deleteMessage.text && (
-                                            <div className={`m-6 p-3 rounded-lg flex items-center text-sm ${deleteMessage.type === 'success' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' : 'bg-red-50 text-red-600 border border-red-100'}`}>
+                                            <div className={`m-6 p-4 rounded-xl flex items-center text-sm ${deleteMessage.type === 'success' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' : 'bg-red-50 text-red-600 border border-red-100'}`}>
                                                 <p className="font-semibold">{deleteMessage.text}</p>
                                             </div>
                                         )}
 
-                                        <div className="px-6 sm:px-8 py-6">
-                                            <p className="text-sm text-slate-600 dark:text-slate-400 font-medium mb-5 leading-relaxed transition-colors">
-                                                Jika Anda memilih menghapus akun, semua data pribadi, foto beserta laporan pengaduan Anda akan dipangkas selamanya dari pangkalan data sistem kami. <span className="font-bold text-red-600 dark:text-red-400">Mohon pastikan Anda yakin!</span>
+                                        <div className="px-6 sm:px-8 py-8">
+                                            <p className="text-base text-slate-600 dark:text-slate-400 font-medium mb-6 leading-relaxed flex flex-col gap-2">
+                                                <span>Jika Anda memilih menghapus akun, seluruh data yang melampirkan identitas Anda: profil, gambar wajah, beserta laporan kejadian yang pernah Anda rekam, akan dibumi-hanguskan selamanya dari pangkalan pusat.</span>
+                                                <span className="font-bold text-red-600 dark:text-red-400">Pertimbangkan baik-baik.</span>
                                             </p>
 
                                             {!showDeleteConfirm ? (
                                                 <button
                                                     onClick={() => setShowDeleteConfirm(true)}
-                                                    className="px-5 py-2.5 text-sm font-bold text-red-600 bg-red-50 border border-red-100 hover:bg-red-100 dark:bg-red-900/20 dark:border-red-900/30 dark:hover:bg-red-900/40 rounded-xl transition-all shadow-sm flex items-center gap-2"
+                                                    className="px-6 py-3.5 text-sm font-bold text-red-600 bg-red-50 border border-red-100 hover:bg-red-100 dark:bg-red-900/20 dark:border-red-900/30 dark:hover:bg-red-900/40 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 w-full sm:w-auto"
                                                 >
-                                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                                                     Hapus Akun Sipentar
                                                 </button>
                                             ) : (
-                                                <form onSubmit={handleDeleteAccount} className="bg-red-50/50 dark:bg-red-900/10 p-5 rounded-2xl border border-red-100 dark:border-red-900/30 space-y-4 animate-in fade-in transition-colors">
+                                                <form onSubmit={handleDeleteAccount} className="bg-red-50/50 dark:bg-red-900/10 p-6 rounded-2xl border border-red-100 dark:border-red-900/30 space-y-5 animate-in fade-in transition-colors">
                                                     <div>
-                                                        <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1.5 transition-colors">
+                                                        <label className="block text-base font-bold text-slate-700 dark:text-slate-300 mb-2 transition-colors">
                                                             Konfirmasi Penghapusan
                                                         </label>
-                                                        <p className="text-xs text-red-600/80 dark:text-red-400 mb-3 font-medium">Buktikan keabsahan ini dengan menginput kata sandi akun Anda.</p>
+                                                        <p className="text-sm text-red-600/80 dark:text-red-400 mb-4 font-medium">Buktikan keabsahan ini dengan menginput kata sandi akun Anda.</p>
                                                         <input
                                                             type="password"
                                                             required
                                                             placeholder="••••••••"
                                                             value={deletePassword}
                                                             onChange={(e) => setDeletePassword(e.target.value)}
-                                                            className="w-full px-4 py-3 bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-red-500/20 focus:border-red-500 dark:focus:border-red-500 outline-none transition-all text-slate-800 dark:text-white font-medium"
+                                                            className="w-full max-w-sm px-4 py-3 bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-red-500/20 focus:border-red-500 dark:focus:border-red-500 outline-none transition-all text-slate-800 dark:text-white font-medium"
                                                         />
                                                     </div>
-                                                    <div className="flex items-center gap-3 pt-2">
+                                                    <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
                                                         <button
                                                             type="button"
                                                             onClick={() => setShowDeleteConfirm(false)}
-                                                            className="flex-1 sm:flex-none px-5 py-2.5 text-sm font-bold text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-xl transition-all shadow-sm"
+                                                            className="w-full sm:w-auto px-6 py-3 text-sm font-bold text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-xl transition-all shadow-sm"
                                                         >
                                                             Batal
                                                         </button>
                                                         <button
                                                             type="submit"
                                                             disabled={loadingDelete}
-                                                            className="flex-1 sm:flex-none px-5 py-2.5 text-sm font-bold text-white bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl transition-all shadow-sm border border-red-600 hover:border-red-700"
+                                                            className="w-full sm:w-auto px-6 py-3 text-sm font-bold text-white bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl transition-all shadow-sm border border-red-600 hover:border-red-700"
                                                         >
                                                             {loadingDelete ? "Sedang Mengunci..." : "Yakin, Hapus!"}
                                                         </button>
@@ -598,7 +643,6 @@ function Profile() {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         )}
                     </div>
