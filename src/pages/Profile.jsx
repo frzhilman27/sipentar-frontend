@@ -154,29 +154,29 @@ function Profile() {
     const theme = "blue";
 
     return (
-        <div className="min-h-screen bg-slate-50 font-sans pb-12 selection:bg-blue-100">
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-900 font-sans pb-12 selection:bg-blue-100 dark:selection:bg-blue-900 transition-colors duration-300">
             {/* Header Premium & Identitas Kompak */}
-            <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-200 shadow-sm">
+            <header className="sticky top-0 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
                     <div className="flex items-center gap-4">
-                        <Link to="/dashboard" className="p-2 text-slate-400 hover:bg-slate-50 rounded-full hover:text-blue-600 transition-colors focus:outline-none">
+                        <Link to="/dashboard" className="p-2 text-slate-400 dark:text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none">
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                         </Link>
 
                         {/* Identitas Terpadu di Header */}
-                        <div className="flex items-center gap-4 pl-2 border-l border-slate-200">
+                        <div className="flex items-center gap-4 pl-2 border-l border-slate-200 dark:border-slate-700 transition-colors">
                             {userPhotoUrl ? (
-                                <img src={userPhotoUrl} alt="Profil Atas" className="w-10 h-10 rounded-full object-cover border border-slate-200 shadow-sm" />
+                                <img src={userPhotoUrl} alt="Profil Atas" className="w-10 h-10 rounded-full object-cover border border-slate-200 dark:border-slate-600 shadow-sm transition-colors" />
                             ) : (
                                 <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold text-white shadow-inner bg-gradient-to-br from-cyan-400 to-blue-600`}>
                                     {user.name.charAt(0).toUpperCase()}
                                 </div>
                             )}
                             <div>
-                                <h1 className="text-base font-bold text-slate-800 tracking-tight leading-none">{user.name}</h1>
+                                <h1 className="text-base font-bold text-slate-800 dark:text-white tracking-tight leading-none transition-colors">{user.name}</h1>
                                 <div className="mt-1 flex items-center gap-2">
-                                    <span className="text-[10px] font-semibold text-blue-600 uppercase tracking-wider">{isUser ? 'Warga' : 'Admin'}</span>
-                                    <span className="text-[10px] font-medium text-slate-400">&bull;&nbsp; {isUser ? `NIK: ${user.nik}` : 'Sipentar Sistem'}</span>
+                                    <span className="text-[10px] font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider transition-colors">{isUser ? 'Warga' : 'Admin'}</span>
+                                    <span className="text-[10px] font-medium text-slate-400 dark:text-slate-500 transition-colors">&bull;&nbsp; {isUser ? `NIK: ${user.nik}` : 'Sipentar Sistem'}</span>
                                 </div>
                             </div>
                         </div>
@@ -189,28 +189,28 @@ function Profile() {
                 <div className="flex flex-col md:flex-row gap-6 items-start">
 
                     {/* --- SIDEBAR NAVIGASI TAB (Lebih Ramping) --- */}
-                    <div className="w-full md:w-56 shrink-0 space-y-1 bg-white p-2 rounded-2xl shadow-sm border border-slate-100 sticky top-28">
+                    <div className="w-full md:w-56 shrink-0 space-y-1 bg-white dark:bg-slate-800 p-2 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700/50 sticky top-28 transition-colors">
                         <div className="px-3 py-2 mb-1">
-                            <h2 className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Menu Akun</h2>
+                            <h2 className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest transition-colors">Menu Akun</h2>
                         </div>
                         <button
                             onClick={() => { setActiveTab("profil"); setProfileMessage({ type: '', text: '' }); }}
                             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-left text-sm font-bold transition-all ${activeTab === "profil"
-                                ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-500/20"
-                                : "bg-transparent text-slate-600 hover:bg-slate-50"
+                                ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 shadow-sm ring-1 ring-blue-500/20 dark:ring-blue-500/30"
+                                : "bg-transparent text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50"
                                 }`}
                         >
-                            <svg className={`w-4 h-4 shrink-0 transition-colors ${activeTab === "profil" ? "text-blue-600" : "text-slate-400"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <svg className={`w-4 h-4 shrink-0 transition-colors ${activeTab === "profil" ? "text-blue-600 dark:text-blue-400" : "text-slate-400 dark:text-slate-500"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                             Kelola Profil
                         </button>
                         <button
                             onClick={() => { setActiveTab("pengaturan"); setPasswordMessage({ type: '', text: '' }); setDeleteMessage({ type: '', text: '' }); }}
                             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-left text-sm font-bold transition-all ${activeTab === "pengaturan"
-                                ? "bg-blue-50 text-blue-700 shadow-sm ring-1 ring-blue-500/20"
-                                : "bg-transparent text-slate-600 hover:bg-slate-50"
+                                ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 shadow-sm ring-1 ring-blue-500/20 dark:ring-blue-500/30"
+                                : "bg-transparent text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50"
                                 }`}
                         >
-                            <svg className={`w-4 h-4 shrink-0 transition-colors ${activeTab === "pengaturan" ? "text-blue-600" : "text-slate-400"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                            <svg className={`w-4 h-4 shrink-0 transition-colors ${activeTab === "pengaturan" ? "text-blue-600 dark:text-blue-400" : "text-slate-400 dark:text-slate-500"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                             Pengaturan
                         </button>
                     </div>
@@ -220,11 +220,11 @@ function Profile() {
 
                         {/* VIEW: KELOLA PROFIL (Dual-Mode: Read vs Edit) */}
                         {activeTab === "profil" && (
-                            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden animate-in fade-in duration-300">
-                                <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
+                            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700/50 overflow-hidden animate-in fade-in duration-300 transition-colors">
+                                <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-700/50 flex items-center justify-between transition-colors">
                                     <div>
-                                        <h3 className="text-lg font-bold text-slate-800">Informasi Dasar</h3>
-                                        <p className="text-xs font-medium text-slate-500 mt-0.5">Identitas otentik yang terafiliasi dengan akun Sipentar Anda.</p>
+                                        <h3 className="text-lg font-bold text-slate-800 dark:text-white transition-colors">Informasi Dasar</h3>
+                                        <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-0.5 transition-colors">Identitas otentik yang terafiliasi dengan akun Sipentar Anda.</p>
                                     </div>
                                     {!isEditingProfile && (
                                         <button

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../services/api";
 import Laporan from "./Laporan";
+import useDarkMode from "../hooks/useDarkMode";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -9,6 +10,7 @@ function Dashboard() {
   const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
   const notifRef = useRef(null);
+  const [isDarkMode, toggleDarkMode] = useDarkMode();
 
   const role = localStorage.getItem("role");
   const name = localStorage.getItem("name");
@@ -105,21 +107,34 @@ function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] font-sans selection:bg-indigo-200">
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-slate-900 font-sans selection:bg-indigo-200 dark:selection:bg-indigo-900 transition-colors duration-300">
       {/* Header Estetis Mewah */}
-      <header className="sticky top-0 z-40 bg-white/70 backdrop-blur-xl border-b border-indigo-50 shadow-[0_4px_30px_rgba(0,0,0,0.03)] transition-all">
+      <header className="sticky top-0 z-40 bg-white/70 dark:bg-slate-900/80 backdrop-blur-xl border-b border-indigo-50 dark:border-slate-800 shadow-[0_4px_30px_rgba(0,0,0,0.03)] transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-blue-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-indigo-500/30 ring-4 ring-indigo-50/50">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-blue-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-indigo-500/30 ring-4 ring-indigo-50/50 dark:ring-indigo-900/30">
               <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
             </div>
             <div>
-              <h1 className="text-xl font-extrabold text-slate-800 tracking-tight leading-tight">Sipentar<span className="text-indigo-600">.</span></h1>
-              <p className="text-[11px] font-bold text-slate-400 tracking-[0.2em] uppercase">Desa Lamaran Tarung</p>
+              <h1 className="text-xl font-extrabold text-slate-800 dark:text-white tracking-tight leading-tight transition-colors">Sipentar<span className="text-indigo-600 dark:text-indigo-400">.</span></h1>
+              <p className="text-[11px] font-bold text-slate-400 dark:text-slate-500 tracking-[0.2em] uppercase transition-colors">Desa Lamaran Tarung</p>
             </div>
           </div>
 
           <div className="flex items-center gap-5 sm:gap-7">
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className="relative p-2.5 rounded-full text-slate-400 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-900"
+              title="Ganti Tema Warna"
+            >
+              {isDarkMode ? (
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+              )}
+            </button>
+
             {/* Notification Bell Mewah */}
             <div className="relative" ref={notifRef}>
               <button
@@ -137,29 +152,29 @@ function Dashboard() {
 
               {/* Notification Dropdown Aesthetic */}
               {showNotifications && (
-                <div className="fixed sm:absolute inset-x-4 top-20 sm:inset-auto sm:top-auto sm:right-0 sm:mt-4 sm:w-96 bg-white/95 backdrop-blur-2xl rounded-3xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] border border-slate-100/60 overflow-hidden transform origin-top sm:origin-top-right transition-all z-50">
-                  <div className="px-6 py-4 border-b border-slate-50 bg-white flex justify-between items-center">
-                    <h3 className="text-sm font-extrabold text-slate-800">Pemberitahuan</h3>
-                    {unreadCount > 0 && <span className="text-[10px] font-bold uppercase tracking-wider text-rose-600 bg-rose-50 px-3 py-1 rounded-full">{unreadCount} Baru</span>}
+                <div className="fixed sm:absolute inset-x-4 top-20 sm:inset-auto sm:top-auto sm:right-0 sm:mt-4 sm:w-96 bg-white/95 dark:bg-slate-800/95 backdrop-blur-2xl rounded-3xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] border border-slate-100/60 dark:border-slate-700/60 overflow-hidden transform origin-top sm:origin-top-right transition-all z-50">
+                  <div className="px-6 py-4 border-b border-slate-50 dark:border-slate-700/50 bg-white dark:bg-slate-800 flex justify-between items-center transition-colors">
+                    <h3 className="text-sm font-extrabold text-slate-800 dark:text-white transition-colors">Pemberitahuan</h3>
+                    {unreadCount > 0 && <span className="text-[10px] font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-900/30 px-3 py-1 rounded-full">{unreadCount} Baru</span>}
                   </div>
                   <div className="max-h-[360px] overflow-y-auto">
                     {notifications.length === 0 ? (
                       <div className="px-6 py-12 flex flex-col items-center justify-center text-center">
-                        <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-3">
-                          <svg className="w-8 h-8 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" /></svg>
+                        <div className="w-16 h-16 bg-slate-50 dark:bg-slate-700/50 rounded-full flex items-center justify-center mb-3">
+                          <svg className="w-8 h-8 text-slate-300 dark:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" /></svg>
                         </div>
-                        <p className="text-sm font-semibold text-slate-500">Ketenangan Terjaga.</p>
-                        <p className="text-xs text-slate-400 mt-0.5">Belum ada aktivitas baru hari ini.</p>
+                        <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">Ketenangan Terjaga.</p>
+                        <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Belum ada aktivitas baru hari ini.</p>
                       </div>
                     ) : (
-                      <ul className="divide-y divide-slate-50">
+                      <ul className="divide-y divide-slate-50 dark:divide-slate-700/50">
                         {notifications.map((notif) => (
-                          <li key={notif.id} className={`p-5 hover:bg-slate-50/80 transition-colors group ${!notif.is_read ? 'bg-indigo-50/20' : ''}`}>
+                          <li key={notif.id} className={`p-5 hover:bg-slate-50/80 dark:hover:bg-slate-700/50 transition-colors group ${!notif.is_read ? 'bg-indigo-50/20 dark:bg-indigo-900/10' : ''}`}>
                             <div className="flex gap-4">
-                              <div className={`mt-1.5 w-2 h-2 rounded-full shrink-0 ${!notif.is_read ? 'bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.6)]' : 'bg-slate-200'}`}></div>
+                              <div className={`mt-1.5 w-2 h-2 rounded-full shrink-0 ${!notif.is_read ? 'bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.6)] dark:shadow-[0_0_8px_rgba(99,102,241,0.4)]' : 'bg-slate-200 dark:bg-slate-600'}`}></div>
                               <div>
-                                <p className={`text-sm leading-snug ${!notif.is_read ? 'font-bold text-slate-800' : 'font-medium text-slate-600'}`}>{notif.message}</p>
-                                <p className="text-[11px] font-semibold text-slate-400 mt-2 flex items-center gap-1.5">
+                                <p className={`text-sm leading-snug transition-colors ${!notif.is_read ? 'font-bold text-slate-800 dark:text-white' : 'font-medium text-slate-600 dark:text-slate-300'}`}>{notif.message}</p>
+                                <p className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 mt-2 flex items-center gap-1.5 transition-colors">
                                   <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                   {new Date(notif.created_at).toLocaleDateString('id-ID', { hour: '2-digit', minute: '2-digit' })}
                                 </p>
@@ -174,19 +189,19 @@ function Dashboard() {
               )}
             </div>
 
-            <div className="h-8 w-px bg-slate-200 hidden sm:block"></div>
+            <div className="h-8 w-px bg-slate-200 dark:bg-slate-700 hidden sm:block transition-colors"></div>
 
             <div className="flex items-center gap-2 sm:gap-4">
               <div className="hidden sm:flex flex-col items-end mr-1">
-                <p className="text-sm font-extrabold text-slate-800 leading-tight">{name || "Pengguna"}</p>
-                <p className="text-[11px] font-bold text-indigo-500 uppercase tracking-wider">{role}</p>
+                <p className="text-sm font-extrabold text-slate-800 dark:text-white leading-tight transition-colors">{name || "Pengguna"}</p>
+                <p className="text-[11px] font-bold text-indigo-500 dark:text-indigo-400 uppercase tracking-wider transition-colors">{role}</p>
               </div>
 
               {/* Actions Dropdown / Links */}
-              <div className="flex gap-1.5 sm:gap-2 bg-slate-50 p-1.5 rounded-xl border border-slate-100">
+              <div className="flex gap-1.5 sm:gap-2 bg-slate-50 dark:bg-slate-800/50 p-1.5 rounded-xl border border-slate-100 dark:border-slate-700/50 transition-colors">
                 <Link
                   to="/profile"
-                  className="p-2 text-slate-500 hover:text-indigo-600 hover:bg-white hover:shadow-sm rounded-lg transition-all"
+                  className="p-2 text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-white dark:hover:bg-slate-700 hover:shadow-sm rounded-lg transition-all"
                   title="Kelola Akun Pribadi"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
@@ -194,7 +209,7 @@ function Dashboard() {
 
                 <button
                   onClick={logout}
-                  className="p-2 text-slate-500 hover:text-red-500 hover:bg-white hover:shadow-sm rounded-lg transition-all"
+                  className="p-2 text-slate-500 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-white dark:hover:bg-slate-700 hover:shadow-sm rounded-lg transition-all"
                   title="Akhiri Sesi"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
@@ -244,36 +259,36 @@ function Dashboard() {
 
         {/* Metrik Analitik Mini (Angka Statistik) */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-12">
-          <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.02)] border border-slate-100/60 hover:-translate-y-1 transition-transform">
-            <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 mb-4">
+          <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.02)] border border-slate-100/60 dark:border-slate-700/50 hover:-translate-y-1 transition-all group">
+            <div className="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-100 dark:border-indigo-800/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-4 transition-colors">
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
             </div>
-            <p className="text-slate-500 font-bold text-sm mb-1 uppercase tracking-wider">Total Laporan</p>
-            <p className="text-3xl font-extrabold text-slate-800">{reports.length}</p>
+            <p className="text-slate-500 dark:text-slate-400 font-bold text-sm mb-1 uppercase tracking-wider transition-colors">Total Laporan</p>
+            <p className="text-3xl font-extrabold text-slate-800 dark:text-white transition-colors">{reports.length}</p>
           </div>
 
-          <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.02)] border border-slate-100/60 hover:-translate-y-1 transition-transform">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 mb-4">
+          <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.02)] border border-slate-100/60 dark:border-slate-700/50 hover:-translate-y-1 transition-all group">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-100 dark:border-emerald-800/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-4 transition-colors">
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             </div>
-            <p className="text-slate-500 font-bold text-sm mb-1 uppercase tracking-wider">Diselesaikan</p>
-            <p className="text-3xl font-extrabold text-slate-800">{reports.filter(r => r.status === 'Selesai').length}</p>
+            <p className="text-slate-500 dark:text-slate-400 font-bold text-sm mb-1 uppercase tracking-wider transition-colors">Diselesaikan</p>
+            <p className="text-3xl font-extrabold text-slate-800 dark:text-white transition-colors">{reports.filter(r => r.status === 'Selesai').length}</p>
           </div>
 
-          <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.02)] border border-slate-100/60 hover:-translate-y-1 transition-transform">
-            <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-4">
+          <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.02)] border border-slate-100/60 dark:border-slate-700/50 hover:-translate-y-1 transition-all group">
+            <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800/50 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4 transition-colors">
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
             </div>
-            <p className="text-slate-500 font-bold text-sm mb-1 uppercase tracking-wider">Diproses</p>
-            <p className="text-3xl font-extrabold text-slate-800">{reports.filter(r => r.status === 'Diproses').length}</p>
+            <p className="text-slate-500 dark:text-slate-400 font-bold text-sm mb-1 uppercase tracking-wider transition-colors">Diproses</p>
+            <p className="text-3xl font-extrabold text-slate-800 dark:text-white transition-colors">{reports.filter(r => r.status === 'Diproses').length}</p>
           </div>
 
-          <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.02)] border border-slate-100/60 hover:-translate-y-1 transition-transform">
-            <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 mb-4">
+          <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.02)] border border-slate-100/60 dark:border-slate-700/50 hover:-translate-y-1 transition-all group">
+            <div className="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-900/30 border border-amber-100 dark:border-amber-800/50 flex items-center justify-center text-amber-600 dark:text-amber-400 mb-4 transition-colors">
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             </div>
-            <p className="text-slate-500 font-bold text-sm mb-1 uppercase tracking-wider">Menunggu</p>
-            <p className="text-3xl font-extrabold text-slate-800">{reports.filter(r => r.status === 'Menunggu').length}</p>
+            <p className="text-slate-500 dark:text-slate-400 font-bold text-sm mb-1 uppercase tracking-wider transition-colors">Menunggu</p>
+            <p className="text-3xl font-extrabold text-slate-800 dark:text-white transition-colors">{reports.filter(r => r.status === 'Menunggu').length}</p>
           </div>
         </div>
 
@@ -288,34 +303,34 @@ function Dashboard() {
         <div className="mb-8">
           <div className="flex flex-col sm:flex-row justify-between items-end mb-6">
             <div>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-800 dark:text-white tracking-tight transition-colors">
                 {role === "admin" ? "Semua Rekapitulasi Laporan" : "Lini Masa Laporan Anda"}
               </h3>
-              <p className="text-slate-500 font-medium mt-1">Histori laporan disajikan dalam tatanan kronologis yang mutakhir.</p>
+              <p className="text-slate-500 dark:text-slate-400 font-medium mt-1 transition-colors">Histori laporan disajikan dalam tatanan kronologis yang mutakhir.</p>
             </div>
           </div>
 
           <div className="flex flex-col gap-4">
             {reports.length === 0 ? (
-              <div className="bg-white rounded-[2rem] border border-slate-100/60 shadow-sm p-20 flex flex-col items-center justify-center text-center">
-                <div className="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center mb-6">
-                  <svg className="w-12 h-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+              <div className="bg-white dark:bg-slate-800 rounded-[2rem] border border-slate-100/60 dark:border-slate-700/50 shadow-sm p-20 flex flex-col items-center justify-center text-center transition-all">
+                <div className="w-24 h-24 bg-slate-50 dark:bg-slate-700/50 rounded-full flex items-center justify-center mb-6">
+                  <svg className="w-12 h-12 text-slate-300 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                 </div>
-                <h4 className="text-xl font-extrabold text-slate-800 mb-2">Papan Ketik Bersih</h4>
-                <p className="text-slate-500 font-medium max-w-sm">Sipentar belum mencatat satu pelaporan pun ke dalam kotak arsip.</p>
+                <h4 className="text-xl font-extrabold text-slate-800 dark:text-white mb-2 transition-colors">Papan Ketik Bersih</h4>
+                <p className="text-slate-500 dark:text-slate-400 font-medium max-w-sm transition-colors">Sipentar belum mencatat satu pelaporan pun ke dalam kotak arsip.</p>
               </div>
             ) : (
               reports.map((r) => (
-                <div key={r.id} className="bg-white group rounded-[2rem] border border-slate-100/60 p-6 sm:p-8 flex flex-col md:flex-row gap-6 md:gap-10 hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300">
+                <div key={r.id} className="bg-white dark:bg-slate-800 group rounded-[2rem] border border-slate-100/60 dark:border-slate-700/50 p-6 sm:p-8 flex flex-col md:flex-row gap-6 md:gap-10 hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.3)] hover:-translate-y-1 transition-all duration-300">
 
                   {/* Avatar & Info Pelapor */}
                   <div className="flex items-start gap-4 shrink-0 md:w-64">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-slate-100 to-slate-200 flex items-center justify-center text-slate-600 font-extrabold text-xl shadow-inner group-hover:from-indigo-100 group-hover:to-blue-50 transition-colors">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-slate-100 dark:from-slate-700 to-slate-200 dark:to-slate-600 flex items-center justify-center text-slate-600 dark:text-slate-300 font-extrabold text-xl shadow-inner group-hover:from-indigo-100 dark:group-hover:from-indigo-900/50 group-hover:to-blue-50 dark:group-hover:to-blue-900/40 transition-colors">
                       {r.name.charAt(0).toUpperCase()}
                     </div>
                     <div>
-                      <p className="font-extrabold text-slate-800 text-lg group-hover:text-indigo-600 transition-colors">{r.name}</p>
-                      <p className="text-xs font-bold text-slate-400 mt-1 tracking-wider uppercase flex items-center gap-1.5">
+                      <p className="font-extrabold text-slate-800 dark:text-white text-lg group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{r.name}</p>
+                      <p className="text-xs font-bold text-slate-400 dark:text-slate-500 mt-1 tracking-wider uppercase flex items-center gap-1.5 transition-colors">
                         <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         {r.created_at ? new Date(r.created_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Tanggal Laporan'}
                       </p>
@@ -324,8 +339,8 @@ function Dashboard() {
 
                   {/* Konten Aduan */}
                   <div className="flex-1">
-                    <h4 className="font-extrabold text-xl text-slate-900 mb-2 leading-tight">{r.judul}</h4>
-                    <p className="text-slate-500 font-medium leading-relaxed pb-6 text-[15px]">{r.isi}</p>
+                    <h4 className="font-extrabold text-xl text-slate-900 dark:text-white mb-2 leading-tight transition-colors">{r.judul}</h4>
+                    <p className="text-slate-500 dark:text-slate-300 font-medium leading-relaxed pb-6 text-[15px] transition-colors">{r.isi}</p>
 
                     {/* Gambar Opsional Bento Style */}
                     {r.image_url && (
@@ -344,7 +359,7 @@ function Dashboard() {
                     )}
 
                     {/* Status & Kendali Admin Bottom Bar */}
-                    <div className="pt-5 mt-auto border-t border-slate-100 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+                    <div className="pt-5 mt-auto border-t border-slate-100 dark:border-slate-700/50 flex flex-col sm:flex-row justify-between sm:items-center gap-4 transition-colors">
                       <span className={`inline-flex items-center px-4 py-2 rounded-xl text-xs font-extrabold tracking-widest uppercase ${getStatusBadge(r.status)}`}>
                         {r.status === 'Menunggu' && <span className="w-2 h-2 rounded-full bg-amber-500 mr-2.5 shadow-[0_0_10px_rgba(245,158,11,0.6)] animate-pulse"></span>}
                         {r.status === 'Diproses' && <span className="w-2 h-2 rounded-full bg-blue-500 mr-2.5 shadow-[0_0_10px_rgba(59,130,246,0.6)] animate-pulse"></span>}
@@ -357,13 +372,13 @@ function Dashboard() {
                           <select
                             value={r.status}
                             onChange={(e) => handleUpdateStatus(r.id, e.target.value)}
-                            className="appearance-none bg-slate-50 border-2 border-slate-100/80 hover:border-indigo-200 text-slate-700 text-sm font-bold rounded-xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 block w-full pl-5 pr-12 py-2.5 outline-none transition-all cursor-pointer"
+                            className="appearance-none bg-slate-50 dark:bg-slate-800/80 border-2 border-slate-100/80 dark:border-slate-700 hover:border-indigo-200 dark:hover:border-indigo-500 text-slate-700 dark:text-slate-200 text-sm font-bold rounded-xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 block w-full pl-5 pr-12 py-2.5 outline-none transition-all cursor-pointer"
                           >
                             <option value="Menunggu">Tandai Tertunda</option>
                             <option value="Diproses">Kerjakan (Proses)</option>
                             <option value="Selesai">Tetapkan Tuntas</option>
                           </select>
-                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400">
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400 dark:text-slate-500">
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7"></path></svg>
                           </div>
                         </div>
@@ -377,8 +392,8 @@ function Dashboard() {
         </div>
 
         <div className="mt-20 text-center flex flex-col items-center">
-          <div className="w-1.5 h-1.5 bg-slate-200 rounded-full mb-4"></div>
-          <p className="text-slate-400 text-sm font-bold tracking-widest uppercase">
+          <div className="w-1.5 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full mb-4 transition-colors"></div>
+          <p className="text-slate-400 dark:text-slate-500 text-sm font-bold tracking-widest uppercase transition-colors">
             Sipentar Dashboard Platform © {new Date().getFullYear()}
           </p>
         </div>
