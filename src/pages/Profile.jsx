@@ -13,6 +13,7 @@ function Profile() {
     const [fotoProfilLocal, setFotoProfilLocal] = useState("");
     const [selectedImage, setSelectedImage] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
+    const [removePhoto, setRemovePhoto] = useState(false);
 
     const [newEmail, setNewEmail] = useState("");
     const [jenisKelamin, setJenisKelamin] = useState("");
@@ -56,6 +57,7 @@ function Profile() {
             setFotoProfilLocal(res.data.foto_profil || "");
             setImagePreview(null);
             setSelectedImage(null);
+            setRemovePhoto(false);
         } catch (err) {
             console.error("Gagal mengambil profil:", err);
         }
@@ -66,12 +68,14 @@ function Profile() {
         if (file) {
             setSelectedImage(file);
             setImagePreview(URL.createObjectURL(file));
+            setRemovePhoto(false);
         }
     };
 
     const cancelEditing = () => {
         setIsEditingProfile(false);
         setProfileMessage({ type: '', text: '' });
+        setRemovePhoto(false);
         fetchProfile(); // Reset fields to initial
     };
 
@@ -85,8 +89,9 @@ function Profile() {
             formData.append("newEmail", newEmail);
             formData.append("jenis_kelamin", jenisKelamin);
             formData.append("no_hp", noHp);
+            formData.append("remove_photo", removePhoto);
 
-            if (selectedImage) {
+            if (selectedImage && !removePhoto) {
                 formData.append("foto_profil", selectedImage);
             }
 
@@ -391,7 +396,9 @@ function Profile() {
                                             <div className="flex flex-col items-center justify-center mb-6 relative z-10 pt-4">
                                                 <div className="relative group">
                                                     <div className="absolute inset-0 bg-green-500/20 rounded-full blur-xl scale-110 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                                                    {(imagePreview || userPhotoUrl) ? (
+
+                                                    {/* Prioritas Render Gambar */}
+                                                    {(!removePhoto && (imagePreview || userPhotoUrl)) ? (
                                                         <img src={imagePreview || userPhotoUrl} alt="Preview" className="w-[105px] h-[105px] rounded-full object-cover border-[3px] border-white shadow-sm relative z-10" />
                                                     ) : (
                                                         <div className={`w-[105px] h-[105px] rounded-full flex items-center justify-center text-[40px] font-black text-white bg-gradient-to-br from-[#00a82d] to-green-600 shadow-sm border-[3px] border-white relative z-10`}>
@@ -399,8 +406,22 @@ function Profile() {
                                                         </div>
                                                     )}
 
-                                                    {/* Ikon Kamera Overlay */}
-                                                    <label className="absolute bottom-0 -right-2 w-9 h-9 bg-white border border-slate-100 shadow-md rounded-full flex items-center justify-center cursor-pointer hover:bg-slate-50 transition-colors z-20 group-hover:scale-110">
+                                                    {/* Ikon Hapus Foto Kiri Atas Penuh Gaya (Muncul jika ada foto) */}
+                                                    {(!removePhoto && (imagePreview || userPhotoUrl)) && (
+                                                        <button
+                                                            type="button"
+                                                            onClick={(e) => { e.preventDefault(); setRemovePhoto(true); setImagePreview(null); setSelectedImage(null); }}
+                                                            className="absolute top-0 -right-2 w-8 h-8 bg-white border border-rose-100 shadow-md rounded-full flex items-center justify-center cursor-pointer hover:bg-rose-50 hover:border-red-200 transition-all z-30 opacity-80 hover:opacity-100 hover:scale-110 group-hover:opacity-100"
+                                                            title="Hapus Foto Profil"
+                                                        >
+                                                            <svg className="w-[16px] h-[16px] text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
+                                                            </svg>
+                                                        </button>
+                                                    )}
+
+                                                    {/* Ikon Kamera Overlay Kanan Bawah */}
+                                                    <label className="absolute bottom-0 -right-2 w-9 h-9 bg-white border border-slate-100 shadow-md rounded-full flex items-center justify-center cursor-pointer hover:bg-slate-50 transition-colors z-20 hover:scale-110">
                                                         <svg className="w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="currentColor">
                                                             <path d="M4 8V6a2 2 0 012-2h1.5l1.65-2h5.7l1.65 2H18a2 2 0 012 2v2M4 8h16M4 8v10a2 2 0 002 2h12a2 2 0 002-2V8m-9 9a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                                                         </svg>
