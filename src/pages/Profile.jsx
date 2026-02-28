@@ -182,18 +182,18 @@ function Profile() {
     return (
         <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] font-sans pb-16 selection:bg-indigo-200 dark:selection:bg-indigo-900 transition-colors duration-500">
             {/* Header Premium & Identitas Kompak */}
-            <header className="sticky top-0 z-40 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border-b border-white/40 dark:border-slate-800/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)] transition-all duration-300">
-                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
+            <header className={`sticky top-0 z-40 transition-all duration-300 ${isEditingProfile ? 'bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800' : 'bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border-b border-white/40 dark:border-slate-800/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.1)]'}`}>
+                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex justify-between items-center">
                     <div className="flex items-center gap-4">
                         <button
                             onClick={handleBackNavigation}
-                            className="p-2.5 text-slate-400 dark:text-slate-500 hover:bg-white dark:hover:bg-slate-800 rounded-full hover:text-indigo-600 dark:hover:text-indigo-400 transition-all duration-300 hover:shadow-md hover:scale-105 active:scale-95 focus:outline-none"
+                            className="p-1 sm:p-2 text-slate-800 font-bold dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all focus:outline-none flex-shrink-0"
                         >
-                            <svg className="w-5 h-5 lg:w-6 lg:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" /></svg>
+                            <svg className="w-6 h-6 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7" /></svg>
                         </button>
 
                         {/* Identitas Terpadu / Judul Halaman di Header */}
-                        <div className="flex items-center gap-4 pl-2 border-l border-slate-200 dark:border-slate-700 transition-colors">
+                        <div className={`flex items-center gap-3 w-full transition-colors ${activeTab === 'ringkasan' ? 'pl-2 border-l border-slate-200 dark:border-slate-700' : ''}`}>
                             {activeTab === 'ringkasan' ? (
                                 <>
                                     {userPhotoUrl ? (
@@ -203,7 +203,7 @@ function Profile() {
                                             {user.name.charAt(0).toUpperCase()}
                                         </div>
                                     )}
-                                    <div>
+                                    <div className="flex-1">
                                         <h1 className="text-base font-bold text-slate-800 dark:text-white tracking-tight leading-none transition-colors">{user.name}</h1>
                                         <div className="mt-1 flex items-center gap-2">
                                             <span className="text-[10px] font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider transition-colors">{isUser ? 'Warga' : 'Admin'}</span>
@@ -212,8 +212,8 @@ function Profile() {
                                     </div>
                                 </>
                             ) : (
-                                <h1 className="text-lg font-bold text-slate-800 dark:text-white tracking-tight leading-none transition-colors">
-                                    {activeTab === 'profil' ? (isEditingProfile ? 'MENGUBAH PROFIL' : 'Profil') :
+                                <h1 className="text-[17px] font-bold text-slate-800 dark:text-white tracking-wide transition-colors">
+                                    {activeTab === 'profil' ? (isEditingProfile ? 'Ubah Profil' : 'Profil') :
                                         activeTab === 'pengaturan' ? 'Pengaturan' :
                                             activeTab === 'pengaturan_akun' ? 'Akun' :
                                                 activeTab === 'pengaturan_sandi' ? 'Mengubah Sandi' :
@@ -241,8 +241,8 @@ function Profile() {
                 </div>
             </header>
 
-            <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pb-16">
-                <div className="flex flex-col gap-6 items-center w-full">
+            <main className={`max-w-4xl mx-auto px-0 sm:px-6 lg:px-8 mb-16 ${isEditingProfile ? 'mt-0' : 'mt-8'}`}>
+                <div className="flex flex-col items-center w-full">
 
                     {/* VIEW: MENU NAVIGASI GRID (DEFAULT "Ringkasan") */}
                     {activeTab === "ringkasan" && (
@@ -378,100 +378,125 @@ function Profile() {
                                             </div>
                                         </div>
                                     ) : (
-                                        /* ================= EDIT MODE ================= */
-                                        <form onSubmit={handleUpdateProfileInfo} className="divide-y divide-slate-100/60 dark:divide-slate-700/30 animate-in fade-in slide-in-from-top-2 duration-500 relative z-10">
+                                        /* ================= EDIT MODE (REFERENSI BARU) ================= */
+                                        <form onSubmit={handleUpdateProfileInfo} className="px-5 md:px-10 py-6 md:py-10 animate-in fade-in slide-in-from-top-2 duration-500 relative z-10 flex flex-col gap-5 bg-white w-full rounded-b-3xl">
 
-                                            {/* Field Unggah Foto */}
-                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 md:px-10 py-7 bg-blue-50/10 dark:bg-slate-800/30 border-b border-transparent">
-                                                <div className="pt-2">
-                                                    <label className="block text-[15px] font-bold text-slate-800 dark:text-slate-200">Ganti Foto Profil</label>
-                                                    <p className="text-[12px] text-slate-500 mt-1.5 max-w-[200px] leading-relaxed">Disarankan rasio 1:1, berukuran maks (2MB).</p>
-                                                </div>
-                                                <div>
-                                                    <div className="flex items-center gap-5">
-                                                        <div className="relative group">
-                                                            <div className="absolute inset-0 bg-indigo-500/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                                                            {(imagePreview || userPhotoUrl) ? (
-                                                                <img src={imagePreview || userPhotoUrl} alt="Preview" className="w-20 h-20 rounded-full object-cover border-[3px] border-white dark:border-slate-700 shadow-md relative z-10" />
-                                                            ) : (
-                                                                <div className={`w-20 h-20 rounded-full flex items-center justify-center text-3xl font-black text-white bg-gradient-to-br from-indigo-400 to-blue-600 shadow-md border-[3px] border-white dark:border-slate-700 relative z-10`}>
-                                                                    {user.name.charAt(0).toUpperCase()}
-                                                                </div>
-                                                            )}
+                                            {/* Field Unggah Foto Centered */}
+                                            <div className="flex flex-col items-center justify-center mb-6 relative z-10 pt-4">
+                                                <div className="relative group">
+                                                    <div className="absolute inset-0 bg-green-500/20 rounded-full blur-xl scale-110 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                                    {(imagePreview || userPhotoUrl) ? (
+                                                        <img src={imagePreview || userPhotoUrl} alt="Preview" className="w-[105px] h-[105px] rounded-full object-cover border-[3px] border-white shadow-sm relative z-10" />
+                                                    ) : (
+                                                        <div className={`w-[105px] h-[105px] rounded-full flex items-center justify-center text-[40px] font-black text-white bg-gradient-to-br from-[#00a82d] to-green-600 shadow-sm border-[3px] border-white relative z-10`}>
+                                                            {user.name.charAt(0).toUpperCase()}
                                                         </div>
-                                                        <label className="cursor-pointer px-5 py-2.5 text-sm font-bold text-indigo-700 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-800/50 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 rounded-xl shadow-sm transition-colors active:scale-95 focus:ring-4 focus:ring-indigo-500/20">
-                                                            Pilih Berkas
-                                                            <input type="file" className="hidden" accept="image/*" onChange={handleImageChange} />
-                                                        </label>
+                                                    )}
+
+                                                    {/* Ikon Kamera Overlay */}
+                                                    <label className="absolute bottom-0 -right-2 w-9 h-9 bg-white border border-slate-100 shadow-md rounded-full flex items-center justify-center cursor-pointer hover:bg-slate-50 transition-colors z-20 group-hover:scale-110">
+                                                        <svg className="w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="currentColor">
+                                                            <path d="M4 8V6a2 2 0 012-2h1.5l1.65-2h5.7l1.65 2H18a2 2 0 012 2v2M4 8h16M4 8v10a2 2 0 002 2h12a2 2 0 002-2V8m-9 9a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                                                        </svg>
+                                                        <input type="file" className="hidden" accept="image/*" onChange={handleImageChange} />
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            {/* Input Area Group */}
+                                            <div className="space-y-5">
+
+                                                {/* Edit Nama Field */}
+                                                <div className="space-y-1.5">
+                                                    <label className="block text-[14px] font-bold text-slate-800 dark:text-slate-200 tracking-tight">
+                                                        Nama Lengkap<span className="text-red-500 ml-0.5">*</span>
+                                                    </label>
+                                                    <input
+                                                        type="text"
+                                                        className={`appearance-none bg-white border border-slate-200 text-slate-700 text-[15px] font-medium rounded-xl focus:ring-2 focus:ring-[#00a82d]/20 focus:border-[#00a82d] block w-full px-4 py-3 outline-none transition-all`}
+                                                        value={user.name}
+                                                        readOnly
+                                                        disabled
+                                                    />
+                                                </div>
+
+                                                {/* Edit Email Field */}
+                                                <div className="space-y-1.5">
+                                                    <label className="block text-[14px] font-bold text-slate-800 dark:text-slate-200 tracking-tight">
+                                                        Email<span className="text-red-500 ml-0.5">*</span>
+                                                    </label>
+                                                    <div className="relative">
+                                                        <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                                                            <svg className="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                                            </svg>
+                                                        </div>
+                                                        <input
+                                                            type="email"
+                                                            required
+                                                            className={`appearance-none bg-[#eff2f6] border border-transparent text-slate-700 text-[15px] font-medium rounded-xl focus:bg-white focus:border-slate-200 focus:ring-2 focus:ring-[#00a82d]/20 block w-full pl-11 pr-4 py-3 outline-none transition-all`}
+                                                            value={newEmail}
+                                                            onChange={(e) => setNewEmail(e.target.value)}
+                                                        />
                                                     </div>
                                                 </div>
+
+                                                {/* Edit Kelamin Field */}
+                                                <div className="space-y-1.5">
+                                                    <label className="block text-[14px] font-bold text-slate-800 dark:text-slate-200 tracking-tight">
+                                                        Jenis Kelamin
+                                                    </label>
+                                                    <div className="relative">
+                                                        <select
+                                                            className={`appearance-none bg-white border border-slate-200 text-slate-700 text-[15px] font-medium rounded-xl focus:ring-2 focus:ring-[#00a82d]/20 focus:border-[#00a82d] block w-full px-4 py-3 pr-10 outline-none transition-all cursor-pointer`}
+                                                            value={jenisKelamin}
+                                                            onChange={(e) => setJenisKelamin(e.target.value)}
+                                                        >
+                                                            <option value="">-- Pilih --</option>
+                                                            <option value="Laki-laki">Laki-laki</option>
+                                                            <option value="Perempuan">Perempuan</option>
+                                                        </select>
+                                                        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-400">
+                                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {/* Edit Nomor Handphone Field */}
+                                                <div className="space-y-1.5">
+                                                    <label className="block text-[14px] font-bold text-slate-800 dark:text-slate-200 tracking-tight">
+                                                        Nomor Handphone
+                                                    </label>
+                                                    <div className="relative">
+                                                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center text-[15px] font-medium text-slate-400 pointer-events-none">
+                                                            +62
+                                                        </div>
+                                                        <input
+                                                            type="tel"
+                                                            className={`appearance-none bg-white border border-slate-200 text-slate-700 text-[15px] font-medium rounded-xl focus:ring-2 focus:ring-[#00a82d]/20 focus:border-[#00a82d] block w-full pl-12 pr-4 py-3 outline-none transition-all`}
+                                                            value={noHp.replace(/^\+?62/, '')}
+                                                            placeholder="000 0000 0000 0000"
+                                                            onChange={(e) => setNoHp(e.target.value)}
+                                                            maxLength={15}
+                                                        />
+                                                    </div>
+                                                    <div className="text-right text-[11px] font-bold text-slate-400 mt-1">
+                                                        {noHp.length}/15
+                                                    </div>
+                                                </div>
+
                                             </div>
 
-                                            {/* Field Email: Layout Mendatar */}
-                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 md:px-10 py-7 hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition-colors">
-                                                <div className="pt-3">
-                                                    <label className="block text-[15px] font-bold text-slate-800 dark:text-slate-200">Alamat Email Baru</label>
-                                                </div>
-                                                <div>
-                                                    <input
-                                                        type="email"
-                                                        required
-                                                        className={`appearance-none bg-slate-50/50 dark:bg-slate-900/50 hover:bg-white dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white text-[15px] font-medium rounded-xl focus:bg-white dark:focus:bg-slate-900 focus:ring-4 focus:ring-indigo-500/15 focus:border-indigo-500 block w-full max-w-md px-4 py-3 outline-none transition-all shadow-sm`}
-                                                        value={newEmail}
-                                                        onChange={(e) => setNewEmail(e.target.value)}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            {/* Field Kelamin: Layout Mendatar */}
-                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 md:px-10 py-7 hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition-colors">
-                                                <div className="pt-3">
-                                                    <label className="block text-[15px] font-bold text-slate-800 dark:text-slate-200">Jenis Kelamin</label>
-                                                </div>
-                                                <div>
-                                                    <select
-                                                        className={`appearance-none bg-slate-50/50 dark:bg-slate-900/50 hover:bg-white dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white text-[15px] font-medium rounded-xl focus:bg-white dark:focus:bg-slate-900 focus:ring-4 focus:ring-indigo-500/15 focus:border-indigo-500 block w-full max-w-[12rem] px-4 py-3 outline-none transition-all shadow-sm cursor-pointer`}
-                                                        value={jenisKelamin}
-                                                        onChange={(e) => setJenisKelamin(e.target.value)}
-                                                    >
-                                                        <option value="">-- Pilih --</option>
-                                                        <option value="Laki-laki">Laki-laki</option>
-                                                        <option value="Perempuan">Perempuan</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            {/* Field Nomor HP: Layout Mendatar */}
-                                            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 px-6 md:px-10 py-7 hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition-colors border-b border-transparent">
-                                                <div className="pt-3">
-                                                    <label className="block text-[15px] font-bold text-slate-800 dark:text-slate-200">Nomor Telepon</label>
-                                                </div>
-                                                <div>
-                                                    <input
-                                                        type="tel"
-                                                        className={`appearance-none bg-slate-50/50 dark:bg-slate-900/50 hover:bg-white dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white text-[15px] font-medium rounded-xl focus:bg-white dark:focus:bg-slate-900 focus:ring-4 focus:ring-indigo-500/15 focus:border-indigo-500 block w-full max-w-sm px-4 py-3 outline-none transition-all shadow-sm`}
-                                                        value={noHp}
-                                                        placeholder="0812xxxxx (Boleh dikosongkan)"
-                                                        onChange={(e) => setNoHp(e.target.value)}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            {/* Area Tombol Aksi Simpan */}
-                                            <div className="bg-slate-50/50 dark:bg-slate-800/30 px-6 md:px-10 py-6 flex justify-end gap-3 sm:rounded-b-[2.5rem]">
-                                                <button
-                                                    type="button"
-                                                    onClick={cancelEditing}
-                                                    className={`px-6 py-3 text-sm font-bold text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800/80 rounded-xl transition-all shadow-sm active:scale-95`}
-                                                >
-                                                    Batal
-                                                </button>
+                                            {/* Area Tombol Aksi Simpan Full Width */}
+                                            <div className="pt-2 mt-4 pb-2">
                                                 <button
                                                     type="submit"
                                                     disabled={loadingProfile}
-                                                    className={`px-7 py-3 text-sm font-bold text-white rounded-xl transition-all shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 disabled:opacity-50 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 active:scale-95 border border-indigo-400/20 whitespace-nowrap`}
+                                                    className={`w-full py-3.5 text-[15px] font-bold text-white rounded-xl transition-all disabled:opacity-50 bg-[#00a82d] hover:bg-green-700 active:scale-[0.98] outline-none shadow-sm`}
                                                 >
-                                                    {loadingProfile ? "Meyimpan..." : "Simpan Berkas"}
+                                                    {loadingProfile ? "Memproses..." : "Simpan"}
                                                 </button>
                                             </div>
                                         </form>
