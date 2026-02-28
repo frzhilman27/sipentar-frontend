@@ -27,7 +27,7 @@ function Profile() {
     const [loadingPassword, setLoadingPassword] = useState(false);
 
     // State Tab & Delete Account
-    const [activeTab, setActiveTab] = useState("profil");
+    const [activeTab, setActiveTab] = useState("ringkasan");
     const [deletePassword, setDeletePassword] = useState("");
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [loadingDelete, setLoadingDelete] = useState(false);
@@ -234,6 +234,19 @@ function Profile() {
 
                     {/* --- AREA KONTEN TAB --- */}
                     <div className="flex-1 min-w-0">
+
+                        {/* VIEW: RINGKASAN (DEFAULT) */}
+                        {activeTab === "ringkasan" && (
+                            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700/50 p-10 flex flex-col items-center justify-center text-center animate-in fade-in duration-300 transition-colors min-h-[400px]">
+                                <div className="w-24 h-24 bg-blue-50 dark:bg-blue-900/20 text-blue-500 dark:text-blue-400 rounded-full flex items-center justify-center mb-6 shadow-inner ring-4 ring-blue-50/50 dark:ring-blue-900/10 transition-colors">
+                                    <svg className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                </div>
+                                <h3 className="text-2xl font-extrabold text-slate-800 dark:text-white mb-2 transition-colors">Halo, {user.name || "Kawan"}!</h3>
+                                <p className="text-slate-500 dark:text-slate-400 max-w-md leading-relaxed transition-colors">
+                                    Selamat datang di pusat kendali persinggahan digital. Silakan pilih menu navigasi untuk mulai mengelola identitas atau menyesuaikan pengaturan keamanan akun Sipentar Anda.
+                                </p>
+                            </div>
+                        )}
 
                         {/* VIEW: KELOLA PROFIL (Dual-Mode: Read vs Edit) */}
                         {activeTab === "profil" && (
