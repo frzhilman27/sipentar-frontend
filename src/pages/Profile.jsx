@@ -345,11 +345,11 @@ function Profile() {
                                                 </div>
                                                 <h2 className="text-[19px] font-black tracking-widest uppercase text-slate-800 dark:text-white mb-2">{user.name}</h2>
                                                 {isUser ? (
-                                                    <p className="text-[14px] font-semibold text-slate-500 dark:text-slate-400 tracking-wide mb-1.5">Politeknik Negeri Indramayu</p>
+                                                    <p className="text-[14px] font-semibold text-slate-500 dark:text-slate-400 tracking-wide mb-1.5">Warga Masyarakat</p>
                                                 ) : (
                                                     <p className="text-[14px] font-semibold text-slate-500 dark:text-slate-400 tracking-wide mb-1.5">Pusat Sistem Sipentar</p>
                                                 )}
-                                                <p className="text-[14px] font-medium text-slate-400 dark:text-slate-500 tracking-wide mb-3">{isUser ? 'Mahasiswa' : 'Administrator'}</p>
+                                                <p className="text-[14px] font-medium text-slate-400 dark:text-slate-500 tracking-wide mb-3">{isUser ? 'Pelapor Aktif' : 'Administrator'}</p>
                                                 <div className="inline-flex px-4 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 tracking-widest text-[10px] font-bold">
                                                     TERVERIFIKASI
                                                 </div>
