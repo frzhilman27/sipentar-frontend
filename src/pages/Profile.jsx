@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import api from "../services/api";
 import useDarkMode from "../hooks/useDarkMode";
 
 function Profile() {
     const [user, setUser] = useState({ name: "", role: "", email: "", nik: "" });
     const [isDarkMode, toggleDarkMode] = useDarkMode();
+    const navigate = useNavigate();
 
     // State Profil Dasar (Email, Kelamin, No HP) & Unggah Foto
     const [isEditingProfile, setIsEditingProfile] = useState(false);
@@ -166,9 +167,12 @@ function Profile() {
             <header className="sticky top-0 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
                     <div className="flex items-center gap-4">
-                        <Link to="/dashboard" className="p-2 text-slate-400 dark:text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none">
+                        <button
+                            onClick={() => activeTab === 'ringkasan' ? navigate('/dashboard') : handleTabChange('ringkasan')}
+                            className="p-2 text-slate-400 dark:text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none"
+                        >
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
-                        </Link>
+                        </button>
 
                         {/* Identitas Terpadu di Header */}
                         <div className="flex items-center gap-4 pl-2 border-l border-slate-200 dark:border-slate-700 transition-colors">
@@ -233,39 +237,33 @@ function Profile() {
                                 </p>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
-                                {/* Card Menu: Kelola Profil */}
+                            <div className="flex flex-col gap-3 w-full max-w-lg mx-auto">
+                                {/* Text List Menu: Kelola Profil */}
                                 <button
                                     onClick={() => { handleTabChange("profil"); setProfileMessage({ type: '', text: '' }); }}
-                                    className="group flex flex-col items-start text-left p-6 sm:p-8 bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700/50 hover:border-blue-300 dark:hover:border-blue-500/50 hover:shadow-lg dark:hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.3)] transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-blue-500/20"
+                                    className="flex items-center justify-between w-full px-5 py-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                                 >
-                                    <div className="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-inner">
-                                        <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-10 h-10 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center">
+                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                                        </div>
+                                        <span className="text-base font-bold text-slate-700 dark:text-white">Kelola Identitas Profil</span>
                                     </div>
-                                    <h4 className="text-xl font-extrabold text-slate-800 dark:text-white mb-2 transition-colors">Kelola Identitas</h4>
-                                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400 transition-colors leading-relaxed">
-                                        Perbarui Nomor Induk Kependudukan (NIK), ubah pasfoto profil yang menawan, atau lengkapi informasi komunikasi pribadi Anda.
-                                    </p>
-                                    <div className="mt-6 flex items-center text-sm font-bold text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-x-2 group-hover:translate-x-0">
-                                        Ubah Profil Sekarang <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                                    </div>
+                                    <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
                                 </button>
 
-                                {/* Card Menu: Pengaturan */}
+                                {/* Text List Menu: Pengaturan */}
                                 <button
                                     onClick={() => { handleTabChange("pengaturan"); setPasswordMessage({ type: '', text: '' }); setDeleteMessage({ type: '', text: '' }); }}
-                                    className="group flex flex-col items-start text-left p-6 sm:p-8 bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-700/50 hover:border-indigo-300 dark:hover:border-indigo-500/50 hover:shadow-lg dark:hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.3)] transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-indigo-500/20"
+                                    className="flex items-center justify-between w-full px-5 py-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
                                 >
-                                    <div className="w-14 h-14 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300 shadow-inner">
-                                        <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-10 h-10 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-xl flex items-center justify-center">
+                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                        </div>
+                                        <span className="text-base font-bold text-slate-700 dark:text-white">Pengaturan Keamanan</span>
                                     </div>
-                                    <h4 className="text-xl font-extrabold text-slate-800 dark:text-white mb-2 transition-colors">Pengaturan Keamanan</h4>
-                                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400 transition-colors leading-relaxed">
-                                        Perkuat kata sandi (*password*) dinding perlindungan kredensial Anda yang sekarang, atau kelola opsi pemusnahan total data privasi (*Delete Account*).
-                                    </p>
-                                    <div className="mt-6 flex items-center text-sm font-bold text-indigo-600 dark:text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-x-2 group-hover:translate-x-0">
-                                        Atur Keamanan <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                                    </div>
+                                    <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
                                 </button>
                             </div>
                         </div>
@@ -279,12 +277,6 @@ function Profile() {
                             <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg shadow-blue-900/5 dark:shadow-none border border-slate-200 dark:border-slate-700/50 overflow-hidden animate-in slide-in-from-right-8 fade-in duration-300 transition-colors">
                                 <div className="px-6 sm:px-8 py-6 border-b border-slate-100 dark:border-slate-700/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors">
                                     <div className="flex items-center gap-4">
-                                        <button
-                                            onClick={() => handleTabChange("ringkasan")}
-                                            className="p-2 -ml-2 text-slate-400 hover:text-blue-600 dark:text-slate-500 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-full transition-colors focus:outline-none"
-                                        >
-                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
-                                        </button>
                                         <div>
                                             <h3 className="text-xl font-extrabold text-slate-800 dark:text-white transition-colors tracking-tight">Kelola Identitas Publik</h3>
                                             <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mt-1 transition-colors">Identitas otentik yang terafiliasi dengan akun Sipentar Anda.</p>
@@ -457,12 +449,6 @@ function Profile() {
                                 {/* Header Kembali Navigasi Pengaturan */}
                                 <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-lg shadow-indigo-900/5 dark:shadow-none border border-slate-200 dark:border-slate-700/50 overflow-hidden transition-colors">
                                     <div className="px-6 sm:px-8 py-6 flex items-center gap-4 transition-colors">
-                                        <button
-                                            onClick={() => handleTabChange("ringkasan")}
-                                            className="p-2 -ml-2 text-slate-400 hover:text-indigo-600 dark:text-slate-500 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-full transition-colors focus:outline-none"
-                                        >
-                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
-                                        </button>
                                         <div>
                                             <h3 className="text-xl font-extrabold text-slate-800 dark:text-white transition-colors tracking-tight">Pusat Keamanan & Pengaturan Terpadu</h3>
                                             <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mt-1 transition-colors">Kelola lapis dinding pelindung akun digital Sipentar Anda.</p>
