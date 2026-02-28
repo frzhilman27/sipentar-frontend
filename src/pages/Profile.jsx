@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import api from "../services/api";
 import useDarkMode from "../hooks/useDarkMode";
 
@@ -27,7 +27,12 @@ function Profile() {
     const [loadingPassword, setLoadingPassword] = useState(false);
 
     // State Tab & Delete Account
-    const [activeTab, setActiveTab] = useState("ringkasan");
+    const [searchParams, setSearchParams] = useSearchParams();
+    const activeTab = searchParams.get("tab") || "ringkasan";
+
+    const handleTabChange = (tabName) => {
+        setSearchParams({ tab: tabName });
+    };
     const [deletePassword, setDeletePassword] = useState("");
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [loadingDelete, setLoadingDelete] = useState(false);
@@ -211,7 +216,7 @@ function Profile() {
                             <h2 className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest transition-colors">Menu Akun</h2>
                         </div>
                         <button
-                            onClick={() => { setActiveTab("profil"); setProfileMessage({ type: '', text: '' }); }}
+                            onClick={() => { handleTabChange("profil"); setProfileMessage({ type: '', text: '' }); }}
                             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-left text-sm font-bold transition-all ${activeTab === "profil"
                                 ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 shadow-sm ring-1 ring-blue-500/20 dark:ring-blue-500/30"
                                 : "bg-transparent text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50"
@@ -221,7 +226,7 @@ function Profile() {
                             Kelola Profil
                         </button>
                         <button
-                            onClick={() => { setActiveTab("pengaturan"); setPasswordMessage({ type: '', text: '' }); setDeleteMessage({ type: '', text: '' }); }}
+                            onClick={() => { handleTabChange("pengaturan"); setPasswordMessage({ type: '', text: '' }); setDeleteMessage({ type: '', text: '' }); }}
                             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-left text-sm font-bold transition-all ${activeTab === "pengaturan"
                                 ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 shadow-sm ring-1 ring-blue-500/20 dark:ring-blue-500/30"
                                 : "bg-transparent text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50"
