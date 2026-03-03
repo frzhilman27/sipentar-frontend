@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../services/api";
+import { toast } from "react-hot-toast";
 
 function Laporan({ onReportAdded }) {
   const [judul, setJudul] = useState("");
@@ -37,13 +38,13 @@ function Laporan({ onReportAdded }) {
           "Content-Type": "multipart/form-data",
         },
       });
-      alert("Laporan berhasil dikirim 🔥");
+      toast.success("Laporan berhasil dikirim 🔥");
       setJudul("");
       setIsi("");
       setImage(null);
       if (onReportAdded) onReportAdded();
     } catch (err) {
-      alert(err.response?.data?.error || "Gagal kirim laporan");
+      toast.error(err.response?.data?.error || "Gagal kirim laporan");
     } finally {
       setLoading(false);
     }

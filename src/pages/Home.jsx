@@ -5,6 +5,7 @@ import useDarkMode from "../hooks/useDarkMode";
 function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDarkMode, toggleDarkMode] = useDarkMode();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Handle scroll for sticky navbar effect
   useEffect(() => {
@@ -37,7 +38,7 @@ function Home() {
             <a href="#alur" className={`text-sm font-semibold transition-colors ${isScrolled ? 'text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400' : 'text-slate-200 hover:text-white'}`}>Alur Pelaporan</a>
           </div>
 
-          <div className="flex gap-3 items-center">
+          <div className="flex gap-2 sm:gap-3 items-center">
             {/* Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
@@ -55,13 +56,44 @@ function Home() {
                 Masuk
               </button>
             </Link>
-            <Link to="/register">
+            <Link to="/register" className="hidden sm:block">
               <button className="px-5 py-2.5 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition shadow-lg shadow-blue-600/30">
                 Daftar Warga
               </button>
             </Link>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className={`md:hidden p-2.5 rounded-lg transition-all focus:outline-none ${isScrolled ? 'text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 dark:text-slate-300' : 'text-slate-200 hover:bg-white/10 hover:text-white'}`}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {isMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+                )}
+              </svg>
+            </button>
           </div>
         </div>
+
+        {/* Mobile Menu Dropdown */}
+        {isMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 shadow-xl py-4 px-6 flex flex-col gap-4 animate-fade-in">
+            <a href="#beranda" onClick={() => setIsMenuOpen(false)} className="text-base font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 py-2 border-b border-slate-100 dark:border-slate-800/50">Beranda</a>
+            <a href="#tentang" onClick={() => setIsMenuOpen(false)} className="text-base font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 py-2 border-b border-slate-100 dark:border-slate-800/50">Tentang Sipentar</a>
+            <a href="#alur" onClick={() => setIsMenuOpen(false)} className="text-base font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 py-2 border-b border-slate-100 dark:border-slate-800/50">Alur Pelaporan</a>
+            <div className="flex flex-col gap-3 pt-2">
+              <Link to="/login" onClick={() => setIsMenuOpen(false)} className="w-full text-center py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-bold hover:bg-slate-50 dark:hover:bg-slate-800">
+                Masuk
+              </Link>
+              <Link to="/register" onClick={() => setIsMenuOpen(false)} className="w-full text-center py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-lg shadow-blue-600/30">
+                Daftar Warga Baru
+              </Link>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* 2. HERO SECTION */}
