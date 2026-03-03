@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import api from "../services/api";
 import Laporan from "./Laporan";
 import useDarkMode from "../hooks/useDarkMode";
+import { toast } from "react-hot-toast";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -50,6 +51,7 @@ function Dashboard() {
     // Polling setiap 10 detik
     const intervalId = setInterval(fetchNotifications, 10000);
     return () => clearInterval(intervalId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
   // Click outside to close notification dropdown
@@ -85,8 +87,9 @@ function Dashboard() {
     try {
       await api.put(`/laporan/${id}/status`, { status: newStatus });
       fetchReports();
-    } catch (err) {
-      alert("Gagal memperbarui status");
+      toast.success(`Status berhasil diubah menjadi ${newStatus}`);
+    } catch {
+      toast.error("Gagal memperbarui status");
     }
   };
 
@@ -324,16 +327,16 @@ function Dashboard() {
                 <div key={r.id} className="bg-white dark:bg-slate-800 group rounded-[2rem] border border-slate-100/60 dark:border-slate-700/50 p-6 sm:p-8 flex flex-col md:flex-row gap-6 md:gap-10 hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.3)] hover:-translate-y-1 transition-all duration-300">
 
                   {/* Avatar & Info Pelapor */}
-                  <div className="flex items-start gap-4 shrink-0 md:w-64">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 shrink-0 md:w-64">
                     <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-slate-100 dark:from-slate-700 to-slate-200 dark:to-slate-600 flex items-center justify-center text-slate-600 dark:text-slate-300 font-extrabold text-xl shadow-inner group-hover:from-indigo-100 dark:group-hover:from-indigo-900/50 group-hover:to-blue-50 dark:group-hover:to-blue-900/40 transition-colors">
                       {r.name.charAt(0).toUpperCase()}
                     </div>
-                    <div>
+                    <div className="flex flex-col">
                       <p className="font-extrabold text-slate-800 dark:text-white text-lg group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{r.name}</p>
-                      <p className="text-xs font-bold text-slate-400 dark:text-slate-500 mt-1 tracking-wider uppercase flex items-center gap-1.5 transition-colors">
+                      <div className="text-xs font-bold text-slate-400 dark:text-slate-500 mt-1 tracking-wider uppercase flex items-center gap-1.5 transition-colors">
                         <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        {r.created_at ? new Date(r.created_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Tanggal Laporan'}
-                      </p>
+                        <span>{r.created_at ? new Date(r.created_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Tanggal Laporan'}</span>
+                      </div>
                     </div>
                   </div>
 
@@ -360,15 +363,17 @@ function Dashboard() {
 
                     {/* Status & Kendali Admin Bottom Bar */}
                     <div className="pt-5 mt-auto border-t border-slate-100 dark:border-slate-700/50 flex flex-col sm:flex-row justify-between sm:items-center gap-4 transition-colors">
-                      <span className={`inline-flex items-center px-4 py-2 rounded-xl text-xs font-extrabold tracking-widest uppercase ${getStatusBadge(r.status)}`}>
-                        {r.status === 'Menunggu' && <span className="w-2 h-2 rounded-full bg-amber-500 mr-2.5 shadow-[0_0_10px_rgba(245,158,11,0.6)] animate-pulse"></span>}
-                        {r.status === 'Diproses' && <span className="w-2 h-2 rounded-full bg-blue-500 mr-2.5 shadow-[0_0_10px_rgba(59,130,246,0.6)] animate-pulse"></span>}
-                        {r.status === 'Selesai' && <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>}
-                        Status: {r.status}
-                      </span>
+                      <div className="flex-shrink-0">
+                        <span className={`inline-flex items-center px-4 py-2 rounded-xl text-xs font-extrabold tracking-widest uppercase ${getStatusBadge(r.status)}`}>
+                          {r.status === 'Menunggu' && <span className="w-2 h-2 rounded-full bg-amber-500 mr-2.5 shadow-[0_0_10px_rgba(245,158,11,0.6)] animate-pulse"></span>}
+                          {r.status === 'Diproses' && <span className="w-2 h-2 rounded-full bg-blue-500 mr-2.5 shadow-[0_0_10px_rgba(59,130,246,0.6)] animate-pulse"></span>}
+                          {r.status === 'Selesai' && <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>}
+                          Status: {r.status}
+                        </span>
+                      </div>
 
                       {role === "admin" && (
-                        <div className="relative shrink-0">
+                        <div className="relative shrink-0 w-full sm:w-auto mt-2 sm:mt-0">
                           <select
                             value={r.status}
                             onChange={(e) => handleUpdateStatus(r.id, e.target.value)}

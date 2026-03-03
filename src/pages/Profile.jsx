@@ -73,7 +73,7 @@ function Profile() {
         }
     };
 
-    const cancelEditing = () => {
+    const _cancelEditing = () => {
         setIsEditingProfile(false);
         setProfileMessage({ type: '', text: '' });
         setRemovePhoto(false);
@@ -183,7 +183,7 @@ function Profile() {
     };
 
     const isUser = user.role === "user";
-    const theme = "blue";
+    const _theme = "blue";
 
     return (
         <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] font-sans pb-16 selection:bg-indigo-200 dark:selection:bg-indigo-900 transition-colors duration-500">
