@@ -85,7 +85,7 @@ function Dashboard() {
     try {
       await api.put(`/laporan/${id}/status`, { status: newStatus });
       fetchReports();
-    } catch (err) {
+    } catch {
       alert("Gagal memperbarui status");
     }
   };

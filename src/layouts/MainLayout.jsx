@@ -41,7 +41,7 @@ function MainLayout() {
             </Link>
           )}
 
-          {role === "warga" && (
+          {role === "user" && (
             <Link to="/laporan" className="hover:text-blue-400 transition">
               Buat Laporan
             </Link>

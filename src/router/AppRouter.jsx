@@ -14,7 +14,7 @@ function AppRouter() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
          <Route path="/dashboard" element={<ProtectedRoute roleRequired="admin"><Dashboard /></ProtectedRoute>}/>
-         <Route path="/laporan"element={<ProtectedRoute roleRequired="warga"><Laporan /></ProtectedRoute>}/>
+         <Route path="/laporan" element={<ProtectedRoute roleRequired="user"><Laporan /></ProtectedRoute>}/>
         </Route>
       </Routes>
     </BrowserRouter>
