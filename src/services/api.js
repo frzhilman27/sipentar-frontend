@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL || "https://sipentar-backend-production.up.railway.app/api";
+const API_URL = import.meta.env.VITE_API_URL || "https://sipentar-backend.vercel.app/api";
 
 // Membersihkan kelebihan "/api" jika pengguna sudah menuliskannya di .env
 const cleanBaseURL = API_URL.endsWith("/api") ? API_URL : `${API_URL}/api`;
