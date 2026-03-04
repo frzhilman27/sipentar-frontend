@@ -16,7 +16,7 @@ function MainLayout() {
 
       {/* ===== NAVBAR ===== */}
       <nav className="bg-black border-b border-gray-800 px-10 py-4 flex justify-between items-center shadow-lg">
-        
+
         {/* Logo */}
         <h1 className="text-2xl font-bold tracking-wide text-blue-500">
           SIPENTAR
@@ -42,7 +42,7 @@ function MainLayout() {
           )}
 
           {role === "user" && (
-            <Link to="/laporan" className="hover:text-blue-400 transition">
+            <Link to="/dashboard" className="hover:text-blue-400 transition">
               Buat Laporan
             </Link>
           )}
