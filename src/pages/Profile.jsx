@@ -90,11 +90,7 @@ function Profile() {
                 formData.append("foto_profil", selectedImage);
             }
 
-            const res = await api.put("/auth/profile/info", formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                }
-            });
+            const res = await api.put("/auth/profile/info", formData);
 
             setProfileMessage({ type: "success", text: res.data.message });
             setIsEditingProfile(false);

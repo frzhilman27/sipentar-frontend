@@ -32,11 +32,7 @@ function Laporan({ onReportAdded }) {
     }
 
     try {
-      await api.post("/laporan", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await api.post("/laporan", formData);
       alert("Laporan berhasil dikirim 🔥");
       setJudul("");
       setIsi("");
