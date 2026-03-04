@@ -339,6 +339,28 @@ function Dashboard() {
 
                   {/* Konten Aduan */}
                   <div className="flex-1">
+                    <h4 className="font-extrabold text-xl text-slate-900 dark:text-white mb-2 leading-tight transition-colors">{r.judul}</h4>
+                    <p className="text-slate-500 dark:text-slate-300 font-medium leading-relaxed pb-6 text-[15px] transition-colors">{r.isi}</p>
+
+                    {/* Gambar Opsional Bento Style */}
+                    {r.image_url && (
+                      <div
+                        className="mt-2 mb-6 rounded-2xl overflow-hidden border border-slate-200/40 shadow-sm sm:max-w-md relative group/img cursor-zoom-in"
+                        onClick={() => {
+                          const imgSrc = r.image_url.startsWith('data:image') ? r.image_url : `${IMAGE_BASE_URL}/uploads/${r.image_url}`;
+                          window.open(imgSrc, "_blank");
+                        }}
+                      >
+                        <img
+                          src={r.image_url.startsWith('data:image') ? r.image_url : `${IMAGE_BASE_URL}/uploads/${r.image_url}`}
+                          alt="Bukti Laporan"
+                          className="w-full h-auto object-cover group-hover/img:scale-105 group-hover/img:rotate-1 transition-all duration-500"
+                        />
+                        {/* Overlay shadow (pointer-events-none mencegah halangan ketukan sentuh UI HP) */}
+                        <div className="absolute inset-0 bg-indigo-900/10 opacity-0 group-hover/img:opacity-100 transition-opacity pointer-events-none"></div>
+                      </div>
+                    )}
+
                     {/* Status & Kendali Admin Bottom Bar */}
                     <div className="pt-5 mt-auto border-t border-slate-100 dark:border-slate-700/50 flex flex-col sm:flex-row justify-between sm:items-center gap-4 transition-colors">
                       <span className={`inline-flex items-center px-4 py-2 rounded-xl text-xs font-extrabold tracking-widest uppercase ${getStatusBadge(r.status)}`}>
