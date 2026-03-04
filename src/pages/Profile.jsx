@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import api from "../services/api";
 import useDarkMode from "../hooks/useDarkMode";
+import { compressImageToBase64 } from "../utils/imageUtils";
 
 function Profile() {
     const [user, setUser] = useState({ name: "", role: "", email: "", nik: "" });
@@ -82,12 +83,7 @@ function Profile() {
         try {
             let base64Image = null;
             if (selectedImage && !removePhoto) {
-                base64Image = await new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.readAsDataURL(selectedImage);
-                    reader.onload = () => resolve(reader.result);
-                    reader.onerror = error => reject(error);
-                });
+                base64Image = await compressImageToBase64(selectedImage, 800, 800, 0.7);
             }
 
             const payload = {

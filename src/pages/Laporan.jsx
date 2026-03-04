@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../services/api";
+import { compressImageToBase64 } from "../utils/imageUtils";
 
 function Laporan({ onReportAdded }) {
   const [judul, setJudul] = useState("");
@@ -25,12 +26,7 @@ function Laporan({ onReportAdded }) {
 
     let base64Image = null;
     if (image) {
-      base64Image = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(image);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-      });
+      base64Image = await compressImageToBase64(image, 800, 800, 0.7);
     }
 
     const payload = {
