@@ -80,17 +80,25 @@ function Profile() {
 
         setLoadingProfile(true);
         try {
-            const formData = new FormData();
-            formData.append("newEmail", newEmail);
-            formData.append("jenis_kelamin", jenisKelamin);
-            formData.append("no_hp", noHp);
-            formData.append("remove_photo", removePhoto);
-
+            let base64Image = null;
             if (selectedImage && !removePhoto) {
-                formData.append("foto_profil", selectedImage);
+                base64Image = await new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(selectedImage);
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = error => reject(error);
+                });
             }
 
-            const res = await api.put("/auth/profile/info", formData);
+            const payload = {
+                newEmail: newEmail,
+                jenis_kelamin: jenisKelamin,
+                no_hp: noHp,
+                remove_photo: removePhoto,
+                foto_profil: base64Image
+            };
+
+            const res = await api.put("/auth/profile/info", payload);
 
             setProfileMessage({ type: "success", text: res.data.message });
             setIsEditingProfile(false);

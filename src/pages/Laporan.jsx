@@ -23,16 +23,24 @@ function Laporan({ onReportAdded }) {
     e.preventDefault();
     setLoading(true);
 
-    // Create FormData for file upload
-    const formData = new FormData();
-    formData.append("judul", judul);
-    formData.append("isi", isi);
+    let base64Image = null;
     if (image) {
-      formData.append("image", image);
+      base64Image = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+      });
     }
 
+    const payload = {
+      judul: judul,
+      isi: isi,
+      imageUrl: base64Image
+    };
+
     try {
-      await api.post("/laporan", formData);
+      await api.post("/laporan", payload);
       alert("Laporan berhasil dikirim 🔥");
       setJudul("");
       setIsi("");
