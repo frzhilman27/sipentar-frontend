@@ -4,7 +4,7 @@ import api from "../services/api";
 import { compressImageToBase64 } from "../utils/imageUtils";
 import villageBg from '../assets/village-bg.png';
 
-function Profile() {
+function Profile({ isEmbedded = false }) {
     const [user, setUser] = useState({ name: "", role: "", email: "", nik: "" });
     const navigate = useNavigate();
 
@@ -186,53 +186,55 @@ function Profile() {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 relative font-sans transition-colors duration-500 pb-16">
+        <div className={`font-sans transition-colors duration-500 ${isEmbedded ? 'pb-8' : 'min-h-screen bg-slate-50 relative pb-16'}`}>
 
-            <div className="relative z-10">
-                {/* Header Formal */}
-                <header className="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm transition-all">
-                    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex justify-between items-center">
-                        <div className="flex items-center gap-4">
-                            <button
-                                onClick={handleBackNavigation}
-                                className="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-all focus:outline-none flex-shrink-0"
-                            >
-                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7" /></svg>
-                            </button>
+            <div className="relative z-10 w-full h-full">
+                {/* Header Formal - only if not embedded */}
+                {!isEmbedded && (
+                    <header className="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm transition-all">
+                        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex justify-between items-center">
+                            <div className="flex items-center gap-4">
+                                <button
+                                    onClick={handleBackNavigation}
+                                    className="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-all focus:outline-none flex-shrink-0"
+                                >
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7" /></svg>
+                                </button>
 
-                            <div className={`flex items-center gap-3 w-full transition-colors ${activeTab === 'ringkasan' ? 'pl-2 border-l border-slate-200' : ''}`}>
-                                {activeTab === 'ringkasan' ? (
-                                    <>
-                                        {userPhotoUrl ? (
-                                            <img src={userPhotoUrl} alt="Profil Atas" className="w-10 h-10 rounded-full object-cover border border-slate-200 shadow-sm" />
-                                        ) : (
-                                            <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold border border-slate-200 shadow-sm ${themeParams.bgLight} ${themeParams.textHighlight}`}>
-                                                {user.name.charAt(0).toUpperCase()}
+                                <div className={`flex items-center gap-3 w-full transition-colors ${activeTab === 'ringkasan' ? 'pl-2 border-l border-slate-200' : ''}`}>
+                                    {activeTab === 'ringkasan' ? (
+                                        <>
+                                            {userPhotoUrl ? (
+                                                <img src={userPhotoUrl} alt="Profil Atas" className="w-10 h-10 rounded-full object-cover border border-slate-200 shadow-sm" />
+                                            ) : (
+                                                <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold border border-slate-200 shadow-sm ${themeParams.bgLight} ${themeParams.textHighlight}`}>
+                                                    {user.name.charAt(0).toUpperCase()}
+                                                </div>
+                                            )}
+                                            <div className="flex-1">
+                                                <h1 className="text-base font-bold text-slate-900 tracking-tight leading-none">{user.name}</h1>
+                                                <div className="mt-1 flex items-center gap-2">
+                                                    <span className={`text-[10px] font-bold ${themeParams.textHighlight} uppercase tracking-wider`}>{isUser ? 'Warga' : 'Admin'}</span>
+                                                    <span className="text-[10px] font-medium text-slate-400">&bull;&nbsp; {isUser ? `NIK: ${user.nik}` : 'Sipentar Sistem'}</span>
+                                                </div>
                                             </div>
-                                        )}
-                                        <div className="flex-1">
-                                            <h1 className="text-base font-bold text-slate-900 tracking-tight leading-none">{user.name}</h1>
-                                            <div className="mt-1 flex items-center gap-2">
-                                                <span className={`text-[10px] font-bold ${themeParams.textHighlight} uppercase tracking-wider`}>{isUser ? 'Warga' : 'Admin'}</span>
-                                                <span className="text-[10px] font-medium text-slate-400">&bull;&nbsp; {isUser ? `NIK: ${user.nik}` : 'Sipentar Sistem'}</span>
-                                            </div>
-                                        </div>
-                                    </>
-                                ) : (
-                                    <h1 className="font-outfit text-[17px] font-bold text-slate-800 tracking-wide border-l border-slate-200 pl-4">
-                                        {activeTab === 'profil' ? (isEditingProfile ? 'Ubah Profil' : 'Profil') :
-                                            activeTab === 'pengaturan' ? 'Pengaturan' :
-                                                activeTab === 'pengaturan_akun' ? 'Akun' :
-                                                    activeTab === 'pengaturan_sandi' ? 'Mengubah Sandi' :
-                                                        activeTab === 'pengaturan_hapus' ? 'Hapus Akun' : ''}
-                                    </h1>
-                                )}
+                                        </>
+                                    ) : (
+                                        <h1 className="font-outfit text-[17px] font-bold text-slate-800 tracking-wide border-l border-slate-200 pl-4">
+                                            {activeTab === 'profil' ? (isEditingProfile ? 'Ubah Profil' : 'Profil') :
+                                                activeTab === 'pengaturan' ? 'Pengaturan' :
+                                                    activeTab === 'pengaturan_akun' ? 'Akun' :
+                                                        activeTab === 'pengaturan_sandi' ? 'Mengubah Sandi' :
+                                                            activeTab === 'pengaturan_hapus' ? 'Hapus Akun' : ''}
+                                        </h1>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </header>
+                    </header>
+                )}
 
-                <main className={`max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 ${isEditingProfile ? 'mt-4' : 'mt-8'}`}>
+                <main className={`w-full mx-auto px-4 sm:px-6 lg:px-8 mb-4 ${isEditingProfile ? 'mt-4' : (isEmbedded ? 'mt-0' : 'mt-8')} ${isEmbedded ? 'max-w-7xl' : 'max-w-4xl'}`}>
                     <div className="flex flex-col items-center w-full">
 
                         {/* VIEW: MENU NAVIGASI GRID (DEFAULT "Ringkasan") */}
