@@ -47,13 +47,13 @@ function Home() {
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto mt-2">
             <Link to="/register" className="w-full sm:w-auto">
-              <button className="w-full px-6 sm:px-8 py-3.5 sm:py-4 bg-emerald-700 hover:bg-emerald-800 text-white text-sm sm:text-base font-bold rounded-lg transition-all shadow-lg flex items-center justify-center gap-3">
+              <button className="w-full px-5 sm:px-8 py-3.5 sm:py-4 bg-emerald-700 hover:bg-emerald-800 text-white text-sm sm:text-base font-bold rounded-lg transition-all shadow-lg flex items-center justify-center gap-3">
                 Buat Laporan / Pengaduan
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
               </button>
             </Link>
             <Link to="/login" className="w-full sm:w-auto">
-              <button className="w-full px-6 sm:px-8 py-3.5 sm:py-4 bg-white hover:bg-slate-50 text-slate-800 border-2 border-transparent text-sm sm:text-base font-bold rounded-lg transition-all shadow-lg flex items-center justify-center gap-2">
+              <button className="w-full px-5 sm:px-8 py-3.5 sm:py-4 bg-white hover:bg-slate-50 text-slate-800 border-2 border-transparent text-sm sm:text-base font-bold rounded-lg transition-all shadow-lg flex items-center justify-center gap-2">
                 Pantau Laporan Saya
               </button>
             </Link>
@@ -62,25 +62,25 @@ function Home() {
       </section>
 
       {/* 3. TENTANG SIPENTAR SECTION  */}
-      <section id="tentang" className="py-12 sm:py-24 bg-white border-y border-slate-200">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <section id="tentang" className="py-12 sm:py-24 bg-white border-y border-slate-200 text-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-16 items-center">
             {/* Image / Stats Solid Card */}
             <div className="order-2 lg:order-1">
               <div className="bg-slate-50 p-5 sm:p-10 rounded-2xl shadow-lg border border-slate-200">
 
                 <div className="grid grid-cols-2 gap-3 sm:gap-6">
-                  <div className="p-3 sm:p-6 bg-white rounded-xl border border-slate-200 text-center shadow-sm">
-                    <p className="text-2xl sm:text-4xl font-black text-emerald-700 mb-1 sm:mb-2">24/7</p>
-                    <p className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest leading-tight">Akses Terbuka</p>
+                  <div className="p-4 sm:p-6 bg-white rounded-xl border border-slate-200 text-center shadow-sm">
+                    <p className="text-3xl sm:text-4xl font-black text-emerald-700 mb-1 sm:mb-2">24/7</p>
+                    <p className="text-[11px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest leading-tight">Akses Terbuka</p>
                   </div>
-                  <div className="p-3 sm:p-6 bg-white rounded-xl border border-slate-200 text-center shadow-sm">
-                    <p className="text-2xl sm:text-4xl font-black text-amber-600 mb-1 sm:mb-2">100%</p>
-                    <p className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest leading-tight">Terintegrasi</p>
+                  <div className="p-4 sm:p-6 bg-white rounded-xl border border-slate-200 text-center shadow-sm">
+                    <p className="text-3xl sm:text-4xl font-black text-amber-600 mb-1 sm:mb-2">100%</p>
+                    <p className="text-[11px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest leading-tight">Terintegrasi</p>
                   </div>
-                  <div className="sm:col-span-2 p-5 sm:p-8 bg-emerald-800 rounded-xl shadow-md text-left relative overflow-hidden">
+                  <div className="sm:col-span-2 p-6 sm:p-8 bg-emerald-800 rounded-xl shadow-md text-left relative overflow-hidden">
                     <h4 className="text-xl sm:text-2xl font-bold text-white mb-1.5 sm:mb-2 relative z-10">Keterbukaan Informasi</h4>
-                    <p className="text-emerald-100 font-medium leading-relaxed relative z-10 text-xs sm:text-base">Mewujudkan Desa Lamaran Tarung yang aman, bersih, dan sejahtera melalui partisipasi dan pengawasan aktif warga.</p>
+                    <p className="text-emerald-50 font-medium leading-relaxed relative z-10 text-sm sm:text-base">Mewujudkan Desa Lamaran Tarung yang aman, bersih, dan sejahtera melalui partisipasi dan pengawasan aktif warga.</p>
                   </div>
                 </div>
               </div>
