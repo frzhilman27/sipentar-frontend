@@ -20,42 +20,8 @@ function Home() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-emerald-200 flex flex-col transition-colors duration-300 relative overflow-x-hidden">
 
-      {/* 1. NAVBAR SECTION */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-3 border-b border-slate-200' : 'bg-white/95 backdrop-blur-sm shadow-sm py-4 border-b border-slate-200'} `}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center relative z-10">
-          <div className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-lg bg-emerald-700 flex items-center justify-center shadow-md">
-              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-            </div>
-            <div>
-              <span className={`text-xl font-extrabold tracking-tight block leading-none text-slate-900`}>Pemerintah Desa</span>
-              <span className={`text-[11px] uppercase tracking-widest font-bold text-emerald-700 mt-0.5 block`}>Lamaran Tarung</span>
-            </div>
-          </div>
-
-          <div className="hidden md:flex gap-8 items-center">
-            <a href="#beranda" className={`text-sm font-bold transition-colors text-slate-600 hover:text-emerald-700`}>Beranda</a>
-            <a href="#tentang" className={`text-sm font-bold transition-colors text-slate-600 hover:text-emerald-700`}>Tentang Sipentar</a>
-            <a href="#alur" className={`text-sm font-bold transition-colors text-slate-600 hover:text-emerald-700`}>Alur Pelaporan</a>
-          </div>
-
-          <div className="flex gap-3 items-center">
-            <Link to="/login">
-              <button className={`hidden sm:block px-5 py-2 text-sm font-bold rounded-lg transition-all border text-slate-700 bg-white border-slate-300 hover:bg-slate-50 hover:text-emerald-700`}>
-                Masuk Dasbor
-              </button>
-            </Link>
-            <Link to="/register">
-              <button className="px-5 py-2 text-sm font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-lg transition-all shadow-md">
-                Daftar Warga
-              </button>
-            </Link>
-          </div>
-        </div>
-      </nav>
-
       {/* 2. HERO SECTION */}
-      <section id="beranda" className="relative min-h-[85vh] pt-32 pb-20 flex flex-col justify-center items-center text-center overflow-hidden">
+      <section id="beranda" className="relative min-h-[85vh] pt-16 pb-20 flex flex-col justify-center items-center text-center overflow-hidden">
         {/* Hero Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div

@@ -80,14 +80,6 @@ function Login() {
       </div>
 
       <div className="relative z-10 w-full max-w-md px-4 py-12">
-        {/* Back Link */}
-        <Link to="/" className="inline-flex items-center gap-2 mb-8 text-white hover:text-amber-300 font-bold transition group drop-shadow-md">
-          <div className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center border border-white/20 group-hover:bg-black/60 transition">
-            <svg className="w-4 h-4 transform group-hover:-translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-          </div>
-          Kembali ke Situs Resmi
-        </Link>
-
         {/* Login Card - Formal Solid White */}
         <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden relative transition-all duration-500 p-8 sm:p-10">
 
