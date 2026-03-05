@@ -37,11 +37,11 @@ function Home() {
             Sistem Informasi Desa Resmi
           </div>
 
-          <h1 className="font-outfit text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1] mb-5 sm:mb-6 drop-shadow-lg">
+          <h1 className="font-outfit text-2xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1] mb-5 sm:mb-6 drop-shadow-lg max-w-[90%] mx-auto md:max-w-none">
             Pemerintah Desa Lamaran Tarung <br className="hidden md:block" /> Melayani Secara Digital.
           </h1>
 
-          <p className="text-base sm:text-lg lg:text-xl text-slate-100 mb-8 sm:mb-10 leading-relaxed font-medium max-w-2xl drop-shadow-md px-2">
+          <p className="text-sm sm:text-lg lg:text-xl text-slate-100 mb-8 sm:mb-10 leading-relaxed font-medium max-w-2xl drop-shadow-md px-2">
             Wadah penyampaian aspirasi dan pengaduan masyarakat secara resmi, terintegrasi, dan transparan untuk pembangunan desa yang lebih baik.
           </p>
 
@@ -69,14 +69,14 @@ function Home() {
             <div className="order-2 lg:order-1">
               <div className="bg-slate-50 p-5 sm:p-10 rounded-2xl shadow-lg border border-slate-200">
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
-                  <div className="p-4 sm:p-6 bg-white rounded-xl border border-slate-200 text-center shadow-sm">
-                    <p className="text-4xl font-black text-emerald-700 mb-2">24/7</p>
-                    <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Akses Terbuka</p>
+                <div className="grid grid-cols-2 gap-3 sm:gap-6">
+                  <div className="p-3 sm:p-6 bg-white rounded-xl border border-slate-200 text-center shadow-sm">
+                    <p className="text-2xl sm:text-4xl font-black text-emerald-700 mb-1 sm:mb-2">24/7</p>
+                    <p className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest leading-tight">Akses Terbuka</p>
                   </div>
                   <div className="p-3 sm:p-6 bg-white rounded-xl border border-slate-200 text-center shadow-sm">
-                    <p className="text-3xl sm:text-4xl font-black text-amber-600 mb-1 sm:mb-2">100%</p>
-                    <p className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest">Terintegrasi</p>
+                    <p className="text-2xl sm:text-4xl font-black text-amber-600 mb-1 sm:mb-2">100%</p>
+                    <p className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest leading-tight">Terintegrasi</p>
                   </div>
                   <div className="sm:col-span-2 p-5 sm:p-8 bg-emerald-800 rounded-xl shadow-md text-left relative overflow-hidden">
                     <h4 className="text-xl sm:text-2xl font-bold text-white mb-1.5 sm:mb-2 relative z-10">Keterbukaan Informasi</h4>
@@ -92,10 +92,10 @@ function Home() {
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 Informasi Desa
               </div>
-              <h2 className="font-outfit text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight mb-6">
+              <h2 className="font-outfit text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight mb-4 sm:mb-6">
                 Sistem Pengaduan Pintar <br className="hidden lg:block" /> Terpadu Satu Pintu.
               </h2>
-              <div className="space-y-6 text-base text-slate-600 leading-relaxed font-medium">
+              <div className="space-y-4 sm:space-y-6 text-sm sm:text-base text-slate-600 leading-relaxed font-medium">
                 <p>
                   Sipentar (Sistem Informasi Pengaduan Pintar) adalah komitmen nyata dari Pemerintah Desa Lamaran Tarung untuk mempermudah warga dalam menyampaikan masalah, kebutuhan fasilitas, dan aspirasi.
                 </p>

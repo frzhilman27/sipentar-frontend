@@ -370,11 +370,11 @@ function Dashboard() {
                       }
 
                       return displayedReports.map((r) => (
-                        <div key={r.id} className="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 flex flex-col sm:flex-row gap-4 sm:gap-6 shadow-sm">
+                        <div key={r.id} className="bg-white rounded-xl border border-slate-200 p-4 sm:p-6 flex flex-col sm:flex-row gap-3 sm:gap-6 shadow-sm">
 
                           {/* Avatar & Info Pelapor */}
-                          <div className="flex items-center sm:items-start gap-4 shrink-0 sm:w-56 pb-4 sm:pb-0 border-b border-slate-100 sm:border-0">
-                            <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-slate-100 flex items-center justify-center text-lg font-black border border-slate-200 ${role === 'admin' ? 'text-amber-700' : 'text-emerald-700'}`}>
+                          <div className="flex items-center sm:items-start gap-3 sm:gap-4 shrink-0 sm:w-56 pb-3 sm:pb-0 border-b border-slate-100 sm:border-0">
+                            <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-slate-100 flex items-center justify-center text-lg font-black border border-slate-200 shrink-0 ${role === 'admin' ? 'text-amber-700' : 'text-emerald-700'}`}>
                               {r.name.charAt(0).toUpperCase()}
                             </div>
                             <div>
@@ -386,9 +386,9 @@ function Dashboard() {
                           </div>
 
                           {/* Konten Aduan */}
-                          <div className="flex-1 pt-2 sm:pt-0">
-                            <h4 className="font-bold text-lg sm:text-xl text-slate-900 mb-2">{r.judul}</h4>
-                            <p className="text-slate-600 font-medium leading-relaxed pb-4 text-sm">{r.isi}</p>
+                          <div className="flex-1 pt-1 sm:pt-0">
+                            <h4 className="font-bold text-base sm:text-xl text-slate-900 mb-1.5 sm:mb-2 leading-snug">{r.judul}</h4>
+                            <p className="text-slate-600 font-medium leading-relaxed pb-3 sm:pb-4 text-[13px] sm:text-sm">{r.isi}</p>
 
                             {/* Gambar Opsional */}
                             {r.image_url && (

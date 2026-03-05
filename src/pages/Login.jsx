@@ -79,9 +79,9 @@ function Login() {
         </div>
       </div>
 
-      <div className="relative z-10 w-full max-w-md px-3 py-4 sm:px-4 sm:py-12">
+      <div className="relative z-10 w-full max-w-md px-4 py-8 sm:px-4 sm:py-12">
         {/* Login Card - Formal Solid White */}
-        <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl border border-slate-200 overflow-hidden relative transition-all duration-500 p-5 sm:p-10">
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl border border-slate-200 overflow-hidden relative transition-all duration-500 p-6 sm:p-10 w-full">
 
           <div className="text-center mb-6 sm:mb-8">
             <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br mx-auto flex items-center justify-center shadow-md mb-4 sm:mb-5 ${iconGradient}`}>
@@ -93,8 +93,8 @@ function Login() {
                 )}
               </svg>
             </div>
-            <h2 className="font-outfit text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900">Portal Sipentar</h2>
-            <p className={`text-xs sm:text-sm font-bold mt-1.5 uppercase tracking-widest ${isUser ? 'text-emerald-700' : 'text-amber-600'}`}>
+            <h2 className="font-outfit text-2xl font-extrabold tracking-tight text-slate-900">Portal Sipentar</h2>
+            <p className={`text-xs font-bold mt-1.5 uppercase tracking-widest ${isUser ? 'text-emerald-700' : 'text-amber-600'}`}>
               {isUser ? "Akses Warga Desa" : "Divisi Administrator"}
             </p>
           </div>
