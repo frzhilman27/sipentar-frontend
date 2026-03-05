@@ -79,13 +79,13 @@ function Login() {
         </div>
       </div>
 
-      <div className="relative z-10 w-full max-w-md px-4 py-12">
+      <div className="relative z-10 w-full max-w-md px-4 py-8 sm:py-12">
         {/* Login Card - Formal Solid White */}
-        <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden relative transition-all duration-500 p-8 sm:p-10">
+        <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden relative transition-all duration-500 p-6 sm:p-10">
 
-          <div className="text-center mb-8">
-            <div className={`w-14 h-14 rounded-xl bg-gradient-to-br mx-auto flex items-center justify-center shadow-md mb-5 ${iconGradient}`}>
-              <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="text-center mb-6 sm:mb-8">
+            <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br mx-auto flex items-center justify-center shadow-md mb-4 sm:mb-5 ${iconGradient}`}>
+              <svg className="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {isUser ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 ) : (
@@ -93,14 +93,14 @@ function Login() {
                 )}
               </svg>
             </div>
-            <h2 className="font-outfit text-2xl font-extrabold tracking-tight text-slate-900">Portal Sipentar</h2>
-            <p className={`text-sm font-bold mt-1.5 uppercase tracking-widest ${isUser ? 'text-emerald-700' : 'text-amber-600'}`}>
+            <h2 className="font-outfit text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900">Portal Sipentar</h2>
+            <p className={`text-xs sm:text-sm font-bold mt-1.5 uppercase tracking-widest ${isUser ? 'text-emerald-700' : 'text-amber-600'}`}>
               {isUser ? "Akses Warga Desa" : "Divisi Administrator"}
             </p>
           </div>
 
           {/* Role Toggle Switch */}
-          <div className="flex p-1.5 rounded-xl mb-8 relative z-20 bg-slate-100 shadow-inner overflow-hidden border border-slate-200">
+          <div className="flex p-1.5 rounded-xl mb-6 sm:mb-8 relative z-20 bg-slate-100 shadow-inner overflow-hidden border border-slate-200">
             <button
               type="button"
               onClick={() => handleRoleSwitch("user")}

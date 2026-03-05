@@ -46,16 +46,16 @@ function Register() {
                 <div className="absolute inset-0 backdrop-blur-[4px] bg-village-dark-900/40"></div>
             </div>
 
-            <div className="relative z-10 w-full max-w-md px-4">
+            <div className="relative z-10 w-full max-w-md px-4 py-8 sm:py-12">
                 {/* Register Card - Formal Solid White */}
-                <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 p-8 sm:p-10 relative overflow-hidden">
+                <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 sm:p-10 relative overflow-hidden">
 
-                    <div className="text-center mb-8">
-                        <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 mx-auto flex items-center justify-center shadow-md mb-4">
-                            <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                    <div className="text-center mb-6 sm:mb-8 font-jakarta">
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 mx-auto flex items-center justify-center shadow-md mb-4 sm:mb-5">
+                            <svg className="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                         </div>
-                        <h2 className="font-outfit text-2xl font-extrabold text-slate-900 tracking-tight">Registrasi Warga</h2>
-                        <p className="text-sm font-bold text-emerald-700 mt-2 uppercase tracking-widest">Aktivasi Identitas Sipentar</p>
+                        <h2 className="font-outfit text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Registrasi Warga</h2>
+                        <p className="text-xs sm:text-sm font-bold text-emerald-700 mt-1.5 uppercase tracking-widest">Aktivasi Identitas Sipentar</p>
                     </div>
 
                     {error && (
