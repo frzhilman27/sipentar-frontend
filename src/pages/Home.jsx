@@ -31,29 +31,29 @@ function Home() {
           <div className="absolute inset-0 bg-slate-900/60 mix-blend-multiply"></div>
         </div>
 
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative w-full flex flex-col items-center z-10">
+        <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 relative w-full flex flex-col items-center z-10">
 
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/80 border border-slate-600 text-emerald-300 text-[11px] font-bold tracking-widest uppercase mb-8 shadow-lg">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-slate-800/80 border border-slate-600 text-emerald-300 text-[10px] sm:text-[11px] font-bold tracking-widest uppercase mb-6 sm:mb-8 shadow-lg">
             Sistem Informasi Desa Resmi
           </div>
 
-          <h1 className="font-outfit text-[32px] md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1] mb-5 sm:mb-6 drop-shadow-lg">
+          <h1 className="font-outfit text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1] mb-5 sm:mb-6 drop-shadow-lg">
             Pemerintah Desa Lamaran Tarung <br className="hidden md:block" /> Melayani Secara Digital.
           </h1>
 
-          <p className="text-lg lg:text-xl text-slate-100 mb-10 leading-relaxed font-medium max-w-2xl drop-shadow-md">
+          <p className="text-base sm:text-lg lg:text-xl text-slate-100 mb-8 sm:mb-10 leading-relaxed font-medium max-w-2xl drop-shadow-md px-2">
             Wadah penyampaian aspirasi dan pengaduan masyarakat secara resmi, terintegrasi, dan transparan untuk pembangunan desa yang lebih baik.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-2">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto mt-2">
             <Link to="/register" className="w-full sm:w-auto">
-              <button className="w-full px-8 py-4 bg-emerald-700 hover:bg-emerald-800 text-white text-base font-bold rounded-lg transition-all shadow-lg flex items-center justify-center gap-3">
+              <button className="w-full px-6 sm:px-8 py-3.5 sm:py-4 bg-emerald-700 hover:bg-emerald-800 text-white text-sm sm:text-base font-bold rounded-lg transition-all shadow-lg flex items-center justify-center gap-3">
                 Buat Laporan / Pengaduan
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
               </button>
             </Link>
             <Link to="/login" className="w-full sm:w-auto">
-              <button className="w-full px-8 py-4 bg-white hover:bg-slate-50 text-slate-800 border-2 border-transparent text-base font-bold rounded-lg transition-all shadow-lg flex items-center justify-center gap-2">
+              <button className="w-full px-6 sm:px-8 py-3.5 sm:py-4 bg-white hover:bg-slate-50 text-slate-800 border-2 border-transparent text-sm sm:text-base font-bold rounded-lg transition-all shadow-lg flex items-center justify-center gap-2">
                 Pantau Laporan Saya
               </button>
             </Link>
@@ -62,14 +62,14 @@ function Home() {
       </section>
 
       {/* 3. TENTANG SIPENTAR SECTION  */}
-      <section id="tentang" className="py-16 sm:py-24 bg-white border-y border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-10 sm:gap-16 items-center">
+      <section id="tentang" className="py-12 sm:py-24 bg-white border-y border-slate-200">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-16 items-center">
             {/* Image / Stats Solid Card */}
             <div className="order-2 lg:order-1">
-              <div className="bg-slate-50 p-6 sm:p-10 rounded-2xl shadow-lg border border-slate-200">
+              <div className="bg-slate-50 p-5 sm:p-10 rounded-2xl shadow-lg border border-slate-200">
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
                   <div className="p-4 sm:p-6 bg-white rounded-xl border border-slate-200 text-center shadow-sm">
                     <p className="text-4xl font-black text-emerald-700 mb-2">24/7</p>
                     <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Akses Terbuka</p>
@@ -117,9 +117,9 @@ function Home() {
       </section>
 
       {/* 4. CARA KERJA SECTION (Solid Cards) */}
-      <section id="alur" className="py-16 sm:py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+      <section id="alur" className="py-12 sm:py-24 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 px-2">
             <h2 className="font-outfit text-3xl font-black text-slate-900 mb-4 tracking-tight">SOP Alur Pelaporan</h2>
             <p className="text-slate-600 text-sm sm:text-base font-medium">Birokrasi Pelayanan Masyarakat secara Sistematis dan Efisien.</p>
           </div>
@@ -127,35 +127,35 @@ function Home() {
           <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
 
             {/* Step 1 */}
-            <div className="p-6 sm:p-8 rounded-xl bg-white border border-slate-200 shadow-md transition-all hover:shadow-lg">
+            <div className="p-5 sm:p-8 rounded-xl bg-white border border-slate-200 shadow-md transition-all hover:shadow-lg">
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-lg font-bold mb-4 sm:mb-6">1</div>
               <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">Pembuatan Laporan</h3>
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-medium">Masuk menggunakan Nomor Induk Kependudukan (NIK) Anda dan lampirkan kronologi rinci perihal keluhan warga atau perbaikan.</p>
             </div>
 
             {/* Step 2 */}
-            <div className="p-6 sm:p-8 rounded-xl bg-white border border-slate-200 shadow-md transition-all hover:shadow-lg">
+            <div className="p-5 sm:p-8 rounded-xl bg-white border border-slate-200 shadow-md transition-all hover:shadow-lg">
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center text-lg font-bold mb-4 sm:mb-6">2</div>
               <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">Verifikasi Desa</h3>
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-medium">Admin / Pamong Desa akan meninjau validitas laporan dan memasukkannya ke dalam tabel antrian penanganan dinas terkait.</p>
             </div>
 
             {/* Step 3 */}
-            <div className="p-6 sm:p-8 rounded-xl bg-white border border-slate-200 shadow-md transition-all hover:shadow-lg">
-              <div className="w-12 h-12 bg-emerald-700 text-white rounded-lg flex items-center justify-center text-lg font-bold mb-6">3</div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Resolusi & Eksekusi</h3>
-              <p className="text-slate-600 text-sm leading-relaxed font-medium">Pemerintah merampungkan perbaikan dan melampirkan tanggapan akhir sebagai tanda laporan telah sukses diselesaikan.</p>
+            <div className="p-5 sm:p-8 rounded-xl bg-white border border-slate-200 shadow-md transition-all hover:shadow-lg">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-700 text-white rounded-lg flex items-center justify-center text-lg font-bold mb-4 sm:mb-6">3</div>
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">Resolusi & Eksekusi</h3>
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-medium">Pemerintah merampungkan perbaikan dan melampirkan tanggapan akhir sebagai tanda laporan telah sukses diselesaikan.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* 5. FOOTER */}
-      <footer className="bg-slate-900 pt-16 pb-8 border-t border-slate-800">
+      <footer className="bg-slate-900 pt-12 sm:pt-16 pb-8 border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12 border-b border-slate-800 pb-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-12 mb-10 sm:mb-12 border-b border-slate-800 pb-10 sm:pb-12">
             <div className="col-span-1 md:col-span-2">
-              <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center gap-2.5 sm:gap-3 mb-5 sm:mb-6">
                 <div className="w-8 h-8 rounded bg-slate-800 flex items-center justify-center border border-slate-700">
                   <svg className="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                 </div>
@@ -167,8 +167,8 @@ function Home() {
             </div>
 
             <div>
-              <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Informasi Web</h4>
-              <ul className="space-y-3 text-sm">
+              <h4 className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Informasi Web</h4>
+              <ul className="space-y-3 text-xs sm:text-sm">
                 <li><a href="#beranda" className="text-slate-300 hover:text-white transition">Halaman Utama</a></li>
                 <li><Link to="/register" className="text-slate-300 hover:text-white transition">Daftar Akun Baru</Link></li>
                 <li><Link to="/login" className="text-slate-300 hover:text-white transition">Akses Sistem</Link></li>
@@ -176,12 +176,12 @@ function Home() {
             </div>
 
             <div>
-              <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Pusat Layanan</h4>
-              <ul className="space-y-3 text-sm text-slate-300">
+              <h4 className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Pusat Layanan</h4>
+              <ul className="space-y-3 text-xs sm:text-sm text-slate-300">
                 <li>Kantor Keuchik / Balai Desa</li>
                 <li>Jalan Raya Blok Kosambi</li>
                 <li>Kecamatan Cantigi</li>
-                <li className="pt-3 text-emerald-400 font-medium">admin@lamarantarung.desa.id</li>
+                <li className="pt-2 sm:pt-3 text-emerald-400 font-medium break-all">admin@lamarantarung.desa.id</li>
               </ul>
             </div>
           </div>
