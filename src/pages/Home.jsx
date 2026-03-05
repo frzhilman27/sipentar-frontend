@@ -66,7 +66,7 @@ function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-16 items-center">
             {/* Image / Stats Solid Card */}
-            <div className="order-2 lg:order-1">
+            <div>
               <div className="bg-slate-50 p-5 sm:p-10 rounded-2xl shadow-lg border border-slate-200">
 
                 <div className="grid grid-cols-2 gap-3 sm:gap-6">
@@ -87,7 +87,7 @@ function Home() {
             </div>
 
             {/* Content Context */}
-            <div className="order-1 lg:order-2">
+            <div>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded bg-emerald-100 text-emerald-800 text-xs font-bold tracking-widest uppercase mb-6">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 Informasi Desa
