@@ -3,27 +3,54 @@
 
 @theme {
     --font-sans: 'Inter', sans-serif;
+    --font-outfit: 'Outfit', sans-serif; /* Adding Outfit for premium headings */
+
+    /* Premium Village Theme Colors */
+    --color-village-emerald-50: #ecfdf5;
+    --color-village-emerald-100: #d1fae5;
+    --color-village-emerald-500: #10b981;
+    --color-village-emerald-600: #059669;
+    --color-village-emerald-700: #047857;
+    --color-village-emerald-900: #064e3b;
+
+    --color-village-amber-50: #fffbeb;
+    --color-village-amber-100: #fef3c7;
+    --color-village-amber-500: #f59e0b;
+    --color-village-amber-600: #d97706;
+    --color-village-amber-700: #b45309;
+    --color-village-amber-900: #78350f;
+    
+    --color-village-dark-900: #0f172a;
+    --color-village-dark-800: #1e293b;
 }
 
 body {
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Base text color for the premium dark vibe */
+    color: #f8fafc;
+    background-color: #0f172a;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Custom Scrollbar for Premium Feel */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f5f9;
+    background: #0f172a; /* Dark track */
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
+    background: #334155;
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+    background: #475569;
 }
