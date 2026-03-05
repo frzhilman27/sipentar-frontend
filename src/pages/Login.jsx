@@ -100,7 +100,7 @@ function Login() {
           </div>
 
           {/* Role Toggle Switch */}
-          <div className="flex p-1.5 rounded-xl mb-6 sm:mb-8 relative z-20 bg-slate-100 shadow-inner overflow-hidden border border-slate-200">
+          <div className="flex flex-col sm:flex-row p-1.5 rounded-xl mb-6 sm:mb-8 relative z-20 bg-slate-100 shadow-inner overflow-hidden border border-slate-200 gap-1 sm:gap-0">
             <button
               type="button"
               onClick={() => handleRoleSwitch("user")}

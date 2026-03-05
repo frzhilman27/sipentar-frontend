@@ -69,7 +69,7 @@ function Home() {
             <div className="order-2 lg:order-1">
               <div className="bg-slate-50 p-6 sm:p-10 rounded-2xl shadow-lg border border-slate-200">
 
-                <div className="grid grid-cols-2 gap-4 sm:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div className="p-4 sm:p-6 bg-white rounded-xl border border-slate-200 text-center shadow-sm">
                     <p className="text-4xl font-black text-emerald-700 mb-2">24/7</p>
                     <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Akses Terbuka</p>
@@ -78,7 +78,7 @@ function Home() {
                     <p className="text-3xl sm:text-4xl font-black text-amber-600 mb-1 sm:mb-2">100%</p>
                     <p className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest">Terintegrasi</p>
                   </div>
-                  <div className="col-span-2 p-5 sm:p-8 bg-emerald-800 rounded-xl shadow-md text-left relative overflow-hidden">
+                  <div className="sm:col-span-2 p-5 sm:p-8 bg-emerald-800 rounded-xl shadow-md text-left relative overflow-hidden">
                     <h4 className="text-xl sm:text-2xl font-bold text-white mb-1.5 sm:mb-2 relative z-10">Keterbukaan Informasi</h4>
                     <p className="text-emerald-100 font-medium leading-relaxed relative z-10 text-xs sm:text-base">Mewujudkan Desa Lamaran Tarung yang aman, bersih, dan sejahtera melalui partisipasi dan pengawasan aktif warga.</p>
                   </div>
@@ -100,7 +100,7 @@ function Home() {
                   Sipentar (Sistem Informasi Pengaduan Pintar) adalah komitmen nyata dari Pemerintah Desa Lamaran Tarung untuk mempermudah warga dalam menyampaikan masalah, kebutuhan fasilitas, dan aspirasi.
                 </p>
                 <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 bg-slate-50 border border-slate-200 rounded-xl mt-6">
-                  <div className="min-w-max">
+                  <div className="flex-shrink-0">
                     <div className="w-10 h-10 rounded bg-emerald-100 flex items-center justify-center text-emerald-700">
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     </div>
