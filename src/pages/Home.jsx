@@ -62,15 +62,15 @@ function Home() {
       </section>
 
       {/* 3. TENTANG SIPENTAR SECTION  */}
-      <section id="tentang" className="py-24 bg-white border-y border-slate-200">
+      <section id="tentang" className="py-16 sm:py-24 bg-white border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 sm:gap-16 items-center">
             {/* Image / Stats Solid Card */}
             <div className="order-2 lg:order-1">
-              <div className="bg-slate-50 p-8 sm:p-10 rounded-2xl shadow-lg border border-slate-200">
+              <div className="bg-slate-50 p-6 sm:p-10 rounded-2xl shadow-lg border border-slate-200">
 
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="p-6 bg-white rounded-xl border border-slate-200 text-center shadow-sm">
+                <div className="grid grid-cols-2 gap-4 sm:gap-6">
+                  <div className="p-4 sm:p-6 bg-white rounded-xl border border-slate-200 text-center shadow-sm">
                     <p className="text-4xl font-black text-emerald-700 mb-2">24/7</p>
                     <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Akses Terbuka</p>
                   </div>
@@ -117,31 +117,31 @@ function Home() {
       </section>
 
       {/* 4. CARA KERJA SECTION (Solid Cards) */}
-      <section id="alur" className="py-24 bg-slate-50">
+      <section id="alur" className="py-16 sm:py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
             <h2 className="font-outfit text-3xl font-black text-slate-900 mb-4 tracking-tight">SOP Alur Pelaporan</h2>
-            <p className="text-slate-600 text-base font-medium">Birokrasi Pelayanan Masyarakat secara Sistematis dan Efisien.</p>
+            <p className="text-slate-600 text-sm sm:text-base font-medium">Birokrasi Pelayanan Masyarakat secara Sistematis dan Efisien.</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
 
             {/* Step 1 */}
-            <div className="p-8 rounded-xl bg-white border border-slate-200 shadow-md transition-all hover:shadow-lg">
-              <div className="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-lg font-bold mb-6">1</div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Pembuatan Laporan</h3>
-              <p className="text-slate-600 text-sm leading-relaxed font-medium">Masuk menggunakan Nomor Induk Kependudukan (NIK) Anda dan lampirkan kronologi rinci perihal keluhan warga atau perbaikan.</p>
+            <div className="p-6 sm:p-8 rounded-xl bg-white border border-slate-200 shadow-md transition-all hover:shadow-lg">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-lg font-bold mb-4 sm:mb-6">1</div>
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">Pembuatan Laporan</h3>
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-medium">Masuk menggunakan Nomor Induk Kependudukan (NIK) Anda dan lampirkan kronologi rinci perihal keluhan warga atau perbaikan.</p>
             </div>
 
             {/* Step 2 */}
-            <div className="p-8 rounded-xl bg-white border border-slate-200 shadow-md transition-all hover:shadow-lg">
-              <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center text-lg font-bold mb-6">2</div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Verifikasi Desa</h3>
-              <p className="text-slate-600 text-sm leading-relaxed font-medium">Admin / Pamong Desa akan meninjau validitas laporan dan memasukkannya ke dalam tabel antrian penanganan dinas terkait.</p>
+            <div className="p-6 sm:p-8 rounded-xl bg-white border border-slate-200 shadow-md transition-all hover:shadow-lg">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center text-lg font-bold mb-4 sm:mb-6">2</div>
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">Verifikasi Desa</h3>
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-medium">Admin / Pamong Desa akan meninjau validitas laporan dan memasukkannya ke dalam tabel antrian penanganan dinas terkait.</p>
             </div>
 
             {/* Step 3 */}
-            <div className="p-8 rounded-xl bg-white border border-slate-200 shadow-md transition-all hover:shadow-lg">
+            <div className="p-6 sm:p-8 rounded-xl bg-white border border-slate-200 shadow-md transition-all hover:shadow-lg">
               <div className="w-12 h-12 bg-emerald-700 text-white rounded-lg flex items-center justify-center text-lg font-bold mb-6">3</div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Resolusi & Eksekusi</h3>
               <p className="text-slate-600 text-sm leading-relaxed font-medium">Pemerintah merampungkan perbaikan dan melampirkan tanggapan akhir sebagai tanda laporan telah sukses diselesaikan.</p>

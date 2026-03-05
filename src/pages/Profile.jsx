@@ -247,18 +247,18 @@ function Profile({ isEmbedded = false }) {
                         {activeTab === "ringkasan" && (
                             <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
                                 {/* Profil Card Formal */}
-                                <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-10 flex flex-col items-center justify-center text-center transition-all duration-500 mb-10 relative overflow-hidden group">
-                                    <div className="w-28 h-28 mb-6 relative z-10 transition-transform duration-500 group-hover:scale-105">
+                                <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-10 flex flex-col items-center justify-center text-center transition-all duration-500 mb-10 relative overflow-hidden group">
+                                    <div className="w-24 h-24 sm:w-28 sm:h-28 mb-4 sm:mb-6 relative z-10 transition-transform duration-500 group-hover:scale-105">
                                         {userPhotoUrl ? (
                                             <img src={userPhotoUrl} alt="Profil Atas" className="w-full h-full rounded-full object-cover border-[4px] border-white shadow-md relative z-10" />
                                         ) : (
-                                            <div className={`w-full h-full rounded-full flex items-center justify-center text-4xl font-black text-slate-700 shadow-md border-[4px] border-white bg-slate-100 relative z-10`}>
+                                            <div className={`w-full h-full rounded-full flex items-center justify-center text-3xl sm:text-4xl font-black text-slate-700 shadow-md border-[4px] border-white bg-slate-100 relative z-10`}>
                                                 {user.name.charAt(0).toUpperCase()}
                                             </div>
                                         )}
                                     </div>
-                                    <h3 className="font-outfit text-3xl md:text-4xl font-extrabold text-slate-800 mb-2 relative z-10 tracking-tight">Halo, <span className={`${themeParams.textHighlight}`}>{user.name || "Kawan"}</span>!</h3>
-                                    <p className="text-slate-500 max-w-lg leading-relaxed relative z-10 text-sm md:text-base font-medium">
+                                    <h3 className="font-outfit text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-800 mb-2 relative z-10 tracking-tight">Halo, <span className={`${themeParams.textHighlight}`}>{user.name || "Kawan"}</span>!</h3>
+                                    <p className="text-slate-500 max-w-lg leading-relaxed relative z-10 text-xs sm:text-sm md:text-base font-medium">
                                         Pusat Identitas Sipentar. Kelola identitas dan privasi profil Anda dengan aman dan terpadu.
                                     </p>
                                 </div>
@@ -267,43 +267,43 @@ function Profile({ isEmbedded = false }) {
                                     {/* Kelola Profil Button */}
                                     <button
                                         onClick={() => { handleTabChange("profil"); setProfileMessage({ type: '', text: '' }); }}
-                                        className="group flex items-center justify-between w-full px-6 py-5 bg-white rounded-2xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 shadow-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-emerald-500/10"
+                                        className="group flex items-center justify-between w-full px-5 sm:px-6 py-4 sm:py-5 bg-white rounded-2xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 shadow-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-emerald-500/10"
                                     >
-                                        <div className="flex items-center gap-5">
-                                            <div className="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center group-hover:text-emerald-600 group-hover:border-emerald-200 border border-slate-200 shadow-sm transition-colors">
-                                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                                        <div className="flex items-center gap-4 sm:gap-5">
+                                            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center group-hover:text-emerald-600 group-hover:border-emerald-200 border border-slate-200 shadow-sm transition-colors shrink-0">
+                                                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                                             </div>
-                                            <span className="text-[17px] font-bold text-slate-700 group-hover:text-emerald-700 transition-colors">Kelola Identitas Profil</span>
+                                            <span className="text-base sm:text-[17px] font-bold text-slate-700 group-hover:text-emerald-700 transition-colors text-left">Kelola Identitas Profil</span>
                                         </div>
-                                        <svg className="w-5 h-5 text-slate-400 group-hover:translate-x-1 group-hover:text-emerald-600 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
+                                        <svg className="w-5 h-5 text-slate-400 group-hover:translate-x-1 group-hover:text-emerald-600 transition-all duration-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
                                     </button>
 
                                     {/* Pengaturan Button */}
                                     <button
                                         onClick={() => { handleTabChange("pengaturan"); setPasswordMessage({ type: '', text: '' }); setDeleteMessage({ type: '', text: '' }); }}
-                                        className="group flex items-center justify-between w-full px-6 py-5 bg-white rounded-2xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 shadow-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
+                                        className="group flex items-center justify-between w-full px-5 sm:px-6 py-4 sm:py-5 bg-white rounded-2xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 shadow-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
                                     >
-                                        <div className="flex items-center gap-5">
-                                            <div className="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center group-hover:text-indigo-600 group-hover:border-indigo-200 border border-slate-200 shadow-sm transition-colors">
-                                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                        <div className="flex items-center gap-4 sm:gap-5">
+                                            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center group-hover:text-indigo-600 group-hover:border-indigo-200 border border-slate-200 shadow-sm transition-colors shrink-0">
+                                                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                                             </div>
-                                            <span className="text-[17px] font-bold text-slate-700 group-hover:text-indigo-700 transition-colors">Keamanan & Privasi</span>
+                                            <span className="text-base sm:text-[17px] font-bold text-slate-700 group-hover:text-indigo-700 transition-colors text-left">Keamanan & Privasi</span>
                                         </div>
-                                        <svg className="w-5 h-5 text-slate-400 group-hover:translate-x-1 group-hover:text-indigo-600 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
+                                        <svg className="w-5 h-5 text-slate-400 group-hover:translate-x-1 group-hover:text-indigo-600 transition-all duration-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
                                     </button>
 
                                     {/* Logout Button */}
                                     <button
                                         onClick={handleLogout}
-                                        className="group flex items-center justify-between w-full px-6 py-5 bg-white rounded-2xl border border-slate-200 hover:border-red-300 hover:bg-red-50 shadow-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-red-500/10 mt-4"
+                                        className="group flex items-center justify-between w-full px-5 sm:px-6 py-4 sm:py-5 bg-white rounded-2xl border border-slate-200 hover:border-red-300 hover:bg-red-50 shadow-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-red-500/10 mt-2 sm:mt-4"
                                     >
-                                        <div className="flex items-center gap-5">
-                                            <div className="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center group-hover:text-red-600 group-hover:border-red-200 border border-slate-200 shadow-sm transition-colors">
-                                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                                        <div className="flex items-center gap-4 sm:gap-5">
+                                            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center group-hover:text-red-600 group-hover:border-red-200 border border-slate-200 shadow-sm transition-colors shrink-0">
+                                                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                                             </div>
-                                            <span className="text-[17px] font-bold text-slate-700 group-hover:text-red-700 transition-colors">Keluar dari Akun (Logout)</span>
+                                            <span className="text-base sm:text-[17px] font-bold text-slate-700 group-hover:text-red-700 transition-colors text-left">Keluar dari Akun (Logout)</span>
                                         </div>
-                                        <svg className="w-5 h-5 text-slate-400 group-hover:translate-x-1 group-hover:text-red-600 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
+                                        <svg className="w-5 h-5 text-slate-400 group-hover:translate-x-1 group-hover:text-red-600 transition-all duration-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
                                     </button>
                                 </div>
                             </div>

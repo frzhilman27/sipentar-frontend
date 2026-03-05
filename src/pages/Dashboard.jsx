@@ -370,30 +370,30 @@ function Dashboard() {
                       }
 
                       return displayedReports.map((r) => (
-                        <div key={r.id} className="bg-white rounded-xl border border-slate-200 p-6 flex flex-col md:flex-row gap-6 shadow-sm">
+                        <div key={r.id} className="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 flex flex-col sm:flex-row gap-4 sm:gap-6 shadow-sm">
 
                           {/* Avatar & Info Pelapor */}
-                          <div className="flex items-start gap-4 shrink-0 md:w-56">
-                            <div className={`w-12 h-12 rounded-lg bg-slate-100 flex items-center justify-center text-lg font-black border border-slate-200 ${role === 'admin' ? 'text-amber-700' : 'text-emerald-700'}`}>
+                          <div className="flex items-center sm:items-start gap-4 shrink-0 sm:w-56 pb-4 sm:pb-0 border-b border-slate-100 sm:border-0">
+                            <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-slate-100 flex items-center justify-center text-lg font-black border border-slate-200 ${role === 'admin' ? 'text-amber-700' : 'text-emerald-700'}`}>
                               {r.name.charAt(0).toUpperCase()}
                             </div>
                             <div>
-                              <p className={`font-black text-slate-900 text-base`}>{r.name}</p>
-                              <p className="text-xs font-semibold text-slate-500 mt-0.5 tracking-wide flex items-center gap-1">
+                              <p className={`font-black text-slate-900 text-sm sm:text-base`}>{r.name}</p>
+                              <p className="text-[11px] sm:text-xs font-semibold text-slate-500 mt-0.5 tracking-wide flex items-center gap-1">
                                 {r.created_at ? new Date(r.created_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Tanggal Laporan'}
                               </p>
                             </div>
                           </div>
 
                           {/* Konten Aduan */}
-                          <div className="flex-1">
-                            <h4 className="font-bold text-xl text-slate-900 mb-2">{r.judul}</h4>
+                          <div className="flex-1 pt-2 sm:pt-0">
+                            <h4 className="font-bold text-lg sm:text-xl text-slate-900 mb-2">{r.judul}</h4>
                             <p className="text-slate-600 font-medium leading-relaxed pb-4 text-sm">{r.isi}</p>
 
                             {/* Gambar Opsional */}
                             {r.image_url && (
                               <div
-                                className="mt-1 mb-5 rounded-lg overflow-hidden border border-slate-200 shadow-sm sm:max-w-md w-full relative group/img cursor-zoom-in"
+                                className="mt-1 mb-5 rounded-lg overflow-hidden border border-slate-200 shadow-sm sm:max-w-md w-full relative group/img cursor-zoom-in bg-slate-50"
                                 onClick={() => {
                                   const imgSrc = r.image_url.startsWith('data:image') ? r.image_url : `${IMAGE_BASE_URL}/uploads/${r.image_url}`;
                                   setSelectedImage(imgSrc);
@@ -402,7 +402,7 @@ function Dashboard() {
                                 <img
                                   src={r.image_url.startsWith('data:image') ? r.image_url : `${IMAGE_BASE_URL}/uploads/${r.image_url}`}
                                   alt="Bukti Laporan"
-                                  className="w-full h-auto max-h-48 object-cover transition-transform duration-500 group-hover/img:scale-105"
+                                  className="w-full h-auto max-h-48 object-contain sm:object-cover transition-transform duration-500 group-hover/img:scale-105"
                                 />
                                 <div className="absolute inset-0 bg-slate-900/0 group-hover/img:bg-slate-900/10 transition-colors duration-300 flex items-center justify-center">
                                   <div className="bg-white/90 backdrop-blur-sm text-slate-800 px-3 py-1.5 rounded-lg shadow-sm font-bold text-xs transform scale-90 opacity-0 group-hover/img:scale-100 group-hover/img:opacity-100 transition-all duration-300 flex items-center gap-1.5 border border-slate-200">
@@ -415,10 +415,10 @@ function Dashboard() {
 
                             {/* Status & Kendali Admin Bottom Bar */}
                             <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row justify-between sm:items-center gap-3">
-                              <span className={`inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold tracking-widest uppercase border ${r.status === 'Selesai' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : r.status === 'Diproses' ? 'bg-cyan-50 text-cyan-700 border-cyan-200' : 'bg-amber-50 text-amber-700 border-amber-200'}`}>
-                                {r.status === 'Menunggu' && <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mr-2"></span>}
-                                {r.status === 'Diproses' && <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 mr-2"></span>}
-                                {r.status === 'Selesai' && <svg className="w-3 h-3 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>}
+                              <span className={`inline-flex items-center w-fit px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-bold tracking-widest uppercase border ${r.status === 'Selesai' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : r.status === 'Diproses' ? 'bg-cyan-50 text-cyan-700 border-cyan-200' : 'bg-amber-50 text-amber-700 border-amber-200'}`}>
+                                {r.status === 'Menunggu' && <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mr-2 shrink-0"></span>}
+                                {r.status === 'Diproses' && <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 mr-2 shrink-0"></span>}
+                                {r.status === 'Selesai' && <svg className="w-3 h-3 mr-1.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>}
                                 Status: {r.status}
                               </span>
 
@@ -427,13 +427,13 @@ function Dashboard() {
                                   <select
                                     value={r.status}
                                     onChange={(e) => handleUpdateStatus(r.id, e.target.value)}
-                                    className={`appearance-none bg-slate-50 border border-slate-300 text-slate-800 text-xs font-bold rounded-lg focus:ring-2 outline-none cursor-pointer block w-full pl-3 pr-8 py-2 ${role === 'admin' ? 'focus:ring-amber-500/30' : 'focus:ring-emerald-500/30'}`}
+                                    className={`appearance-none bg-slate-50 border border-slate-300 text-slate-800 text-[11px] sm:text-xs font-bold rounded-lg focus:ring-2 outline-none cursor-pointer block w-full pl-3 pr-8 py-2.5 sm:py-2 ${role === 'admin' ? 'focus:ring-amber-500/30' : 'focus:ring-emerald-500/30'}`}
                                   >
                                     <option value="Menunggu">Tertunda</option>
                                     <option value="Diproses">Diproses</option>
                                     <option value="Selesai">Tuntas</option>
                                   </select>
-                                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-slate-500">
+                                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 sm:pr-2 text-slate-500">
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                                   </div>
                                 </div>
