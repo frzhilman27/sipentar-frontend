@@ -243,7 +243,7 @@ function Dashboard() {
                 className={`px-4 sm:px-6 py-4 font-bold text-sm sm:text-base whitespace-nowrap border-b-[3px] transition-colors flex items-center gap-2 ${activeMainTab === 'histori' ? 'border-emerald-600 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                Histori Saya
+                Laporan Saya
               </button>
             )}
 
@@ -441,8 +441,8 @@ function Dashboard() {
                             </div>
                           </div>
                         </div>
-                      ))
-                    )}
+                      ));
+                    })()}
                   </div>
                 </div>
               </>
