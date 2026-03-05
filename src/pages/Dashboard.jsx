@@ -227,8 +227,8 @@ function Dashboard() {
 
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
 
-          {/* Tab Navigation Menu */}
-          <div className="flex border-b border-slate-200 mb-8 overflow-x-auto no-scrollbar gap-2 sm:gap-6">
+          {/* Tab Navigation Menu (Desktop) */}
+          <div className="hidden sm:flex border-b border-slate-200 mb-8 overflow-x-auto no-scrollbar gap-2 sm:gap-6">
             <button
               onClick={() => setActiveMainTab('beranda')}
               className={`px-4 sm:px-6 py-4 font-bold text-sm sm:text-base whitespace-nowrap border-b-[3px] transition-colors flex items-center gap-2 ${activeMainTab === 'beranda' ? (role === 'admin' ? 'border-amber-600 text-amber-700' : 'border-emerald-600 text-emerald-700') : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}
@@ -465,7 +465,52 @@ function Dashboard() {
             </p>
           </div>
         </main>
+
+        {/* Bottom Navigation Bar (Mobile Native App Feel) */}
+        <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 shadow-[0_-4px_15px_rgba(0,0,0,0.05)] z-40 pb-safe">
+          <div className="flex justify-around items-center h-16">
+            <button
+              onClick={() => setActiveMainTab('beranda')}
+              className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors ${activeMainTab === 'beranda' ? (role === 'admin' ? 'text-amber-600' : 'text-emerald-700') : 'text-slate-400 hover:text-slate-600'}`}
+            >
+              <svg className="w-6 h-6" fill={activeMainTab === 'beranda' ? "currentColor" : "none"} viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={activeMainTab === 'beranda' ? "0" : "2"} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+              <span className="text-[10px] font-bold tracking-wide">Beranda</span>
+            </button>
+
+            {role === 'user' && (
+              <button
+                onClick={() => setActiveMainTab('histori')}
+                className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors ${activeMainTab === 'histori' ? 'text-emerald-700' : 'text-slate-400 hover:text-slate-600'}`}
+              >
+                <svg className="w-6 h-6" fill={activeMainTab === 'histori' ? "currentColor" : "none"} viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={activeMainTab === 'histori' ? "0" : "2"} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span className="text-[10px] font-bold tracking-wide">Histori</span>
+              </button>
+            )}
+
+            {role === 'user' && (
+              <button
+                onClick={() => setActiveMainTab('pengaduan')}
+                className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors relative`}
+              >
+                <div className={`absolute -top-5 bg-gradient-to-br from-emerald-500 to-emerald-700 text-white rounded-full p-3 shadow-lg border-4 border-slate-50 transition-transform ${activeMainTab === 'pengaduan' ? 'scale-110 shadow-emerald-500/40' : 'hover:scale-105'}`}>
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M11 5H6a2 2 0 00-2-2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                </div>
+                <span className={`text-[10px] font-bold tracking-wide mt-7 ${activeMainTab === 'pengaduan' ? 'text-emerald-700' : 'text-slate-400'}`}>Aduan</span>
+              </button>
+            )}
+
+            <button
+              onClick={() => setActiveMainTab('profil')}
+              className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors ${activeMainTab === 'profil' ? (role === 'admin' ? 'text-amber-600' : 'text-emerald-700') : 'text-slate-400 hover:text-slate-600'}`}
+            >
+              <svg className="w-6 h-6" fill={activeMainTab === 'profil' ? "currentColor" : "none"} viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={activeMainTab === 'profil' ? "0" : "2"} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+              <span className="text-[10px] font-bold tracking-wide">Profil</span>
+            </button>
+          </div>
+        </div>
+
       </div>
+
     </div>
   );
 }

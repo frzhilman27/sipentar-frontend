@@ -46,9 +46,9 @@ function Register() {
                 <div className="absolute inset-0 backdrop-blur-[4px] bg-village-dark-900/40"></div>
             </div>
 
-            <div className="relative z-10 w-full max-w-md px-4 py-8 sm:py-12">
+            <div className="relative z-10 w-full max-w-md px-3 py-4 sm:px-4 sm:py-12">
                 {/* Register Card - Formal Solid White */}
-                <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 sm:p-10 relative overflow-hidden">
+                <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl border border-slate-200 p-5 sm:p-10 relative overflow-hidden">
 
                     <div className="text-center mb-6 sm:mb-8 font-jakarta">
                         <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 mx-auto flex items-center justify-center shadow-md mb-4 sm:mb-5">
