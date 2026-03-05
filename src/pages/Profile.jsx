@@ -42,7 +42,13 @@ function Profile({ isEmbedded = false }) {
 
     const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
     const BASE_URL = API_URL.replace(/\/api\/?$/, "");
-    const userPhotoUrl = fotoProfilLocal ? `${BASE_URL}${fotoProfilLocal}` : null;
+
+    // Determine the correct user photo URL based on if it's base64 or a relative path
+    const userPhotoUrl = fotoProfilLocal
+        ? (fotoProfilLocal.startsWith('data:image') || fotoProfilLocal.startsWith('http'))
+            ? fotoProfilLocal
+            : `${BASE_URL}${fotoProfilLocal.startsWith('/') ? '' : '/'}${fotoProfilLocal}`
+        : null;
 
     useEffect(() => {
         fetchProfile();
