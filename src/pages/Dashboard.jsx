@@ -234,8 +234,18 @@ function Dashboard() {
               className={`px-4 sm:px-6 py-4 font-bold text-sm sm:text-base whitespace-nowrap border-b-[3px] transition-colors flex items-center gap-2 ${activeMainTab === 'beranda' ? (role === 'admin' ? 'border-amber-600 text-amber-700' : 'border-emerald-600 text-emerald-700') : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
-              Beranda
+              Semua Laporan
             </button>
+
+            {role === 'user' && (
+              <button
+                onClick={() => setActiveMainTab('histori')}
+                className={`px-4 sm:px-6 py-4 font-bold text-sm sm:text-base whitespace-nowrap border-b-[3px] transition-colors flex items-center gap-2 ${activeMainTab === 'histori' ? 'border-emerald-600 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                Histori Saya
+              </button>
+            )}
 
             {role === 'user' && (
               <button
@@ -257,32 +267,34 @@ function Dashboard() {
           </div>
 
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {activeMainTab === 'beranda' && (
+            {(activeMainTab === 'beranda' || activeMainTab === 'histori') && (
               <>
                 {/* Hero Section Formal */}
-                <div className="relative mb-8 rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-sm">
-                  <div className={`absolute inset-0 bg-gradient-to-r ${role === 'admin' ? 'from-amber-50 to-white' : 'from-emerald-50 to-white'} opacity-90`}></div>
+                {activeMainTab === 'beranda' && (
+                  <div className="relative mb-8 rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-sm">
+                    <div className={`absolute inset-0 bg-gradient-to-r ${role === 'admin' ? 'from-amber-50 to-white' : 'from-emerald-50 to-white'} opacity-90`}></div>
 
-                  <div className="relative p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-8">
-                    <div className="text-center sm:text-left z-10 w-full">
-                      <span className={`inline-block px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest mb-4 border ${role === 'admin' ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-emerald-100 text-emerald-800 border-emerald-200'}`}>
-                        {role === 'admin' ? 'Portal Kelurahan' : 'Ruang Warga'}
-                      </span>
-                      <h2 className="font-outfit text-3xl sm:text-4xl font-black text-slate-900 mb-3 tracking-tight">
-                        <span className="font-medium">Selamat datang,</span> <br className="hidden sm:block" />
-                        {name}
-                      </h2>
-                      <p className="text-slate-600 font-medium max-w-xl leading-relaxed text-sm lg:text-base">
-                        Lihat rekapitulasi pelaporan dan status operasional sistem persuratan desa dalam tayangan data yang aktual dan presisi.
-                      </p>
-                    </div>
-                    <div className="hidden lg:flex shrink-0 z-10 w-32 h-32 opacity-90 items-center justify-center bg-white rounded-2xl border border-slate-200 shadow-sm">
-                      <svg className={`w-16 h-16 ${role === 'admin' ? 'text-amber-600' : 'text-emerald-700'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                      </svg>
+                    <div className="relative p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-8">
+                      <div className="text-center sm:text-left z-10 w-full">
+                        <span className={`inline-block px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest mb-4 border ${role === 'admin' ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-emerald-100 text-emerald-800 border-emerald-200'}`}>
+                          {role === 'admin' ? 'Portal Kelurahan' : 'Ruang Warga'}
+                        </span>
+                        <h2 className="font-outfit text-3xl sm:text-4xl font-black text-slate-900 mb-3 tracking-tight">
+                          <span className="font-medium">Selamat datang,</span> <br className="hidden sm:block" />
+                          {name}
+                        </h2>
+                        <p className="text-slate-600 font-medium max-w-xl leading-relaxed text-sm lg:text-base">
+                          {role === 'admin' ? "Pantau semua pelaporan dan status operasional sistem persuratan desa dalam tayangan data yang aktual dan presisi." : "Lihat laporan publik dari berbagai warga untuk mengetahui kondisi dan keluhan terkini seputar desa."}
+                        </p>
+                      </div>
+                      <div className="hidden lg:flex shrink-0 z-10 w-32 h-32 opacity-90 items-center justify-center bg-white rounded-2xl border border-slate-200 shadow-sm">
+                        <svg className={`w-16 h-16 ${role === 'admin' ? 'text-amber-600' : 'text-emerald-700'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
 
                 {/* Metrik Analitik Mini - Formal */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-12">
@@ -291,7 +303,9 @@ function Dashboard() {
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                     </div>
                     <p className="text-slate-500 font-bold text-xs mb-1 uppercase tracking-wider">Total Laporan</p>
-                    <p className="text-2xl font-black text-slate-800">{reports.length}</p>
+                    <p className="text-2xl font-black text-slate-800">
+                      {activeMainTab === 'beranda' ? reports.length : reports.filter(r => r.name === name).length}
+                    </p>
                   </div>
 
                   <div className="bg-white rounded-xl p-6 shadow-sm border border-emerald-100">
@@ -299,7 +313,9 @@ function Dashboard() {
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     </div>
                     <p className="text-slate-500 font-bold text-xs mb-1 uppercase tracking-wider">Diselesaikan</p>
-                    <p className="text-2xl font-black text-slate-800">{reports.filter(r => r.status === 'Selesai').length}</p>
+                    <p className="text-2xl font-black text-slate-800">
+                      {activeMainTab === 'beranda' ? reports.filter(r => r.status === 'Selesai').length : reports.filter(r => r.name === name && r.status === 'Selesai').length}
+                    </p>
                   </div>
 
                   <div className="bg-white rounded-xl p-6 shadow-sm border border-cyan-100">
@@ -307,7 +323,9 @@ function Dashboard() {
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
                     </div>
                     <p className="text-slate-500 font-bold text-xs mb-1 uppercase tracking-wider">Diproses</p>
-                    <p className="text-2xl font-black text-slate-800">{reports.filter(r => r.status === 'Diproses').length}</p>
+                    <p className="text-2xl font-black text-slate-800">
+                      {activeMainTab === 'beranda' ? reports.filter(r => r.status === 'Diproses').length : reports.filter(r => r.name === name && r.status === 'Diproses').length}
+                    </p>
                   </div>
 
                   <div className="bg-white rounded-xl p-6 shadow-sm border border-amber-100">
@@ -315,7 +333,9 @@ function Dashboard() {
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     </div>
                     <p className="text-slate-500 font-bold text-xs mb-1 uppercase tracking-wider">Menunggu</p>
-                    <p className="text-2xl font-black text-slate-800">{reports.filter(r => r.status === 'Menunggu').length}</p>
+                    <p className="text-2xl font-black text-slate-800">
+                      {activeMainTab === 'beranda' ? reports.filter(r => r.status === 'Menunggu').length : reports.filter(r => r.name === name && r.status === 'Menunggu').length}
+                    </p>
                   </div>
                 </div>
 
@@ -324,23 +344,32 @@ function Dashboard() {
                   <div className="flex flex-col sm:flex-row justify-between items-end mb-6 border-b border-slate-200 pb-4">
                     <div>
                       <h3 className="font-outfit text-2xl font-black text-slate-800 tracking-tight">
-                        {role === "admin" ? "Semua Rekapitulasi Laporan" : "Lini Masa Laporan Anda"}
+                        {activeMainTab === 'beranda' ? "Semua Rekapitulasi Laporan" : "Lini Masa Laporan Anda"}
                       </h3>
-                      <p className="text-slate-500 font-medium mt-1 text-sm">Histori dan status tindak lanjut pengaduan.</p>
+                      <p className="text-slate-500 font-medium mt-1 text-sm">
+                        {activeMainTab === 'beranda' ? "Histori publik dari seluruh warga desa." : "Histori khusus dari aduan yang Anda kirimkan."}
+                      </p>
                     </div>
                   </div>
 
                   <div className="flex flex-col gap-5">
-                    {reports.length === 0 ? (
-                      <div className="bg-white rounded-xl border border-slate-200 p-16 flex flex-col items-center justify-center text-center">
-                        <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-4">
-                          <svg className="w-10 h-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                        </div>
-                        <h4 className="text-lg font-bold text-slate-700 mb-1">Belum Ada Catatan</h4>
-                        <p className="text-slate-500 text-sm">Sipentar belum mencatat satu pelaporan pun ke dalam arsip.</p>
-                      </div>
-                    ) : (
-                      reports.map((r) => (
+                    {/* Render Filtered Reports */}
+                    {(() => {
+                      const displayedReports = activeMainTab === 'histori' ? reports.filter(r => r.name === name) : reports;
+
+                      if (displayedReports.length === 0) {
+                        return (
+                          <div className="bg-white rounded-xl border border-slate-200 p-16 flex flex-col items-center justify-center text-center">
+                            <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-4">
+                              <svg className="w-10 h-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                            </div>
+                            <h4 className="text-lg font-bold text-slate-700 mb-1">Belum Ada Catatan</h4>
+                            <p className="text-slate-500 text-sm">Sipentar belum mencatat pelaporan apa pun di halaman ini.</p>
+                          </div>
+                        );
+                      }
+
+                      return displayedReports.map((r) => (
                         <div key={r.id} className="bg-white rounded-xl border border-slate-200 p-6 flex flex-col md:flex-row gap-6 shadow-sm">
 
                           {/* Avatar & Info Pelapor */}
