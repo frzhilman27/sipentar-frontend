@@ -10,6 +10,7 @@ function Dashboard() {
   const [reports, setReports] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
   const notifRef = useRef(null);
   const [isDarkMode, toggleDarkMode] = useDarkMode();
 
@@ -98,6 +99,30 @@ function Dashboard() {
 
   return (
     <div className="min-h-screen relative font-sans selection:bg-emerald-200 transition-colors duration-300 bg-slate-50">
+
+      {/* Image Modal */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/90 backdrop-blur-sm p-4 animate-in fade-in duration-300 cursor-zoom-out"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative max-w-5xl w-full max-h-[90vh] flex flex-col items-center justify-center">
+            <button
+              className="absolute -top-12 right-0 text-white/70 hover:text-white transition-colors bg-white/10 hover:bg-white/20 rounded-full p-2"
+              onClick={(e) => { e.stopPropagation(); setSelectedImage(null); }}
+              title="Tutup (Esc)"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <img
+              src={selectedImage}
+              alt="Bukti Laporan (Diperbesar)"
+              className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl cursor-default border border-white/20 bg-slate-800"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        </div>
+      )}
 
       <div className="relative z-10 flex flex-col min-h-screen">
         {/* Header Estetis Mewah - Solid Formal */}
@@ -312,17 +337,23 @@ function Dashboard() {
                       {/* Gambar Opsional */}
                       {r.image_url && (
                         <div
-                          className="mt-1 mb-5 rounded-lg overflow-hidden border border-slate-200 shadow-sm sm:max-w-md w-full"
+                          className="mt-1 mb-5 rounded-lg overflow-hidden border border-slate-200 shadow-sm sm:max-w-md w-full relative group/img cursor-zoom-in"
                           onClick={() => {
                             const imgSrc = r.image_url.startsWith('data:image') ? r.image_url : `${IMAGE_BASE_URL}/uploads/${r.image_url}`;
-                            window.open(imgSrc, "_blank");
+                            setSelectedImage(imgSrc);
                           }}
                         >
                           <img
                             src={r.image_url.startsWith('data:image') ? r.image_url : `${IMAGE_BASE_URL}/uploads/${r.image_url}`}
                             alt="Bukti Laporan"
-                            className="w-full h-auto max-h-48 object-cover cursor-zoom-in"
+                            className="w-full h-auto max-h-48 object-cover transition-transform duration-500 group-hover/img:scale-105"
                           />
+                          <div className="absolute inset-0 bg-slate-900/0 group-hover/img:bg-slate-900/10 transition-colors duration-300 flex items-center justify-center">
+                            <div className="bg-white/90 backdrop-blur-sm text-slate-800 px-3 py-1.5 rounded-lg shadow-sm font-bold text-xs transform scale-90 opacity-0 group-hover/img:scale-100 group-hover/img:opacity-100 transition-all duration-300 flex items-center gap-1.5 border border-slate-200">
+                              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+                              Perbesar
+                            </div>
+                          </div>
                         </div>
                       )}
 
