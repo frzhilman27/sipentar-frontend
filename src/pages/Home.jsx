@@ -37,7 +37,7 @@ function Home() {
             Sistem Informasi Desa Resmi
           </div>
 
-          <h1 className="font-outfit text-4xl lg:text-6xl font-black text-white tracking-tight leading-[1.1] mb-6 drop-shadow-lg">
+          <h1 className="font-outfit text-[32px] md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1] mb-5 sm:mb-6 drop-shadow-lg">
             Pemerintah Desa Lamaran Tarung <br className="hidden md:block" /> Melayani Secara Digital.
           </h1>
 
