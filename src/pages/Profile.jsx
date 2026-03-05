@@ -156,6 +156,12 @@ function Profile({ isEmbedded = false }) {
         }
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+        navigate("/login");
+    };
+
     const handleBackNavigation = () => {
         if (activeTab === 'ringkasan') {
             navigate('/dashboard');
@@ -284,6 +290,20 @@ function Profile({ isEmbedded = false }) {
                                             <span className="text-[17px] font-bold text-slate-700 group-hover:text-indigo-700 transition-colors">Keamanan & Privasi</span>
                                         </div>
                                         <svg className="w-5 h-5 text-slate-400 group-hover:translate-x-1 group-hover:text-indigo-600 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
+                                    </button>
+
+                                    {/* Logout Button */}
+                                    <button
+                                        onClick={handleLogout}
+                                        className="group flex items-center justify-between w-full px-6 py-5 bg-white rounded-2xl border border-slate-200 hover:border-red-300 hover:bg-red-50 shadow-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-red-500/10 mt-4"
+                                    >
+                                        <div className="flex items-center gap-5">
+                                            <div className="w-12 h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center group-hover:text-red-600 group-hover:border-red-200 border border-slate-200 shadow-sm transition-colors">
+                                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                                            </div>
+                                            <span className="text-[17px] font-bold text-slate-700 group-hover:text-red-700 transition-colors">Keluar dari Akun (Logout)</span>
+                                        </div>
+                                        <svg className="w-5 h-5 text-slate-400 group-hover:translate-x-1 group-hover:text-red-600 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
                                     </button>
                                 </div>
                             </div>
