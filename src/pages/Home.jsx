@@ -6,6 +6,7 @@ import villageBg from '../assets/village-bg.png';
 
 function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, toggleDarkMode] = useDarkMode();
 
   // Handle scroll for sticky navbar effect
@@ -21,7 +22,7 @@ function Home() {
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-emerald-200 flex flex-col transition-colors duration-300 relative overflow-x-hidden">
 
       {/* 1. NAVBAR */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200 py-3' : 'bg-transparent py-5'}`}>
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200 py-3' : 'bg-transparent py-5'} ${isMobileMenuOpen && !isScrolled ? 'bg-slate-900/95 backdrop-blur-md border-b border-slate-800' : ''}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             {/* Logo */}
@@ -29,7 +30,7 @@ function Home() {
               <div className="w-8 h-8 rounded bg-emerald-600 flex items-center justify-center shadow-lg">
                 <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
               </div>
-              <span className={`text-xl font-bold tracking-tight ${isScrolled ? 'text-slate-900' : 'text-white drop-shadow-md'}`}>Sipentar</span>
+              <span className={`text-xl font-bold tracking-tight ${(isScrolled || (isMobileMenuOpen && !isScrolled)) ? 'text-slate-900' : 'text-white'} ${(!isScrolled && isMobileMenuOpen) ? '!text-white' : ''} drop-shadow-md`}>Sipentar</span>
             </div>
 
             {/* Desktop Menu */}
@@ -52,27 +53,35 @@ function Home() {
             {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center">
               <button
-                className={`p-2 rounded-md ${isScrolled ? 'text-slate-600 hover:bg-slate-100' : 'text-white hover:bg-white/10'}`}
+                className={`p-2 rounded-md ${isScrolled ? 'text-slate-600 hover:bg-slate-100' : 'text-white hover:bg-white/10'} ${isMobileMenuOpen && !isScrolled ? '!text-white hover:!bg-white/10' : ''} transition-colors focus:outline-none`}
                 aria-label="Menu"
-                onClick={() => document.getElementById('mobile-menu').classList.toggle('hidden')}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
+                {isMobileMenuOpen ? (
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
               </button>
             </div>
           </div>
         </div>
 
         {/* Mobile Menu Dropdown */}
-        <div id="mobile-menu" className="hidden md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-200 shadow-lg z-50">
-          <div className="px-4 py-4 flex flex-col gap-4">
-            <a href="#beranda" className="text-slate-700 font-medium hover:text-emerald-600" onClick={() => document.getElementById('mobile-menu').classList.add('hidden')}>Beranda</a>
-            <a href="#tentang" className="text-slate-700 font-medium hover:text-emerald-600" onClick={() => document.getElementById('mobile-menu').classList.add('hidden')}>Tentang</a>
-            <a href="#alur" className="text-slate-700 font-medium hover:text-emerald-600" onClick={() => document.getElementById('mobile-menu').classList.add('hidden')}>Alur</a>
-            <div className="h-px bg-slate-100 my-2"></div>
-            <Link to="/login" className="text-slate-700 font-medium" onClick={() => document.getElementById('mobile-menu').classList.add('hidden')}>Masuk</Link>
-            <Link to="/register" className="text-center bg-emerald-600 text-white font-bold py-2.5 rounded-lg mt-2" onClick={() => document.getElementById('mobile-menu').classList.add('hidden')}>Daftar</Link>
+        <div
+          className={`md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-200 shadow-xl transition-all duration-300 ease-in-out origin-top ${isMobileMenuOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0 pointer-events-none'}`}
+        >
+          <div className="px-5 py-6 flex flex-col gap-5">
+            <a href="#beranda" className="text-slate-700 font-bold text-lg hover:text-emerald-600" onClick={() => setIsMobileMenuOpen(false)}>Beranda</a>
+            <a href="#tentang" className="text-slate-700 font-bold text-lg hover:text-emerald-600" onClick={() => setIsMobileMenuOpen(false)}>Tentang Sipentar</a>
+            <a href="#alur" className="text-slate-700 font-bold text-lg hover:text-emerald-600" onClick={() => setIsMobileMenuOpen(false)}>Alur Pelaporan</a>
+            <div className="h-px bg-slate-200 my-1"></div>
+            <Link to="/login" className="text-slate-700 font-bold text-lg text-center border border-slate-200 py-3 rounded-xl hover:bg-slate-50 mt-1" onClick={() => setIsMobileMenuOpen(false)}>Masuk Ke Akun</Link>
+            <Link to="/register" className="text-center bg-emerald-600 text-white font-bold text-lg py-3 rounded-xl shadow-md hover:bg-emerald-700 mt-1" onClick={() => setIsMobileMenuOpen(false)}>Mendaftar</Link>
           </div>
         </div>
       </nav>
