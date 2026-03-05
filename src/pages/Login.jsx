@@ -25,16 +25,16 @@ function Login() {
     : "from-transparent via-amber-400 to-transparent";
 
   const iconGradient = isUser
-    ? "from-emerald-500 to-teal-700 shadow-[0_10px_30px_-10px_rgba(16,185,129,0.8)] border border-emerald-400/30"
-    : "from-amber-500 via-orange-600 to-red-700 shadow-[0_10px_30px_-10px_rgba(245,158,11,0.8)] border border-amber-400/30";
+    ? "from-emerald-600 to-teal-700 shadow-emerald-500/30"
+    : "from-amber-600 to-orange-700 shadow-amber-500/30";
 
   const inputFocusRing = isUser
-    ? "focus:ring-emerald-500/30 focus:border-emerald-400"
-    : "focus:ring-amber-500/30 focus:border-amber-400";
+    ? "focus:ring-emerald-500/20 focus:border-emerald-500"
+    : "focus:ring-amber-500/20 focus:border-amber-500";
 
   const buttonStyle = isUser
-    ? "bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 shadow-[0_10px_30px_-10px_rgba(16,185,129,0.8)] border border-emerald-400/50"
-    : "bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 shadow-[0_10px_30px_-10px_rgba(245,158,11,0.8)] border border-amber-400/50";
+    ? "bg-emerald-700 hover:bg-emerald-800 shadow-emerald-700/30"
+    : "bg-amber-600 hover:bg-amber-700 shadow-amber-600/30";
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -81,20 +81,18 @@ function Login() {
 
       <div className="relative z-10 w-full max-w-md px-4 py-12">
         {/* Back Link */}
-        <Link to="/" className="inline-flex items-center gap-2 mb-8 text-white/90 hover:text-amber-300 font-medium transition group drop-shadow-md">
-          <div className="w-8 h-8 rounded-full bg-slate-900/50 backdrop-blur-md flex items-center justify-center border border-white/20 group-hover:bg-slate-900/80 transition">
+        <Link to="/" className="inline-flex items-center gap-2 mb-8 text-white hover:text-amber-300 font-bold transition group drop-shadow-md">
+          <div className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center border border-white/20 group-hover:bg-black/60 transition">
             <svg className="w-4 h-4 transform group-hover:-translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
           </div>
-          Kembali ke Beranda Desa
+          Kembali ke Situs Resmi
         </Link>
 
-        {/* Login Card */}
-        <div className={`backdrop-blur-2xl rounded-[2rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] border relative overflow-hidden transition-all duration-500 p-8 sm:p-10 ${isUser ? 'bg-white/10 border-white/20' : 'bg-slate-900/60 border-amber-500/30'}`}>
-          {/* Subtle top glare */}
-          <div className={`absolute top-0 inset-x-0 h-1 bg-gradient-to-r opacity-50 transition-all duration-500 ${glareGradient}`}></div>
+        {/* Login Card - Formal Solid White */}
+        <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden relative transition-all duration-500 p-8 sm:p-10">
 
           <div className="text-center mb-8">
-            <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br mx-auto flex items-center justify-center shadow-lg mb-5 transition-all duration-500 transform ${isUser ? 'rotate-0' : 'rotate-3'} ${iconGradient}`}>
+            <div className={`w-14 h-14 rounded-xl bg-gradient-to-br mx-auto flex items-center justify-center shadow-md mb-5 ${iconGradient}`}>
               <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {isUser ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -103,20 +101,20 @@ function Login() {
                 )}
               </svg>
             </div>
-            <h2 className={`font-outfit text-2xl font-extrabold tracking-tight transition-colors ${isUser ? 'text-slate-100' : 'text-white'}`}>Portal Sipentar</h2>
-            <p className={`text-sm font-bold mt-1.5 uppercase tracking-widest transition-colors ${isUser ? 'text-emerald-200/80' : 'text-orange-400/80'}`}>
+            <h2 className="font-outfit text-2xl font-extrabold tracking-tight text-slate-900">Portal Sipentar</h2>
+            <p className={`text-sm font-bold mt-1.5 uppercase tracking-widest ${isUser ? 'text-emerald-700' : 'text-amber-600'}`}>
               {isUser ? "Akses Warga Desa" : "Divisi Administrator"}
             </p>
           </div>
 
           {/* Role Toggle Switch */}
-          <div className={`flex p-1.5 rounded-2xl mb-8 relative z-20 shadow-inner transition-colors duration-500 ${isUser ? 'bg-slate-900/40 backdrop-blur-sm shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)]' : 'bg-slate-950/60 border border-slate-700/50 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]'}`}>
+          <div className="flex p-1.5 rounded-xl mb-8 relative z-20 bg-slate-100 shadow-inner overflow-hidden border border-slate-200">
             <button
               type="button"
               onClick={() => handleRoleSwitch("user")}
-              className={`flex-1 py-2.5 text-sm font-bold rounded-xl transition-all duration-300 ${isUser
-                ? "bg-gradient-to-r from-emerald-500 to-emerald-400 text-white shadow-md shadow-emerald-900/50 ring-1 ring-emerald-300/50 transform scale-100"
-                : "text-slate-400 hover:text-slate-200 transform scale-95"
+              className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all duration-300 ${isUser
+                ? "bg-white text-emerald-700 shadow-sm ring-1 ring-slate-200"
+                : "text-slate-500 hover:text-slate-700"
                 }`}
             >
               Portal Warga
@@ -124,9 +122,9 @@ function Login() {
             <button
               type="button"
               onClick={() => handleRoleSwitch("admin")}
-              className={`flex-1 py-2.5 text-sm font-bold rounded-xl transition-all duration-300 ${!isUser
-                ? "bg-gradient-to-r from-amber-600 to-orange-500 text-white shadow-md shadow-orange-900/50 ring-1 ring-amber-400/50 transform scale-100"
-                : "text-slate-400 hover:text-slate-200 transform scale-95"
+              className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all duration-300 ${!isUser
+                ? "bg-white text-amber-600 shadow-sm ring-1 ring-slate-200"
+                : "text-slate-500 hover:text-slate-700"
                 }`}
             >
               Portal Admin
@@ -134,33 +132,31 @@ function Login() {
           </div>
 
           {error && (
-            <div className={`border-l-4 p-4 rounded-r-xl mb-6 flex items-start backdrop-blur-md animate-fade-in ${isUser ? 'bg-red-900/40 border-red-500' : 'bg-red-950/60 border-red-500'}`}>
-              <svg className="w-5 h-5 text-red-500 mt-0.5 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              <p className={`text-sm font-medium ${isUser ? 'text-red-100' : 'text-red-200'}`}>{error}</p>
+            <div className="border-l-4 p-4 rounded-r-lg mb-6 flex items-start bg-red-50 border-red-500">
+              <svg className="w-5 h-5 text-red-600 mt-0.5 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <p className="text-sm font-bold text-red-800">{error}</p>
             </div>
           )}
 
           <form onSubmit={handleLogin} className="space-y-5">
             <div>
-              <label className={`block text-sm font-bold mb-1.5 pl-1 drop-shadow-md transition-colors ${isUser ? 'text-slate-100' : 'text-slate-200'}`}>
+              <label className="block text-sm font-bold mb-1.5 pl-1 text-slate-800">
                 {isUser ? "Nomor Induk Kependudukan (NIK)" : "Alamat Email Admin"}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  {isUser ? (
-                    <svg className="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" /></svg>
-                  ) : (
-                    <svg className="h-5 w-5 text-orange-400/70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                  )}
+                  <svg className="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    {isUser ? (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                    ) : (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    )}
+                  </svg>
                 </div>
                 <input
                   type={isUser ? "text" : "email"}
                   placeholder={isUser ? "Masukkan 16 Digit NIK..." : "admin@sipentar.com"}
-                  className={`w-full pl-11 pr-4 py-3 border rounded-xl outline-none transition font-medium backdrop-blur-sm shadow-inner
-                    ${isUser
-                      ? 'border-white/20 bg-slate-900/40 text-white placeholder-slate-400 ' + inputFocusRing
-                      : 'border-amber-500/30 bg-slate-950/60 text-white placeholder-slate-500 ' + inputFocusRing
-                    }`}
+                  className={`w-full pl-11 pr-4 py-3 border border-slate-300 rounded-xl outline-none transition font-medium text-slate-900 placeholder-slate-400 shadow-sm ${inputFocusRing}`}
                   value={identifier}
                   onChange={(e) => setIdentifier(e.target.value)}
                   required
@@ -169,21 +165,17 @@ function Login() {
             </div>
 
             <div>
-              <div className="flex justify-between items-end mb-1.5 pl-1 drop-shadow-md">
-                <label className={`block text-sm font-bold transition-colors ${isUser ? 'text-slate-100' : 'text-slate-200'}`}>Kata Sandi</label>
+              <div className="flex justify-between items-end mb-1.5 pl-1">
+                <label className="block text-sm font-bold text-slate-800">Kata Sandi</label>
               </div>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <svg className={`h-5 w-5 ${isUser ? 'text-slate-400' : 'text-orange-400/70'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                  <svg className="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
                 </div>
                 <input
                   type="password"
                   placeholder="••••••••"
-                  className={`w-full pl-11 pr-4 py-3 border rounded-xl outline-none transition font-medium backdrop-blur-sm shadow-inner
-                    ${isUser
-                      ? 'border-white/20 bg-slate-900/40 text-white placeholder-slate-400 ' + inputFocusRing
-                      : 'border-amber-500/30 bg-slate-950/60 text-white placeholder-slate-500 ' + inputFocusRing
-                    }`}
+                  className={`w-full pl-11 pr-4 py-3 border border-slate-300 rounded-xl outline-none transition font-medium text-slate-900 placeholder-slate-400 shadow-sm ${inputFocusRing}`}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -194,23 +186,23 @@ function Login() {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full mt-8 text-white font-bold py-3.5 rounded-xl transition-all duration-300 shadow-lg disabled:opacity-50 transform hover:-translate-y-0.5 ${buttonStyle}`}
+              className={`w-full mt-6 text-white font-bold py-3.5 rounded-xl transition-all duration-300 shadow-md disabled:opacity-50 transform active:scale-95 ${buttonStyle}`}
             >
               {loading ? "Memproses Data..." : "Masuk"}
             </button>
           </form>
 
-          <div className="mt-8 pt-6 border-t border-white/10 text-center">
+          <div className="mt-8 pt-6 border-t border-slate-200 text-center">
             {isUser ? (
-              <p className="text-sm text-slate-300 font-medium tracking-wide">
+              <p className="text-sm text-slate-600 font-medium">
                 Warga baru mendaftar?{' '}
-                <Link to="/register" className="text-amber-400 font-extrabold hover:text-amber-300 hover:underline transition">
+                <Link to="/register" className="text-emerald-700 font-bold hover:text-emerald-600 hover:underline transition">
                   Buat Akses Pelapor
                 </Link>
               </p>
             ) : (
-              <p className="text-xs text-slate-400 font-medium tracking-wide">
-                <span className="text-amber-400">⚠️</span> Akses Khusus Aparatur Desa Terdaftar.
+              <p className="text-xs text-slate-500 font-medium tracking-wide">
+                <span className="text-amber-500">⚠️</span> Akses Khusus Aparatur Desa Terdaftar.
               </p>
             )}
           </div>
