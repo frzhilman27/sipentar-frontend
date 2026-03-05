@@ -15,12 +15,23 @@ function Dashboard() {
   const [activeMainTab, setActiveMainTab] = useState("beranda");
   const notifRef = useRef(null);
   const [isDarkMode, toggleDarkMode] = useDarkMode();
+  const [userProfileData, setUserProfileData] = useState(null);
 
   const role = localStorage.getItem("role");
   const name = localStorage.getItem("name");
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
   // Menghilangkan sisipan trailing "/api" agar rute uploads langsung mengarah ke akar peladen Node
+  const BASE_URL = API_URL.replace(/\/api\/?$/, "");
   const IMAGE_BASE_URL = API_URL.endsWith("/api") ? API_URL.slice(0, -4) : API_URL;
+
+  const fetchUserProfile = async () => {
+    try {
+      const res = await api.get("/auth/me");
+      setUserProfileData(res.data);
+    } catch (err) {
+      console.error("Gagal mengambil profil detail:", err);
+    }
+  };
 
   const fetchReports = async () => {
     try {
@@ -48,6 +59,7 @@ function Dashboard() {
       navigate("/login");
       return;
     }
+    fetchUserProfile();
     fetchReports();
     fetchNotifications();
 
@@ -202,8 +214,27 @@ function Dashboard() {
                   <p className={`text-[10px] font-bold uppercase tracking-widest ${role === 'admin' ? 'text-amber-600' : 'text-emerald-700'}`}>{role}</p>
                 </div>
 
+                {/* Avatar / Profile Picture in Header */}
+                <div onClick={() => setActiveMainTab("profil")} className="cursor-pointer ml-1 sm:ml-2">
+                  {userProfileData?.foto_profil ? (
+                    <img
+                      src={
+                        (userProfileData.foto_profil.startsWith('data:image') || userProfileData.foto_profil.startsWith('http'))
+                          ? userProfileData.foto_profil
+                          : `${BASE_URL}${userProfileData.foto_profil.startsWith('/') ? '' : '/'}${userProfileData.foto_profil}`
+                      }
+                      alt="Profil"
+                      className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border-2 shadow-sm transition-transform hover:scale-105 ${role === 'admin' ? 'border-amber-200' : 'border-emerald-200'}`}
+                    />
+                  ) : (
+                    <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-sm border-2 transition-transform hover:scale-105 ${role === 'admin' ? 'bg-amber-100 text-amber-700 border-amber-200' : 'bg-emerald-100 text-emerald-700 border-emerald-200'}`}>
+                      {name ? name.charAt(0).toUpperCase() : 'U'}
+                    </div>
+                  )}
+                </div>
+
                 {/* Actions Dropdown / Links */}
-                <div className="flex gap-1.5 sm:gap-2 bg-slate-100 p-1.5 rounded-lg border border-slate-200">
+                <div className="flex gap-1.5 sm:gap-2 bg-slate-100 p-1.5 rounded-lg border border-slate-200 ml-1">
                   <button
                     onClick={() => setActiveMainTab("profil")}
                     className="p-1.5 text-slate-500 hover:text-emerald-700 hover:bg-white rounded-md transition-all"
