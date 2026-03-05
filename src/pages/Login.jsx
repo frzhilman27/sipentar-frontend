@@ -196,7 +196,7 @@ function Login() {
               disabled={loading}
               className={`w-full mt-8 text-white font-bold py-3.5 rounded-xl transition-all duration-300 shadow-lg disabled:opacity-50 transform hover:-translate-y-0.5 ${buttonStyle}`}
             >
-              {loading ? "Memproses Data..." : "Autentikasi Masuk"}
+              {loading ? "Memproses Data..." : "Masuk"}
             </button>
           </form>
 
