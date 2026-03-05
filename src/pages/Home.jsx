@@ -20,6 +20,63 @@ function Home() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-emerald-200 flex flex-col transition-colors duration-300 relative overflow-x-hidden">
 
+      {/* 1. NAVBAR */}
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200 py-3' : 'bg-transparent py-5'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center">
+            {/* Logo */}
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded bg-emerald-600 flex items-center justify-center shadow-lg">
+                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+              </div>
+              <span className={`text-xl font-bold tracking-tight ${isScrolled ? 'text-slate-900' : 'text-white drop-shadow-md'}`}>Sipentar</span>
+            </div>
+
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center gap-8">
+              <a href="#beranda" className={`text-sm font-medium transition-colors hover:text-emerald-500 ${isScrolled ? 'text-slate-600' : 'text-slate-200 drop-shadow-sm'}`}>Beranda</a>
+              <a href="#tentang" className={`text-sm font-medium transition-colors hover:text-emerald-500 ${isScrolled ? 'text-slate-600' : 'text-slate-200 drop-shadow-sm'}`}>Tentang</a>
+              <a href="#alur" className={`text-sm font-medium transition-colors hover:text-emerald-500 ${isScrolled ? 'text-slate-600' : 'text-slate-200 drop-shadow-sm'}`}>Alur</a>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="hidden md:flex items-center gap-3">
+              <Link to="/login" className={`text-sm font-bold px-4 py-2 rounded-lg transition-colors ${isScrolled ? 'text-slate-700 hover:bg-slate-100' : 'text-white hover:bg-white/10'}`}>
+                Masuk
+              </Link>
+              <Link to="/register" className="text-sm font-bold bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-lg transition-all shadow-md hover:shadow-lg">
+                Daftar
+              </Link>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center">
+              <button
+                className={`p-2 rounded-md ${isScrolled ? 'text-slate-600 hover:bg-slate-100' : 'text-white hover:bg-white/10'}`}
+                aria-label="Menu"
+                onClick={() => document.getElementById('mobile-menu').classList.toggle('hidden')}
+              >
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu Dropdown */}
+        <div id="mobile-menu" className="hidden md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-200 shadow-lg z-50">
+          <div className="px-4 py-4 flex flex-col gap-4">
+            <a href="#beranda" className="text-slate-700 font-medium hover:text-emerald-600" onClick={() => document.getElementById('mobile-menu').classList.add('hidden')}>Beranda</a>
+            <a href="#tentang" className="text-slate-700 font-medium hover:text-emerald-600" onClick={() => document.getElementById('mobile-menu').classList.add('hidden')}>Tentang</a>
+            <a href="#alur" className="text-slate-700 font-medium hover:text-emerald-600" onClick={() => document.getElementById('mobile-menu').classList.add('hidden')}>Alur</a>
+            <div className="h-px bg-slate-100 my-2"></div>
+            <Link to="/login" className="text-slate-700 font-medium" onClick={() => document.getElementById('mobile-menu').classList.add('hidden')}>Masuk</Link>
+            <Link to="/register" className="text-center bg-emerald-600 text-white font-bold py-2.5 rounded-lg mt-2" onClick={() => document.getElementById('mobile-menu').classList.add('hidden')}>Daftar</Link>
+          </div>
+        </div>
+      </nav>
+
       {/* 2. HERO SECTION */}
       <section id="beranda" className="relative min-h-[100dvh] pt-16 pb-20 flex flex-col justify-center items-center text-center overflow-hidden">
         {/* Hero Background */}
