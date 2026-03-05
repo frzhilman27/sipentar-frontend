@@ -21,7 +21,7 @@ function Home() {
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-emerald-200 flex flex-col transition-colors duration-300 relative overflow-x-hidden">
 
       {/* 2. HERO SECTION */}
-      <section id="beranda" className="relative min-h-[85vh] pt-16 pb-20 flex flex-col justify-center items-center text-center overflow-hidden">
+      <section id="beranda" className="relative min-h-[100dvh] pt-16 pb-20 flex flex-col justify-center items-center text-center overflow-hidden">
         {/* Hero Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div
