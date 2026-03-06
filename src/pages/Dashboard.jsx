@@ -288,6 +288,24 @@ function Dashboard() {
               </button>
             )}
 
+            {role === 'admin' && (
+              <button
+                onClick={() => setActiveMainTab('aduan_masuk')}
+                className={`px-4 sm:px-6 py-4 font-bold text-sm sm:text-base whitespace-nowrap border-b-[3px] transition-colors flex items-center gap-2 ${activeMainTab === 'aduan_masuk' ? 'border-amber-600 text-amber-700' : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}
+              >
+                <div className="relative">
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" /></svg>
+                  {reports.filter(r => r.status === 'Menunggu').length > 0 && (
+                    <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500 border border-white"></span>
+                    </span>
+                  )}
+                </div>
+                Laporan Masuk
+              </button>
+            )}
+
             <button
               onClick={() => setActiveMainTab('profil')}
               className={`px-4 sm:px-6 py-4 font-bold text-sm sm:text-base whitespace-nowrap border-b-[3px] transition-colors flex items-center gap-2 ${activeMainTab === 'profil' ? (role === 'admin' ? 'border-amber-600 text-amber-700' : 'border-emerald-600 text-emerald-700') : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}
@@ -298,7 +316,7 @@ function Dashboard() {
           </div>
 
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {(activeMainTab === 'beranda' || activeMainTab === 'histori') && (
+            {(activeMainTab === 'beranda' || activeMainTab === 'histori' || activeMainTab === 'aduan_masuk') && (
               <>
                 {/* Hero Section Formal */}
                 {activeMainTab === 'beranda' && (
@@ -375,10 +393,10 @@ function Dashboard() {
                   <div className="flex flex-col sm:flex-row justify-between items-end mb-6 border-b border-slate-200 pb-4">
                     <div>
                       <h3 className="font-outfit text-2xl font-black text-slate-800 tracking-tight">
-                        {activeMainTab === 'beranda' ? "Semua Rekapitulasi Laporan" : "Lini Masa Laporan Anda"}
+                        {activeMainTab === 'beranda' ? "Ruang Publik Laporan Warga" : (activeMainTab === 'aduan_masuk' ? "Antrean Laporan Baru" : "Lini Masa Laporan Anda")}
                       </h3>
                       <p className="text-slate-500 font-medium mt-1 text-sm">
-                        {activeMainTab === 'beranda' ? "Histori publik dari seluruh warga desa." : "Histori khusus dari aduan yang Anda kirimkan."}
+                        {activeMainTab === 'beranda' ? "Aduan warga yang sedang diproses maupun telah diselesaikan oleh desa." : (activeMainTab === 'aduan_masuk' ? "Laporan yang baru dikirim warga dan membutuhkan persetujuan / penanganan Anda segera." : "Histori khusus dari aduan yang Anda kirimkan.")}
                       </p>
                     </div>
                   </div>
@@ -386,7 +404,17 @@ function Dashboard() {
                   <div className="flex flex-col gap-5">
                     {/* Render Filtered Reports */}
                     {(() => {
-                      const displayedReports = activeMainTab === 'histori' ? reports.filter(r => r.name === name) : reports;
+                      let displayedReports = [];
+                      if (activeMainTab === 'beranda') {
+                        // Public feed: only processed or finished reports
+                        displayedReports = reports.filter(r => r.status === 'Diproses' || r.status === 'Selesai');
+                      } else if (activeMainTab === 'histori') {
+                        // User's own feed: all their reports
+                        displayedReports = reports.filter(r => r.name === name);
+                      } else if (activeMainTab === 'aduan_masuk' && role === 'admin') {
+                        // Admin inbox: only pending reports
+                        displayedReports = reports.filter(r => r.status === 'Menunggu');
+                      }
 
                       if (displayedReports.length === 0) {
                         return (
@@ -394,8 +422,8 @@ function Dashboard() {
                             <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-4">
                               <svg className="w-10 h-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                             </div>
-                            <h4 className="text-lg font-bold text-slate-700 mb-1">Belum Ada Catatan</h4>
-                            <p className="text-slate-500 text-sm">Sipentar belum mencatat pelaporan apa pun di halaman ini.</p>
+                            <h4 className="text-lg font-bold text-slate-700 mb-1">{activeMainTab === 'aduan_masuk' ? "Kotak Masuk Kosong" : "Belum Ada Catatan"}</h4>
+                            <p className="text-slate-500 text-sm">{activeMainTab === 'aduan_masuk' ? "Tidak ada pelaporan warga baru yang menunggu untuk diproses saat ini." : "Sipentar belum mencatat pelaporan apa pun di halaman ini."}</p>
                           </div>
                         );
                       }
@@ -527,6 +555,24 @@ function Dashboard() {
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M11 5H6a2 2 0 00-2-2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                 </div>
                 <span className={`text-[10px] font-bold tracking-wide mt-7 ${activeMainTab === 'pengaduan' ? 'text-emerald-700' : 'text-slate-400'}`}>Aduan</span>
+              </button>
+            )}
+
+            {role === 'admin' && (
+              <button
+                onClick={() => setActiveMainTab('aduan_masuk')}
+                className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors relative`}
+              >
+                <div className={`absolute -top-5 text-white rounded-full p-3 shadow-lg border-4 border-slate-50 transition-transform ${activeMainTab === 'aduan_masuk' ? 'bg-amber-600 scale-110 shadow-amber-500/40' : 'bg-slate-400 hover:scale-105'}`}>
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" /></svg>
+                  {reports.filter(r => r.status === 'Menunggu').length > 0 && (
+                    <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500 border border-white"></span>
+                    </span>
+                  )}
+                </div>
+                <span className={`text-[10px] font-bold tracking-wide mt-7 ${activeMainTab === 'aduan_masuk' ? 'text-amber-700' : 'text-slate-400'}`}>Laporan</span>
               </button>
             )}
 
