@@ -97,6 +97,43 @@ function Dashboard() {
 
   const unreadCount = notifications.filter(n => !n.is_read).length;
 
+  const handleNotificationClick = async (notif) => {
+    setShowNotifications(false);
+    
+    if (!notif.is_read) {
+      try {
+        await api.put(`/notifications/${notif.id}/read`);
+        fetchNotifications();
+      } catch (err) {
+        console.error("Gagal menandai notifikasi dibaca", err);
+      }
+    }
+    
+    if (!notif.laporan_id) return;
+    
+    const report = reports.find(r => String(r.id) === String(notif.laporan_id));
+    if (report) {
+      if (role === 'admin') {
+        if (report.status === 'Menunggu') {
+          setActiveMainTab('aduan_masuk');
+        } else {
+          setActiveMainTab('beranda');
+        }
+      } else {
+        setActiveMainTab('histori');
+      }
+      
+      setTimeout(() => {
+        const el = document.getElementById(`report-${report.id}`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          el.classList.add('ring-4', 'ring-emerald-500', 'transition-all', 'duration-1000');
+          setTimeout(() => el.classList.remove('ring-4', 'ring-emerald-500'), 2500);
+        }
+      }, 300);
+    }
+  };
+
   const handleUpdateStatus = async (id, newStatus) => {
     try {
       await api.put(`/laporan/${id}/status`, { status: newStatus });
@@ -185,7 +222,7 @@ function Dashboard() {
                       ) : (
                         <ul className="divide-y divide-slate-100">
                           {notifications.map((notif) => (
-                            <li key={notif.id} className={`p-4 hover:bg-slate-50 transition-colors group ${!notif.is_read ? 'bg-blue-50/30' : ''}`}>
+                            <li key={notif.id} onClick={() => handleNotificationClick(notif)} className={`p-4 hover:bg-slate-50 transition-colors cursor-pointer group ${!notif.is_read ? 'bg-blue-50/30' : ''}`}>
                               <div className="flex gap-3">
                                 <div className={`mt-1.5 w-2 h-2 rounded-full shrink-0 ${!notif.is_read ? (role === 'admin' ? 'bg-amber-500' : 'bg-emerald-500') : 'bg-slate-300'}`}></div>
                                 <div>
@@ -427,7 +464,7 @@ function Dashboard() {
                       }
 
                       return displayedReports.map((r) => (
-                        <div key={r.id} className="bg-white rounded-xl border border-slate-200 p-4 sm:p-6 flex flex-col sm:flex-row gap-3 sm:gap-6 shadow-sm">
+                        <div key={r.id} id={`report-${r.id}`} className="bg-white rounded-xl border border-slate-200 p-4 sm:p-6 flex flex-col sm:flex-row gap-3 sm:gap-6 shadow-sm transition-all duration-500">
 
                           {/* Avatar & Info Pelapor */}
                           <div className="flex items-center sm:items-start gap-3 sm:gap-4 shrink-0 sm:w-56 pb-3 sm:pb-0 border-b border-slate-100 sm:border-0">
