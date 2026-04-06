@@ -27,9 +27,7 @@ function Home() {
           <div className="flex justify-between items-center">
             {/* Logo */}
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded bg-emerald-600 flex items-center justify-center shadow-lg">
-                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-              </div>
+              <img src="/logosipentar.jpg" alt="Logo Sipentar" className="w-8 h-8 rounded-full object-cover shadow-lg border border-white" />
               <span className={`text-xl font-bold tracking-tight ${(isScrolled || (isMobileMenuOpen && !isScrolled)) ? 'text-slate-900' : 'text-white'} ${(!isScrolled && isMobileMenuOpen) ? '!text-white' : ''} drop-shadow-md`}>Sipentar</span>
             </div>
 
@@ -222,9 +220,7 @@ function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-12 mb-10 sm:mb-12 border-b border-slate-800 pb-10 sm:pb-12">
             <div className="col-span-1 md:col-span-2">
               <div className="flex items-center gap-2.5 sm:gap-3 mb-5 sm:mb-6">
-                <div className="w-8 h-8 rounded bg-slate-800 flex items-center justify-center border border-slate-700">
-                  <svg className="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-                </div>
+                <img src="/logosipentar.jpg" alt="Logo Sipentar Footer" className="w-8 h-8 rounded-full border border-slate-700 object-cover opacity-80" />
                 <span className="text-xl font-bold text-white tracking-tight">Pemerintah Desa Lamaran Tarung</span>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed max-w-md">

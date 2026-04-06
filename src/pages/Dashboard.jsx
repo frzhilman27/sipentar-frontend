@@ -143,9 +143,7 @@ function Dashboard() {
         <header className="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm transition-all">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
             <div className="flex items-center gap-4 group">
-              <div className={`w-10 h-10 rounded-lg flex items-center justify-center shadow-sm border ${role === 'admin' ? 'bg-amber-600 border-amber-700' : 'bg-emerald-700 border-emerald-800'}`}>
-                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-              </div>
+              <img src="/logosipentar.jpg" alt="Logo Sipentar" className={`w-10 h-10 rounded-xl object-cover shadow-sm border ${role === 'admin' ? 'border-amber-700/50' : 'border-emerald-800/50'}`} />
               <div>
                 <h1 className="font-outfit text-2xl font-black text-slate-900 tracking-tight leading-tight">Sipentar<span className={role === 'admin' ? 'text-amber-600' : 'text-emerald-700'}>.</span></h1>
                 <p className={`text-[10px] font-extrabold tracking-[0.2em] uppercase ${role === 'admin' ? 'text-amber-700' : 'text-emerald-700'}`}>Desa Lamaran Tarung</p>

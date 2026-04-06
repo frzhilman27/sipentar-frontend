@@ -84,15 +84,7 @@ function Login() {
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl border border-slate-200 overflow-hidden relative transition-all duration-500 p-6 sm:p-10 w-full">
 
           <div className="text-center mb-6 sm:mb-8">
-            <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br mx-auto flex items-center justify-center shadow-md mb-4 sm:mb-5 ${iconGradient}`}>
-              <svg className="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                {isUser ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                )}
-              </svg>
-            </div>
+            <img src="/logosipentar.jpg" alt="Logo Sipentar" className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl mx-auto object-cover shadow-md mb-4 sm:mb-5 ring-2 ring-white ring-offset-2 ${isUser ? 'ring-offset-emerald-50' : 'ring-offset-amber-50'}`} />
             <h2 className="font-outfit text-2xl font-extrabold tracking-tight text-slate-900">Portal Sipentar</h2>
             <p className={`text-xs font-bold mt-1.5 uppercase tracking-widest ${isUser ? 'text-emerald-700' : 'text-amber-600'}`}>
               {isUser ? "Akses Warga Desa" : "Divisi Administrator"}
