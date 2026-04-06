@@ -4,6 +4,7 @@ import api from "../services/api";
 import Laporan from "./Laporan";
 import Profile from "./Profile";
 import useDarkMode from "../hooks/useDarkMode";
+import { compressImageToBase64 } from "../utils/imageUtils";
 import villageBg from '../assets/village-bg.png';
 
 function Dashboard() {
@@ -16,6 +17,25 @@ function Dashboard() {
   const notifRef = useRef(null);
   const [isDarkMode, toggleDarkMode] = useDarkMode();
   const [userProfileData, setUserProfileData] = useState(null);
+
+  // Modal Evidence States
+  const [showEvidenceModal, setShowEvidenceModal] = useState(false);
+  const [evidenceTargetId, setEvidenceTargetId] = useState(null);
+  const [evidenceTargetStatus, setEvidenceTargetStatus] = useState("");
+  const [evidenceImage, setEvidenceImage] = useState(null);
+  const [evidencePreviewUrl, setEvidencePreviewUrl] = useState(null);
+  const [evidenceLoading, setEvidenceLoading] = useState(false);
+
+  // Clean up object URL to avoid memory leaks
+  useEffect(() => {
+    if (evidenceImage) {
+      const url = URL.createObjectURL(evidenceImage);
+      setEvidencePreviewUrl(url);
+      return () => URL.revokeObjectURL(url);
+    } else {
+      setEvidencePreviewUrl(null);
+    }
+  }, [evidenceImage]);
 
   const role = localStorage.getItem("role");
   const name = localStorage.getItem("name");
@@ -134,12 +154,42 @@ function Dashboard() {
     }
   };
 
-  const handleUpdateStatus = async (id, newStatus) => {
+  const handleStatusSelect = (id, newStatus) => {
+    if (newStatus === "Diproses" || newStatus === "Selesai") {
+      setEvidenceTargetId(id);
+      setEvidenceTargetStatus(newStatus);
+      setShowEvidenceModal(true);
+    } else {
+      handleUpdateStatus(id, newStatus, null);
+    }
+  };
+
+  const handleUpdateStatus = async (id, newStatus, adminEvidenceUrl = null) => {
     try {
-      await api.put(`/laporan/${id}/status`, { status: newStatus });
+      await api.put(`/laporan/${id}/status`, { status: newStatus, adminEvidenceUrl });
       fetchReports();
-    } catch {
-      alert("Gagal memperbarui status");
+      setShowEvidenceModal(false);
+      setEvidenceImage(null);
+    } catch (err) {
+      alert(err.response?.data?.error || "Gagal memperbarui status");
+    } finally {
+      setEvidenceLoading(false);
+    }
+  };
+
+  const handleConfirmEvidence = async () => {
+    if (!evidenceImage) {
+      alert("Pilih foto bukti pengerjaan terlebih dahulu!");
+      return;
+    }
+    setEvidenceLoading(true);
+    try {
+      const base64Image = await compressImageToBase64(evidenceImage, 800, 800, 0.7);
+      await handleUpdateStatus(evidenceTargetId, evidenceTargetStatus, base64Image);
+    } catch (err) {
+      console.error(err);
+      alert("Gagal memproses foto");
+      setEvidenceLoading(false);
     }
   };
 
@@ -171,6 +221,55 @@ function Dashboard() {
               className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl cursor-default border border-white/20 bg-slate-800"
               onClick={(e) => e.stopPropagation()}
             />
+          </div>
+        </div>
+      )}
+
+      {/* Evidence Upload Modal */}
+      {showEvidenceModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden relative">
+            <div className="px-6 py-5 border-b border-slate-200 flex justify-between items-center bg-amber-50">
+              <h3 className="font-bold text-lg text-amber-900">Upload Bukti {evidenceTargetStatus}</h3>
+              <button onClick={() => { setShowEvidenceModal(false); setEvidenceImage(null); }} className="text-amber-500 hover:text-amber-700 transition-colors">
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+            </div>
+            <div className="p-6">
+              <p className="text-sm text-slate-600 mb-4 font-medium">Anda diwajibkan menyertakan foto progres penanganan sebagai transparansi untuk warga pelapor.</p>
+              
+              <div className="relative group/upload mt-1 mb-6">
+                <div className={`absolute inset-0 border-2 border-dashed rounded-xl transition-colors duration-300 pointer-events-none ${evidenceImage ? 'border-amber-500' : 'border-slate-300 group-hover/upload:border-amber-400'}`}></div>
+                <div className={`relative flex flex-col items-center justify-center p-6 rounded-xl transition-all duration-300 overflow-hidden ${evidenceImage ? 'bg-amber-50' : 'bg-slate-50 hover:bg-slate-100'}`}>
+                  {!evidenceImage ? (
+                    <>
+                      <div className="w-12 h-12 mb-3 rounded-full bg-white text-slate-400 shadow-sm border border-slate-200 flex items-center justify-center group-hover/upload:text-amber-500 group-hover/upload:border-amber-200 transition-all duration-300 transform">
+                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                      </div>
+                      <p className="text-sm font-bold text-slate-700 mb-1 text-center"><span className="text-amber-600 cursor-pointer hover:underline">Pilih Foto</span></p>
+                      <input type="file" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20" accept="image/jpeg,image/png,image/webp" onChange={(e) => setEvidenceImage(e.target.files[0])} />
+                    </>
+                  ) : (
+                    <div className="text-center w-full z-10 flex flex-col items-center">
+                      <div className="relative inline-block group/preview">
+                        <div className="w-full h-40 rounded-lg overflow-hidden border border-slate-200 mx-auto mb-2 bg-slate-100">
+                          {evidencePreviewUrl && <img src={evidencePreviewUrl} alt="Preview" className="w-full h-full object-cover" />}
+                        </div>
+                        <button type="button" onClick={(e) => { e.preventDefault(); setEvidenceImage(null); }} className="absolute -top-3 -right-3 bg-white text-red-500 rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-red-50 hover:scale-110 transition-all z-30 border border-slate-200"><svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+                      </div>
+                      <p className="text-xs font-bold text-slate-800 truncate max-w-[200px]">{evidenceImage.name}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-3">
+                <button onClick={() => { setShowEvidenceModal(false); setEvidenceImage(null); }} className="px-4 py-2 text-sm font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors disabled:opacity-50" disabled={evidenceLoading}>Batal</button>
+                <button onClick={handleConfirmEvidence} disabled={evidenceLoading || !evidenceImage} className="px-4 py-2 text-sm font-bold text-white bg-amber-600 hover:bg-amber-700 rounded-lg shadow-sm shadow-amber-600/30 transition-all flex items-center gap-2 disabled:opacity-50">
+                  {evidenceLoading ? "Menyimpan..." : "Konfirmasi & Simpan"}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -507,6 +606,32 @@ function Dashboard() {
                               </div>
                             )}
 
+                            {/* Bukti Penanganan Admin */}
+                            {r.admin_evidence_url && (
+                              <div className="mt-4 bg-amber-50 rounded-lg p-3 sm:p-4 border border-amber-200">
+                                <h5 className="font-bold text-xs sm:text-sm text-amber-800 mb-2.5 flex items-center gap-1.5"><svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Bukti Penanganan Admin</h5>
+                                <div 
+                                  className="rounded-lg overflow-hidden border border-amber-300 shadow-sm sm:max-w-md w-full relative group/evidence cursor-zoom-in bg-white"
+                                  onClick={() => {
+                                    const imgSrc = r.admin_evidence_url.startsWith('data:image') ? r.admin_evidence_url : `${IMAGE_BASE_URL}/uploads/${r.admin_evidence_url}`;
+                                    setSelectedImage(imgSrc);
+                                  }}
+                                >
+                                  <img 
+                                    src={r.admin_evidence_url.startsWith('data:image') ? r.admin_evidence_url : `${IMAGE_BASE_URL}/uploads/${r.admin_evidence_url}`} 
+                                    alt="Bukti Admin" 
+                                    className="w-full h-auto max-h-48 object-contain sm:object-cover transition-transform duration-500 group-hover/evidence:scale-105"
+                                  />
+                                  <div className="absolute inset-0 bg-slate-900/0 group-hover/evidence:bg-slate-900/10 transition-colors duration-300 flex items-center justify-center">
+                                    <div className="bg-white/90 backdrop-blur-sm text-slate-800 px-3 py-1.5 rounded-lg shadow-sm font-bold text-xs transform scale-90 opacity-0 group-hover/evidence:scale-100 group-hover/evidence:opacity-100 transition-all duration-300 flex items-center gap-1.5 border border-slate-200">
+                                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+                                      Perbesar
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
+
                             {/* Status & Kendali Admin Bottom Bar */}
                             <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row justify-between sm:items-center gap-3">
                               <span className={`inline-flex items-center w-fit px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-bold tracking-widest uppercase border ${r.status === 'Selesai' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : r.status === 'Diproses' ? 'bg-cyan-50 text-cyan-700 border-cyan-200' : 'bg-amber-50 text-amber-700 border-amber-200'}`}>
@@ -520,7 +645,7 @@ function Dashboard() {
                                 <div className="relative shrink-0 w-full sm:w-auto mt-2 sm:mt-0">
                                   <select
                                     value={r.status}
-                                    onChange={(e) => handleUpdateStatus(r.id, e.target.value)}
+                                    onChange={(e) => handleStatusSelect(r.id, e.target.value)}
                                     className={`appearance-none bg-slate-50 border border-slate-300 text-slate-800 text-[11px] sm:text-xs font-bold rounded-lg focus:ring-2 outline-none cursor-pointer block w-full pl-3 pr-8 py-2.5 sm:py-2 ${role === 'admin' ? 'focus:ring-amber-500/30' : 'focus:ring-emerald-500/30'}`}
                                   >
                                     <option value="Menunggu">Tertunda</option>
