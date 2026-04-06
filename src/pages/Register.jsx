@@ -51,7 +51,7 @@ function Register() {
                 <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl border border-slate-200 p-6 sm:p-10 relative overflow-hidden w-full">
 
                     <div className="text-center mb-6 sm:mb-8 font-jakarta">
-                        <img src="/logosipentar.jpg" alt="Logo Sipentar" className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl mx-auto object-cover shadow-md mb-4 sm:mb-5 ring-2 ring-white ring-offset-2 ring-offset-emerald-50" />
+                        <img src="/logosipentar.png" alt="Logo Sipentar" className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl mx-auto object-cover shadow-md mb-4 sm:mb-5 ring-2 ring-white ring-offset-2 ring-offset-emerald-50" />
                         <h2 className="font-outfit text-2xl font-extrabold text-slate-900 tracking-tight">Registrasi Warga</h2>
                         <p className="text-xs font-bold text-emerald-700 mt-1.5 uppercase tracking-widest">Aktivasi Identitas Sipentar</p>
                     </div>
