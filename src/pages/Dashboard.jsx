@@ -6,6 +6,7 @@ import Profile from "./Profile";
 import useDarkMode from "../hooks/useDarkMode";
 import { compressImageToBase64 } from "../utils/imageUtils";
 import villageBg from '../assets/village-bg.png';
+import AIChatWidget from "../components/AIChatWidget";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -747,7 +748,7 @@ function Dashboard() {
         </div>
 
       </div>
-
+      <AIChatWidget />
     </div>
   );
 }
