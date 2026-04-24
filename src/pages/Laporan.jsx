@@ -27,6 +27,18 @@ function Laporan({ onReportAdded }) {
     let base64Image = null;
     if (image) {
       base64Image = await compressImageToBase64(image, 800, 800, 0.7);
+      
+      // AI Validation
+      try {
+        const aiCheck = await api.post("/ai/validate-photo", { imageBase64: base64Image });
+        if (aiCheck.data && aiCheck.data.isValid === false) {
+            alert("⚠️ Sistem Cerdas Sipentar mendeteksi bahwa foto ini tidak relevan dengan infrastruktur atau fasilitas publik. Silakan unggah foto kejadian yang sebenarnya.");
+            setLoading(false);
+            return;
+        }
+      } catch (err) {
+        console.warn("AI Validation failed, proceeding anyway", err);
+      }
     }
 
     const payload = {

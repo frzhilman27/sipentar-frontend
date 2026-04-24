@@ -49,7 +49,12 @@ function Login() {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.role);
       localStorage.setItem("name", res.data.name);
-      navigate("/dashboard");
+      
+      if (res.data.role === 'admin') {
+          navigate("/admin/dashboard");
+      } else {
+          navigate("/user/dashboard");
+      }
     } catch (err) {
       setError(err.response?.data?.message || err.response?.data?.error || "Kredensial tidak valid");
     } finally {
