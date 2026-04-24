@@ -25,16 +25,6 @@ function UserDashboard() {
   const [historyData, setHistoryData] = useState([]);
   const [historyLoading, setHistoryLoading] = useState(false);
 
-  // Clean up object URL to avoid memory leaks
-  useEffect(() => {
-    if (evidenceImage) {
-      const url = URL.createObjectURL(evidenceImage);
-      setEvidencePreviewUrl(url);
-      return () => URL.revokeObjectURL(url);
-    } else {
-      setEvidencePreviewUrl(null);
-    }
-  }, [evidenceImage]);
 
   const role = localStorage.getItem("role");
   const name = localStorage.getItem("name");
