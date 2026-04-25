@@ -464,7 +464,7 @@ function AdminDashboard() {
           </div>
         </header>
 
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 pb-28 sm:py-8 sm:pb-8">
 
           {/* Tab Navigation Menu (Desktop) */}
           <div className="hidden sm:flex border-b border-slate-200 mb-8 overflow-x-auto no-scrollbar gap-2 sm:gap-6">

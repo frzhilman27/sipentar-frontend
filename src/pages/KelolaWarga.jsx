@@ -48,11 +48,11 @@ function KelolaWarga() {
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-slate-50 border-b border-slate-200 uppercase text-xs font-bold text-slate-500 tracking-wider">
-              <th className="px-6 py-4">Informasi Warga</th>
-              <th className="px-6 py-4">NIK</th>
-              <th className="px-6 py-4">Kontak</th>
-              <th className="px-6 py-4 whitespace-nowrap text-center">Status Verifikasi</th>
-              <th className="px-6 py-4 text-center">Aksi</th>
+              <th className="px-4 py-3 sm:px-6 sm:py-4">Informasi Warga</th>
+              <th className="px-4 py-3 sm:px-6 sm:py-4">NIK</th>
+              <th className="px-4 py-3 sm:px-6 sm:py-4">Kontak</th>
+              <th className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap text-center">Status Verifikasi</th>
+              <th className="px-4 py-3 sm:px-6 sm:py-4 text-center">Aksi</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
@@ -63,7 +63,7 @@ function KelolaWarga() {
             ) : (
               users.map(user => (
                 <tr key={user.id} className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4">
+                  <td className="px-4 py-3 sm:px-6 sm:py-4">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
                         {user.name.charAt(0).toUpperCase()}
@@ -74,12 +74,12 @@ function KelolaWarga() {
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 font-mono text-sm text-slate-600">{user.nik}</td>
-                  <td className="px-6 py-4 text-sm text-slate-600">
+                  <td className="px-4 py-3 sm:px-6 sm:py-4 font-mono text-sm text-slate-600">{user.nik}</td>
+                  <td className="px-4 py-3 sm:px-6 sm:py-4 text-sm text-slate-600">
                     <p>{user.email}</p>
                     <p className="text-xs text-slate-400 mt-0.5">{user.no_hp || '-'}</p>
                   </td>
-                  <td className="px-6 py-4 text-center whitespace-nowrap">
+                  <td className="px-4 py-3 sm:px-6 sm:py-4 text-center whitespace-nowrap">
                     {user.is_verified ? (
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50"></span>
@@ -92,7 +92,7 @@ function KelolaWarga() {
                       </span>
                     )}
                   </td>
-                  <td className="px-6 py-4 text-center">
+                  <td className="px-4 py-3 sm:px-6 sm:py-4 text-center">
                     <button
                       onClick={() => handleVerify(user.id, user.is_verified)}
                       className={`inline-flex items-center justify-center w-full px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${user.is_verified ? 'bg-white border border-slate-300 text-slate-600 hover:bg-slate-50 hover:text-rose-600' : 'bg-emerald-600 text-white shadow-sm shadow-emerald-600/30 hover:bg-emerald-700'}`}
