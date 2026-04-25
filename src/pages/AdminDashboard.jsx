@@ -815,11 +815,23 @@ function AdminDashboard() {
 
             {role === 'admin' && (
               <button
+                onClick={() => setActiveMainTab('kelola_warga')}
+                className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors relative`}
+              >
+                <div className={`absolute -top-5 text-white rounded-full p-3 shadow-lg border-4 border-slate-50 transition-transform ${activeMainTab === 'kelola_warga' ? 'bg-amber-600 scale-110 shadow-amber-500/40' : 'bg-slate-400 hover:scale-105'}`}>
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5V4H2v16h5m10 0v-4H7v4m10 0H7m0 0H2m5 0h10M9 8h6v4H9V8z" /></svg>
+                </div>
+                <span className={`text-[10px] font-bold tracking-wide mt-7 ${activeMainTab === 'kelola_warga' ? 'text-amber-700' : 'text-slate-400'}`}>Warga</span>
+              </button>
+            )}
+
+            {role === 'admin' && (
+              <button
                 onClick={() => setActiveMainTab('aduan_masuk')}
                 className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors relative`}
               >
-                <div className={`absolute -top-5 text-white rounded-full p-3 shadow-lg border-4 border-slate-50 transition-transform ${activeMainTab === 'aduan_masuk' ? 'bg-amber-600 scale-110 shadow-amber-500/40' : 'bg-slate-400 hover:scale-105'}`}>
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" /></svg>
+                <div className={`text-white rounded-full p-2.5 shadow-lg border-4 border-slate-50 transition-transform ${activeMainTab === 'aduan_masuk' ? 'bg-amber-600 scale-110 shadow-amber-500/40' : 'bg-slate-400 hover:scale-105'}`}>
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" /></svg>
                   {reports.filter(r => r.status === 'Menunggu').length > 0 && (
                     <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
@@ -827,7 +839,7 @@ function AdminDashboard() {
                     </span>
                   )}
                 </div>
-                <span className={`text-[10px] font-bold tracking-wide mt-7 ${activeMainTab === 'aduan_masuk' ? 'text-amber-700' : 'text-slate-400'}`}>Laporan</span>
+                <span className={`text-[10px] font-bold tracking-wide mt-1 ${activeMainTab === 'aduan_masuk' ? 'text-amber-700' : 'text-slate-400'}`}>Laporan</span>
               </button>
             )}
 
