@@ -364,35 +364,27 @@ function AdminDashboard() {
       <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
         {(activeMainTab === 'beranda' || activeMainTab === 'histori' || activeMainTab === 'aduan_masuk') && (
           <>
-            {/* Hero Section Formal */}
+            {/* Hero Section Minimalist */}
             {activeMainTab === 'beranda' && (
-              <div className="relative mb-8 rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-sm">
-                <div className={`absolute inset-0 bg-gradient-to-r ${role === 'admin' ? 'from-amber-50 to-white' : 'from-emerald-50 to-white'} opacity-90`}></div>
-
-                <div className="relative p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-8">
-                  <div className="text-center sm:text-left z-10 w-full">
-                    <span className={`inline-block px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest mb-4 border ${role === 'admin' ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-emerald-100 text-emerald-800 border-emerald-200'}`}>
-                      {role === 'admin' ? 'Portal Kelurahan' : 'Ruang Warga'}
+              <div className="mb-8 border-b border-slate-200 pb-6">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="w-full">
+                    <span className={`inline-block px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-widest mb-3 ${role === 'admin' ? 'bg-blue-50 text-blue-700' : 'bg-slate-100 text-slate-600'}`}>
+                      {role === 'admin' ? 'Pusat Kendali Admin' : 'Dasbor Penduduk'}
                     </span>
-                    <h2 className="font-outfit text-3xl sm:text-4xl font-black text-slate-900 mb-3 tracking-tight">
-                      <span className="font-medium">Selamat datang,</span> <br className="hidden sm:block" />
-                      {name}
+                    <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mb-2">
+                      Halo, {name}
                     </h2>
-                    <p className="text-slate-600 font-medium max-w-xl leading-relaxed text-sm lg:text-base">
-                      {role === 'admin' ? "Pantau semua pelaporan dan status operasional sistem persuratan desa dalam tayangan data yang aktual dan presisi." : "Lihat laporan publik dari berbagai warga untuk mengetahui kondisi dan keluhan terkini seputar desa."}
+                    <p className="text-slate-500 font-medium text-sm max-w-2xl">
+                      {role === 'admin' ? "Pantau dan kelola seluruh pelaporan warga secara sistematis melalui antarmuka kendali utama." : "Lihat rekapitulasi data pelaporan publik dan status penanganan isu di lingkungan desa."}
                     </p>
-                  </div>
-                  <div className="hidden lg:flex shrink-0 z-10 w-32 h-32 opacity-90 items-center justify-center bg-white rounded-2xl border border-slate-200 shadow-sm">
-                    <svg className={`w-16 h-16 ${role === 'admin' ? 'text-amber-600' : 'text-emerald-700'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* Metrik Analitik Mini - Formal */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-12">
+            {/* Metrik Analitik Utama - Premium Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
               <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-3 bg-slate-100 text-slate-600">
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
@@ -434,15 +426,15 @@ function AdminDashboard() {
               </div>
             </div>
 
-            {/* Koleksi Laporan - Formal Cards */}
+            {/* Koleksi Laporan - Table/List Style Minimalist */}
             <div className="mb-8">
-              <div className="flex flex-col sm:flex-row justify-between items-end mb-6 border-b border-slate-200 pb-4">
+              <div className="flex flex-col sm:flex-row justify-between items-end mb-4">
                 <div>
-                  <h3 className="font-outfit text-2xl font-black text-slate-800 tracking-tight">
-                    {activeMainTab === 'beranda' ? "Ruang Publik Laporan Warga" : (activeMainTab === 'aduan_masuk' ? "Antrean Laporan Baru" : "Lini Masa Laporan Anda")}
+                  <h3 className="text-lg font-bold text-slate-900 tracking-tight">
+                    {activeMainTab === 'beranda' ? "Basis Data Laporan Masuk" : (activeMainTab === 'aduan_masuk' ? "Antrean Pemeriksaan Laporan" : "Arsip Laporan Pribadi")}
                   </h3>
-                  <p className="text-slate-500 font-medium mt-1 text-sm">
-                    {activeMainTab === 'beranda' ? "Aduan warga yang sedang diproses maupun telah diselesaikan oleh desa." : (activeMainTab === 'aduan_masuk' ? "Laporan yang baru dikirim warga dan membutuhkan persetujuan / penanganan Anda segera." : "Histori khusus dari aduan yang Anda kirimkan.")}
+                  <p className="text-slate-500 mt-1 text-sm">
+                    {activeMainTab === 'beranda' ? "Seluruh data pengaduan dengan status penanganan berjalan atau rampung." : (activeMainTab === 'aduan_masuk' ? "Laporan menunggu verifikasi." : "Catatan historis laporan Anda.")}
                   </p>
                 </div>
               </div>
@@ -472,109 +464,76 @@ function AdminDashboard() {
                   }
 
                   return displayedReports.map((r) => (
-                    <div key={r.id} id={`report-${r.id}`} className="bg-white rounded-xl border border-slate-200 p-4 sm:p-6 flex flex-col sm:flex-row gap-3 sm:gap-6 shadow-sm hover:shadow-md transition-all duration-500">
-
-                      {/* Avatar & Info Pelapor */}
-                      <div className="flex items-center sm:items-start gap-3 sm:gap-4 shrink-0 sm:w-56 pb-3 sm:pb-0 border-b border-slate-100 sm:border-0">
-                        <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-slate-100 flex items-center justify-center text-lg font-black border border-slate-200 shrink-0 ${role === 'admin' ? 'text-amber-700' : 'text-emerald-700'}`}>
-                          {r.name.charAt(0).toUpperCase()}
-                        </div>
-                        <div>
-                          <p className={`font-black text-slate-900 text-sm sm:text-base`}>{r.name}</p>
-                          <p className="text-[11px] sm:text-xs font-semibold text-slate-500 mt-0.5 tracking-wide flex items-center gap-1">
-                            {r.created_at ? new Date(r.created_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Tanggal Laporan'}
-                          </p>
-                        </div>
+                    <div key={r.id} id={`report-${r.id}`} className="bg-white border border-slate-200 p-5 flex flex-col sm:flex-row gap-4 sm:gap-6 rounded-md hover:border-slate-300 transition-colors">
+                      
+                      {/* Tanggal & Pelapor */}
+                      <div className="flex flex-col shrink-0 sm:w-48 sm:border-r border-slate-100 pr-4">
+                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Pelapor</p>
+                        <p className="font-bold text-slate-900 text-sm">{r.name}</p>
+                        <p className="text-[11px] font-medium text-slate-500 mt-1">
+                          {r.created_at ? new Date(r.created_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Tanggal Laporan'}
+                        </p>
                       </div>
 
                       {/* Konten Aduan */}
-                      <div className="flex-1 pt-1 sm:pt-0">
-                        <h4 className="font-bold text-base sm:text-xl text-slate-900 mb-1.5 sm:mb-2 leading-snug">{r.judul}</h4>
-                        <p className="text-slate-600 font-medium leading-relaxed pb-3 sm:pb-4 text-[13px] sm:text-sm">{r.isi}</p>
+                      <div className="flex-1">
+                        <div className="flex justify-between items-start mb-2 gap-4">
+                           <h4 className="font-bold text-base text-slate-900">{r.judul}</h4>
+                           <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold tracking-widest uppercase border ${r.status === 'Selesai' ? 'bg-green-50 text-green-700 border-green-200' : r.status === 'Diproses' ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-slate-100 text-slate-600 border-slate-200'}`}>
+                             {r.status}
+                           </span>
+                        </div>
+                        <p className="text-slate-600 leading-relaxed text-sm mb-4">{r.isi}</p>
 
-                        {/* Gambar Opsional */}
-                        {r.image_url && (
-                          <div
-                            className="mt-1 mb-5 rounded-lg overflow-hidden border border-slate-200 shadow-sm sm:max-w-md w-full relative group/img cursor-zoom-in bg-slate-50"
-                            onClick={() => {
-                              const imgSrc = r.image_url.startsWith('data:image') ? r.image_url : `${IMAGE_BASE_URL}/uploads/${r.image_url}`;
-                              setSelectedImage(imgSrc);
-                            }}
-                          >
-                            <img
-                              src={r.image_url.startsWith('data:image') ? r.image_url : `${IMAGE_BASE_URL}/uploads/${r.image_url}`}
-                              alt="Bukti Laporan"
-                              className="w-full h-auto max-h-48 object-contain sm:object-cover transition-transform duration-500 group-hover/img:scale-105"
-                            />
-                            <div className="absolute inset-0 bg-slate-900/0 group-hover/img:bg-slate-900/10 transition-colors duration-300 flex items-center justify-center">
-                              <div className="bg-white/90 backdrop-blur-sm text-slate-800 px-3 py-1.5 rounded-lg shadow-sm font-bold text-xs transform scale-90 opacity-0 group-hover/img:scale-100 group-hover/img:opacity-100 transition-all duration-300 flex items-center gap-1.5 border border-slate-200">
-                                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
-                                Perbesar
-                              </div>
-                            </div>
-                          </div>
-                        )}
+                        <div className="flex flex-wrap gap-4 items-center mt-4">
+                          {/* Gambar Opsional */}
+                          {r.image_url && (
+                            <button
+                              onClick={() => setSelectedImage(r.image_url.startsWith('data:image') ? r.image_url : `${IMAGE_BASE_URL}/uploads/${r.image_url}`)}
+                              className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded"
+                            >
+                              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                              Lihat Lampiran Warga
+                            </button>
+                          )}
 
-                        {/* Bukti Penanganan Admin */}
-                        {r.admin_evidence_urls && (Array.isArray(r.admin_evidence_urls) ? r.admin_evidence_urls.length > 0 : true) && (
-                          <div className="mt-4 bg-amber-50 rounded-lg p-3 sm:p-4 border border-amber-200">
-                            <h5 className="font-bold text-xs sm:text-sm text-amber-800 mb-2.5 flex items-center gap-1.5"><svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Bukti Penanganan Admin</h5>
-                            <div className="flex overflow-x-auto pb-2 gap-3 no-scrollbar cursor-ew-resize">
-                              {(Array.isArray(r.admin_evidence_urls) ? r.admin_evidence_urls : [r.admin_evidence_urls]).map((url, i) => (
-                                <div 
-                                  key={i}
-                                  className="shrink-0 rounded-lg overflow-hidden border border-amber-300 shadow-sm w-40 sm:w-56 h-28 sm:h-36 relative group/evidence cursor-zoom-in bg-white"
-                                  onClick={() => {
-                                    const imgSrc = url.startsWith('data:image') ? url : `${IMAGE_BASE_URL}/uploads/${url}`;
-                                    setSelectedImage(imgSrc);
-                                  }}
-                                >
-                                  <img 
-                                    src={url.startsWith('data:image') ? url : `${IMAGE_BASE_URL}/uploads/${url}`} 
-                                    alt={`Bukti Admin ${i+1}`} 
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover/evidence:scale-105"
-                                  />
-                                  <div className="absolute inset-0 bg-slate-900/0 group-hover/evidence:bg-slate-900/10 transition-colors duration-300 flex items-center justify-center">
-                                    <div className="bg-white/90 backdrop-blur-sm text-slate-800 px-3 py-1.5 rounded-lg shadow-sm font-bold text-xs transform scale-90 opacity-0 group-hover/evidence:scale-100 group-hover/evidence:opacity-100 transition-all duration-300 flex items-center gap-1.5 border border-slate-200">
-                                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
-                                      Buka
-                                    </div>
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        )}
+                          {/* Bukti Penanganan Admin */}
+                          {r.admin_evidence_urls && (Array.isArray(r.admin_evidence_urls) ? r.admin_evidence_urls.length > 0 : true) && (
+                            <button
+                              onClick={() => {
+                                const urls = Array.isArray(r.admin_evidence_urls) ? r.admin_evidence_urls : [r.admin_evidence_urls];
+                                setSelectedImage(urls[0].startsWith('data:image') ? urls[0] : `${IMAGE_BASE_URL}/uploads/${urls[0]}`);
+                              }}
+                              className="inline-flex items-center gap-1.5 text-xs font-bold text-green-700 hover:text-green-900 transition-colors bg-green-50 hover:bg-green-100 px-3 py-1.5 rounded border border-green-200"
+                            >
+                              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                              Lihat Bukti Penanganan
+                            </button>
+                          )}
+                        </div>
 
                         {/* Status & Kendali Admin Bottom Bar */}
-                        <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row justify-between sm:items-center gap-3">
-                          <span className={`inline-flex items-center w-fit px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-bold tracking-widest uppercase border ${r.status === 'Selesai' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : r.status === 'Diproses' ? 'bg-cyan-50 text-cyan-700 border-cyan-200' : 'bg-amber-50 text-amber-700 border-amber-200'}`}>
-                            {r.status === 'Menunggu' && <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mr-2 shrink-0"></span>}
-                            {r.status === 'Diproses' && <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 mr-2 shrink-0"></span>}
-                            {r.status === 'Selesai' && <svg className="w-3 h-3 mr-1.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>}
-                            Status: {r.status}
-                          </span>
-
+                        <div className="pt-4 mt-4 border-t border-slate-100 flex flex-col sm:flex-row justify-end items-center gap-3">
                           {role === "admin" && (
-                            <div className="flex flex-col sm:flex-row items-center gap-2 shrink-0 w-full sm:w-auto mt-2 sm:mt-0">
-                              <button onClick={() => fetchHistory(r.id)} className="px-3 py-1.5 border border-slate-200 text-slate-500 rounded-lg hover:bg-slate-100 hover:text-slate-800 transition-colors text-xs font-bold flex items-center gap-1 w-full justify-center">
+                            <div className="flex flex-col sm:flex-row items-center gap-2 shrink-0 w-full sm:w-auto">
+                              <button onClick={() => fetchHistory(r.id)} className="px-3 py-1.5 border border-slate-200 text-slate-500 rounded text-xs font-bold hover:bg-slate-100 hover:text-slate-800 transition-colors w-full sm:w-auto justify-center">
                                 Riwayat
                               </button>
                               <div className="relative shrink-0 w-full sm:w-auto">
                                 <select
                                     value={r.status}
                                     onChange={(e) => handleStatusSelect(r.id, e.target.value)}
-                                    className={`appearance-none bg-slate-50 border border-slate-300 text-slate-800 text-[11px] sm:text-xs font-bold rounded-lg focus:ring-2 outline-none cursor-pointer block w-full pl-3 pr-8 py-2.5 sm:py-2 ${role === 'admin' ? 'focus:ring-amber-500/30' : 'focus:ring-emerald-500/30'}`}
+                                    className={`appearance-none bg-slate-50 border border-slate-300 text-slate-800 text-xs font-bold rounded focus:ring-2 outline-none cursor-pointer block w-full pl-3 pr-8 py-2 ${role === 'admin' ? 'focus:ring-blue-500/30' : 'focus:ring-green-500/30'}`}
                                 >
                                     <option value="Menunggu">Tertunda</option>
                                     <option value="Diproses">Diproses</option>
                                     <option value="Selesai">Tuntas</option>
                                 </select>
-                                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 sm:pr-2 text-slate-500">
+                                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-slate-500">
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                                 </div>
                               </div>
-                              <button onClick={() => handleDeleteLaporan(r.id)} className="px-3 py-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors text-xs font-bold flex items-center gap-1 w-full justify-center border border-red-200">
+                              <button onClick={() => handleDeleteLaporan(r.id)} className="px-3 py-1.5 bg-red-50 text-red-600 rounded text-xs font-bold flex items-center gap-1 w-full justify-center border border-red-200 hover:bg-red-100 transition-colors">
                                 Hapus
                               </button>
                             </div>

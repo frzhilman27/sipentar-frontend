@@ -41,49 +41,43 @@ const DashboardLayout = ({
     { id: 'profil', label: 'Profil Akun', icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
   ];
 
-  const primaryColor = role === 'admin' ? 'amber' : 'emerald';
-
   return (
-    <div className="flex h-screen bg-slate-100 font-sans overflow-hidden">
+    <div className="flex h-screen bg-slate-50 font-sans overflow-hidden">
       
-      {/* SIDEBAR DESKTOP - Premium Floating Panel */}
-      <aside className="hidden md:flex flex-col w-72 m-4 rounded-3xl bg-white/80 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 z-20 shrink-0 relative overflow-hidden">
-        {/* Subtle glow background */}
-        <div className={`absolute top-0 right-0 w-32 h-32 bg-${primaryColor}-400/10 rounded-full blur-3xl`}></div>
+      {/* SIDEBAR DESKTOP - Clean Enterprise Panel */}
+      <aside className="hidden md:flex flex-col w-64 bg-white border-r border-slate-200 z-20 shrink-0">
         
-        <div className="h-24 flex items-center gap-3 px-8 border-b border-slate-100/50 shrink-0 relative z-10">
-          <div className="relative group">
-            <div className={`absolute -inset-1 bg-gradient-to-r from-${primaryColor}-400 to-${primaryColor}-300 rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-500`}></div>
-            <img src="/logosipentar.png" alt="Logo Sipentar" className={`relative w-10 h-10 rounded-xl object-cover shadow-sm border border-${primaryColor}-100 bg-white`} />
-          </div>
+        {/* Brand */}
+        <div className="h-16 flex items-center gap-3 px-6 border-b border-slate-200 shrink-0">
+          <img src="/logosipentar.png" alt="Logo Sipentar" className="w-8 h-8 rounded-md object-cover border border-slate-200" />
           <div>
-            <h1 className="font-outfit text-2xl font-black text-slate-800 tracking-tight leading-none">Sipentar<span className={`text-${primaryColor}-500`}>.</span></h1>
-            <p className={`text-[9px] font-extrabold tracking-[0.2em] uppercase text-${primaryColor}-600/80 mt-1`}>Desa Lamaran Tarung</p>
+            <h1 className="font-outfit text-lg font-black text-slate-900 tracking-tight leading-none">SIPENTAR<span className="text-blue-600">.</span></h1>
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto py-8 px-5 flex flex-col gap-2.5 relative z-10">
-          <div className="text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-2 px-3">Menu Utama</div>
+        {/* Navigation */}
+        <div className="flex-1 overflow-y-auto py-6 px-4 flex flex-col gap-1">
+          <div className="text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-2 px-3">Modul Sistem</div>
           {menuItems.map((item) => {
             const isActive = activeMainTab === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => setActiveMainTab(item.id)}
-                className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl transition-all duration-300 relative overflow-hidden group ${
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-md transition-colors relative group ${
                   isActive 
-                    ? `bg-gradient-to-r from-${primaryColor}-50 to-white text-${primaryColor}-700 font-bold shadow-sm shadow-${primaryColor}-500/5 border border-${primaryColor}-100` 
-                    : 'text-slate-500 hover:bg-slate-50/80 hover:text-slate-800 font-medium border border-transparent hover:border-slate-200/50'
+                    ? 'bg-blue-50 text-blue-700 font-bold' 
+                    : 'text-slate-600 hover:bg-slate-100 font-medium'
                 }`}
               >
-                {isActive && <div className={`absolute left-0 top-1/2 -translate-y-1/2 h-8 w-1.5 rounded-r-full bg-${primaryColor}-500`}></div>}
-                <svg className={`w-5 h-5 ${isActive ? `text-${primaryColor}-500` : 'text-slate-400 group-hover:text-slate-600'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {isActive && <div className="absolute left-0 top-1/2 -translate-y-1/2 h-full w-1 rounded-r-full bg-blue-600"></div>}
+                <svg className={`w-5 h-5 ${isActive ? 'text-blue-600' : 'text-slate-400 group-hover:text-slate-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={isActive ? "2.5" : "2"} d={item.icon} />
                 </svg>
-                <span className="text-[13px] tracking-wide">{item.label}</span>
+                <span className="text-sm tracking-wide">{item.label}</span>
                 
                 {item.badge > 0 && (
-                  <span className={`ml-auto flex h-5 min-w-[20px] items-center justify-center rounded-full px-1.5 text-[10px] font-bold text-white bg-${primaryColor}-500 shadow-sm shadow-${primaryColor}-500/40`}>
+                  <span className={`ml-auto flex h-5 min-w-[20px] items-center justify-center rounded-full px-1.5 text-[10px] font-bold ${isActive ? 'bg-blue-600 text-white' : 'bg-slate-200 text-slate-700'}`}>
                     {item.badge}
                   </span>
                 )}
@@ -92,77 +86,102 @@ const DashboardLayout = ({
           })}
         </div>
 
-        <div className="p-5 border-t border-slate-100/50 shrink-0 relative z-10">
+        {/* User Info & Logout */}
+        <div className="p-4 border-t border-slate-200 shrink-0">
+          <div className="flex items-center gap-3 mb-4 px-2">
+            {userProfileData?.foto_profil ? (
+              <img
+                src={
+                  (userProfileData.foto_profil.startsWith('data:image') || userProfileData.foto_profil.startsWith('http'))
+                    ? userProfileData.foto_profil
+                    : `${BASE_URL}${userProfileData.foto_profil.startsWith('/') ? '' : '/'}${userProfileData.foto_profil}`
+                }
+                alt="Profil"
+                className="w-10 h-10 rounded-full object-cover border border-slate-200"
+              />
+            ) : (
+              <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                {name ? name.charAt(0).toUpperCase() : 'U'}
+              </div>
+            )}
+            <div className="flex flex-col">
+              <p className="text-sm font-bold text-slate-900 leading-tight">{name || "Pengguna"}</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">{role}</p>
+            </div>
+          </div>
           <button 
             onClick={logout}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3.5 rounded-2xl text-slate-500 hover:text-red-600 font-bold text-[13px] hover:bg-red-50 transition-all border border-transparent hover:border-red-100 group"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-md text-slate-600 hover:text-red-700 font-bold text-sm hover:bg-red-50 transition-colors border border-transparent hover:border-red-100 group"
           >
-            <svg className="w-5 h-5 text-slate-400 group-hover:text-red-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+            <svg className="w-4 h-4 text-slate-400 group-hover:text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
             Keluar Sistem
           </button>
         </div>
       </aside>
 
       {/* MAIN CONTENT AREA */}
-      <div className="flex-1 flex flex-col h-screen overflow-hidden relative w-full pt-4 pr-4 pb-4 pl-0 max-md:p-0">
+      <div className="flex-1 flex flex-col h-screen overflow-hidden relative w-full">
         
-        {/* HEADER TOP - Glassmorphism */}
-        <header className="h-20 bg-white/60 backdrop-blur-xl border border-white shadow-[0_4px_20px_rgb(0,0,0,0.02)] flex items-center justify-between px-6 sm:px-8 z-30 shrink-0 rounded-3xl max-md:rounded-none max-md:h-16 max-md:border-b max-md:border-slate-200/60 max-md:bg-white/90">
+        {/* HEADER TOP - Clean */}
+        <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6 z-30 shrink-0">
           
           {/* Mobile Logo Only */}
           <div className="md:hidden flex items-center gap-3">
-            <img src="/logosipentar.png" alt="Logo Sipentar" className={`w-8 h-8 rounded-lg object-cover shadow-sm border border-${primaryColor}-200 bg-white`} />
-            <div>
-              <h1 className="font-outfit text-xl font-black text-slate-800 tracking-tight leading-none">Sipentar<span className={`text-${primaryColor}-500`}>.</span></h1>
-            </div>
+            <img src="/logosipentar.png" alt="Logo Sipentar" className="w-8 h-8 rounded-md object-cover border border-slate-200" />
+            <h1 className="font-outfit text-lg font-black text-slate-900 tracking-tight leading-none">SIPENTAR.</h1>
           </div>
 
           {/* Desktop Title Context */}
-          <div className="hidden md:flex flex-col">
-             <h2 className="text-xl font-bold text-slate-800 capitalize tracking-tight">{menuItems.find(m => m.id === activeMainTab)?.label || 'Dashboard'}</h2>
-             <p className="text-xs text-slate-500 font-medium tracking-wide">{new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          <div className="hidden md:flex items-center gap-2 text-sm text-slate-500 font-medium">
+             <span>Sistem Informasi Desa</span>
+             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
+             <span className="text-slate-900 font-bold">{menuItems.find(m => m.id === activeMainTab)?.label || 'Dashboard'}</span>
           </div>
 
-          <div className="flex items-center gap-4 sm:gap-6 ml-auto">
+          <div className="flex items-center gap-4 ml-auto">
+            {/* Search Placeholder (Visual only for now) */}
+            <div className="hidden md:flex relative">
+              <input type="text" placeholder="Cari ID laporan..." className="w-64 pl-9 pr-4 py-1.5 text-sm bg-slate-100 border-transparent rounded-md focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none" />
+              <svg className="w-4 h-4 text-slate-400 absolute left-3 top-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            </div>
+
             {/* Notification Bell */}
             <div className="relative" ref={notifRef}>
               <button
                 onClick={toggleNotifications}
-                className="relative p-2.5 rounded-xl text-slate-500 hover:text-slate-800 hover:bg-white transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500/20 bg-white/50 border border-slate-200/60 shadow-sm"
+                className="relative p-2 rounded-md text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors focus:outline-none"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
                 {unreadCount > 0 && (
-                  <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
-                    <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75`}></span>
-                    <span className={`relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500 border-2 border-white`}></span>
+                  <span className="absolute top-1.5 right-2 flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                   </span>
                 )}
               </button>
 
               {/* Notification Dropdown */}
               {showNotifications && (
-                <div className="fixed sm:absolute inset-x-4 top-16 sm:inset-auto sm:top-auto sm:right-0 sm:mt-4 sm:w-80 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-200/50 overflow-hidden transform origin-top sm:origin-top-right transition-all z-50">
-                  <div className={`px-5 py-3.5 border-b border-slate-100 bg-gradient-to-r from-${primaryColor}-50/50 to-white flex justify-between items-center`}>
-                    <h3 className="text-[11px] font-black text-slate-800 uppercase tracking-widest">Notifikasi</h3>
-                    {unreadCount > 0 && <span className={`text-[9px] font-bold uppercase tracking-widest text-white px-2 py-0.5 rounded-full bg-${primaryColor}-500 shadow-sm shadow-${primaryColor}-500/30`}>{unreadCount} Baru</span>}
+                <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-slate-200 overflow-hidden z-50">
+                  <div className="px-4 py-3 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
+                    <h3 className="text-xs font-bold text-slate-800 uppercase tracking-widest">Notifikasi</h3>
+                    {unreadCount > 0 && <span className="text-[10px] font-bold text-white px-2 py-0.5 rounded-full bg-blue-600">{unreadCount} Baru</span>}
                   </div>
-                  <div className="max-h-[350px] overflow-y-auto no-scrollbar">
+                  <div className="max-h-[300px] overflow-y-auto">
                     {notifications.length === 0 ? (
-                      <div className="px-6 py-10 flex flex-col items-center justify-center text-center">
-                        <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center mb-3 border border-slate-100">
-                          <svg className="w-6 h-6 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" /></svg>
-                        </div>
-                        <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Kotak Masuk Bersih</p>
+                      <div className="px-4 py-8 flex flex-col items-center text-center">
+                        <svg className="w-8 h-8 text-slate-300 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" /></svg>
+                        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Kosong</p>
                       </div>
                     ) : (
-                      <ul className="divide-y divide-slate-50">
+                      <ul className="divide-y divide-slate-100">
                         {notifications.map((notif) => (
-                          <li key={notif.id} onClick={() => handleNotificationClick(notif)} className={`p-4 hover:bg-slate-50 transition-colors cursor-pointer group ${!notif.is_read ? `bg-${primaryColor}-50/30` : ''}`}>
+                          <li key={notif.id} onClick={() => handleNotificationClick(notif)} className={`p-4 hover:bg-slate-50 transition-colors cursor-pointer ${!notif.is_read ? 'bg-blue-50/30' : ''}`}>
                             <div className="flex gap-3">
-                              <div className={`mt-1.5 w-2.5 h-2.5 rounded-full shrink-0 shadow-sm ${!notif.is_read ? `bg-${primaryColor}-500 shadow-${primaryColor}-500/30` : 'bg-slate-200 shadow-none'}`}></div>
+                              <div className={`mt-1 w-2 h-2 rounded-full shrink-0 ${!notif.is_read ? 'bg-blue-600' : 'bg-transparent'}`}></div>
                               <div>
-                                <p className={`text-[13px] leading-relaxed ${!notif.is_read ? 'font-bold text-slate-800' : 'font-medium text-slate-500'}`}>{notif.message}</p>
-                                <p className="text-[10px] font-bold tracking-wider text-slate-400 mt-1.5">
+                                <p className={`text-sm ${!notif.is_read ? 'font-bold text-slate-800' : 'font-medium text-slate-600'}`}>{notif.message}</p>
+                                <p className="text-[10px] font-bold text-slate-400 mt-1">
                                   {new Date(notif.created_at).toLocaleDateString('id-ID', { hour: '2-digit', minute: '2-digit' })}
                                 </p>
                               </div>
@@ -176,88 +195,43 @@ const DashboardLayout = ({
               )}
             </div>
 
-            <div className="h-8 w-px bg-slate-200/60 hidden sm:block"></div>
-
-            {/* User Profile */}
-            <div 
-              onClick={() => setActiveMainTab("profil")} 
-              className="flex items-center gap-3 cursor-pointer group bg-white/50 hover:bg-white p-1.5 pr-4 rounded-full border border-slate-200/60 transition-all shadow-sm"
-            >
-              {userProfileData?.foto_profil ? (
-                <img
-                  src={
-                    (userProfileData.foto_profil.startsWith('data:image') || userProfileData.foto_profil.startsWith('http'))
-                      ? userProfileData.foto_profil
-                      : `${BASE_URL}${userProfileData.foto_profil.startsWith('/') ? '' : '/'}${userProfileData.foto_profil}`
-                  }
-                  alt="Profil"
-                  className={`w-8 h-8 rounded-full object-cover shadow-sm transition-transform group-hover:scale-105 border border-${primaryColor}-200`}
-                />
-              ) : (
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shadow-sm transition-transform group-hover:scale-105 bg-${primaryColor}-50 text-${primaryColor}-600 border border-${primaryColor}-100`}>
-                  {name ? name.charAt(0).toUpperCase() : 'U'}
-                </div>
-              )}
-              <div className="hidden sm:flex flex-col justify-center">
-                <p className={`text-[13px] font-bold text-slate-800 leading-none group-hover:text-${primaryColor}-700 transition-colors`}>{name || "Pengguna"}</p>
-                <p className={`text-[9px] font-bold uppercase tracking-widest text-slate-400 mt-1`}>{role}</p>
-              </div>
-            </div>
           </div>
         </header>
 
         {/* PAGE CONTENT */}
-        <main className="flex-1 overflow-y-auto relative pt-6 md:pt-8 md:px-2 pb-24 md:pb-6 p-4 max-md:p-4 scroll-smooth">
-          <div className="max-w-7xl mx-auto w-full h-full animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <main className="flex-1 overflow-y-auto relative p-4 md:p-6 pb-24 md:pb-6 scroll-smooth bg-slate-50">
+          <div className="max-w-7xl mx-auto w-full h-full">
             {children}
           </div>
         </main>
       </div>
 
-      {/* BOTTOM NAVIGATION MOBILE - Floating Pill Design */}
-      <div className="md:hidden fixed bottom-6 left-4 right-4 z-40">
-        <div className="bg-white/90 backdrop-blur-xl border border-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-3xl pb-safe">
-            <div className="flex justify-around items-center h-16 px-2">
-            {menuItems.map((item) => {
-                const isActive = activeMainTab === item.id;
-                const isSpecial = item.id === 'pengaduan' || item.id === 'aduan_masuk';
-                
-                if (isSpecial) {
-                return (
-                    <button
-                    key={item.id}
-                    onClick={() => setActiveMainTab(item.id)}
-                    className="flex flex-col items-center justify-center w-full h-full relative z-10"
-                    >
-                    <div className={`absolute -top-6 left-1/2 -translate-x-1/2 rounded-2xl p-4 shadow-xl border-4 border-white transition-all duration-300 ${isActive ? `bg-gradient-to-tr from-${primaryColor}-500 to-${primaryColor}-400 scale-110 shadow-${primaryColor}-500/40 text-white` : `bg-slate-800 text-white hover:scale-105 hover:bg-slate-700`}`}>
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d={item.icon} />
-                        </svg>
-                        {item.badge > 0 && (
-                        <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white border-2 border-white shadow-sm">
-                            {item.badge}
-                        </span>
-                        )}
-                    </div>
-                    </button>
-                );
-                }
-
-                return (
-                <button
-                    key={item.id}
-                    onClick={() => setActiveMainTab(item.id)}
-                    className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors ${isActive ? `text-${primaryColor}-600` : 'text-slate-400 hover:text-slate-600'}`}
-                >
-                    <div className={`p-1.5 rounded-xl transition-all ${isActive ? `bg-${primaryColor}-50` : 'bg-transparent'}`}>
-                    <svg className="w-5 h-5" fill={isActive ? "currentColor" : "none"} viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={isActive ? "0" : "2"} d={item.icon} />
-                    </svg>
-                    </div>
-                </button>
-                )
-            })}
-            </div>
+      {/* BOTTOM NAVIGATION MOBILE - Simple Bar Design */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200">
+        <div className="flex justify-around items-center h-16 pb-safe">
+          {menuItems.map((item) => {
+            const isActive = activeMainTab === item.id;
+            
+            return (
+              <button
+                key={item.id}
+                onClick={() => setActiveMainTab(item.id)}
+                className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${isActive ? 'text-blue-600' : 'text-slate-500'}`}
+              >
+                <div className="relative p-1">
+                  <svg className="w-6 h-6" fill={isActive ? "currentColor" : "none"} viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={isActive ? "0" : "2"} d={item.icon} />
+                  </svg>
+                  {item.badge > 0 && (
+                    <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white border border-white">
+                      {item.badge}
+                    </span>
+                  )}
+                </div>
+                <span className="text-[10px] font-bold tracking-wide">{item.label}</span>
+              </button>
+            )
+          })}
         </div>
       </div>
 
