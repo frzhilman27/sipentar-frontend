@@ -22,8 +22,8 @@ function Home() {
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-emerald-200 flex flex-col transition-colors duration-300 relative overflow-x-hidden">
 
       {/* 1. FLOATING NAVBAR */}
-      <div className="fixed w-full z-50 top-0 transition-all duration-500 ease-in-out px-4 sm:px-6 lg:px-8 mt-4">
-        <nav className={`max-w-6xl mx-auto rounded-2xl transition-all duration-500 ${isScrolled ? 'bg-white/80 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-white/40 py-2.5 px-4' : 'bg-transparent py-4 px-2'} ${isMobileMenuOpen && !isScrolled ? 'bg-slate-900/95 backdrop-blur-md border-b border-slate-800' : ''}`}>
+      <div className={`fixed w-full z-50 top-0 transition-all duration-500 ease-in-out sm:px-6 lg:px-8 ${isScrolled ? 'px-2 mt-2' : 'px-4 mt-4'}`}>
+        <nav className={`max-w-6xl mx-auto rounded-2xl transition-all duration-500 ${isScrolled ? 'bg-white/90 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-white/40 py-2.5 px-4' : 'bg-transparent py-4 px-2'} ${isMobileMenuOpen && !isScrolled ? 'bg-slate-900/95 backdrop-blur-md border-b border-slate-800' : ''}`}>
           <div className="flex justify-between items-center">
             {/* Logo */}
             <div className="flex items-center gap-3 pl-2">
@@ -106,7 +106,7 @@ function Home() {
             Platform Pintar Desa 2.0
           </div>
 
-          <h1 className="font-outfit text-4xl md:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-slate-300 tracking-tight leading-[1.1] mb-6 drop-shadow-2xl max-w-[90%] mx-auto md:max-w-none">
+          <h1 className="font-outfit text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-slate-300 tracking-tight leading-[1.1] mb-6 drop-shadow-2xl mx-auto">
             Transformasi Digital <br className="hidden md:block" /> Desa Lamaran Tarung.
           </h1>
 

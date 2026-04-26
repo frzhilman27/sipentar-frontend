@@ -227,9 +227,9 @@ const DashboardLayout = ({
                     <button
                     key={item.id}
                     onClick={() => setActiveMainTab(item.id)}
-                    className="flex flex-col items-center justify-center w-full h-full relative group"
+                    className="flex flex-col items-center justify-center w-full h-full relative z-10"
                     >
-                    <div className={`absolute -top-8 rounded-2xl p-4 shadow-xl border-4 border-slate-50 transition-all duration-300 ${isActive ? `bg-gradient-to-tr from-${primaryColor}-500 to-${primaryColor}-400 scale-110 shadow-${primaryColor}-500/40 text-white` : `bg-slate-800 text-white hover:scale-105 hover:bg-slate-700`}`}>
+                    <div className={`absolute -top-6 left-1/2 -translate-x-1/2 rounded-2xl p-4 shadow-xl border-4 border-white transition-all duration-300 ${isActive ? `bg-gradient-to-tr from-${primaryColor}-500 to-${primaryColor}-400 scale-110 shadow-${primaryColor}-500/40 text-white` : `bg-slate-800 text-white hover:scale-105 hover:bg-slate-700`}`}>
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d={item.icon} />
                         </svg>

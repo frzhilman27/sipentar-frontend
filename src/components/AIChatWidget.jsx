@@ -76,7 +76,7 @@ const AIChatWidget = () => {
   };
 
   return (
-    <div className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-[60] font-sans">
+    <div className="fixed bottom-28 right-4 md:bottom-6 md:right-6 z-[60] font-sans">
       {/* Widget Button */}
       <div className={`transition-all duration-300 transform ${isOpen ? 'scale-0 opacity-0 pointer-events-none' : 'scale-100 opacity-100'}`}>
         <button 
