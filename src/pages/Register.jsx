@@ -53,7 +53,7 @@ function Register() {
                     <div className="text-center mb-6 sm:mb-8 font-jakarta">
                         <img src="/logosipentar.png" alt="Logo Sipentar" className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl mx-auto object-cover shadow-md mb-4 sm:mb-5 ring-2 ring-white ring-offset-2 ring-offset-emerald-50" />
                         <h2 className="font-outfit text-2xl font-extrabold text-slate-900 tracking-tight">Registrasi Warga</h2>
-                        <p className="text-xs font-bold text-emerald-700 mt-1.5 uppercase tracking-widest">Aktivasi Identitas Sipentar</p>
+                        <p className="text-xs font-bold text-sipentar-green-dark mt-1.5 uppercase tracking-widest">Aktivasi Identitas Sipentar</p>
                     </div>
 
                     {error && (
@@ -69,7 +69,7 @@ function Register() {
                             <input
                                 type="number"
                                 placeholder="16 Digit NIK KTP Resmi..."
-                                className="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 text-slate-900 placeholder-slate-400 outline-none transition bg-white shadow-sm font-medium"
+                                className="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-4 focus:ring-sipentar-green/20 focus:border-emerald-500 text-slate-900 placeholder-slate-400 outline-none transition bg-white shadow-sm font-medium"
                                 value={nik}
                                 onChange={(e) => setNik(e.target.value)}
                                 required
@@ -81,7 +81,7 @@ function Register() {
                             <input
                                 type="text"
                                 placeholder="Misal: Bapak Ahmad"
-                                className="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 text-slate-900 placeholder-slate-400 outline-none transition bg-white shadow-sm font-medium"
+                                className="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-4 focus:ring-sipentar-green/20 focus:border-emerald-500 text-slate-900 placeholder-slate-400 outline-none transition bg-white shadow-sm font-medium"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 required
@@ -93,7 +93,7 @@ function Register() {
                             <input
                                 type="email"
                                 placeholder="ahmad@domain.com"
-                                className="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 text-slate-900 placeholder-slate-400 outline-none transition bg-white shadow-sm font-medium"
+                                className="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-4 focus:ring-sipentar-green/20 focus:border-emerald-500 text-slate-900 placeholder-slate-400 outline-none transition bg-white shadow-sm font-medium"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
@@ -105,7 +105,7 @@ function Register() {
                             <input
                                 type="password"
                                 placeholder="••••••••"
-                                className="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 text-slate-900 placeholder-slate-400 outline-none transition bg-white shadow-sm font-medium"
+                                className="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-4 focus:ring-sipentar-green/20 focus:border-emerald-500 text-slate-900 placeholder-slate-400 outline-none transition bg-white shadow-sm font-medium"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
@@ -115,7 +115,7 @@ function Register() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full mt-6 bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 rounded-xl transition-all shadow-md shadow-emerald-700/30 disabled:opacity-50 transform active:scale-95"
+                            className="w-full mt-6 bg-sipentar-green-dark hover:bg-emerald-800 text-white font-bold py-3.5 rounded-xl transition-all shadow-md shadow-emerald-700/30 disabled:opacity-50 transform active:scale-95"
                         >
                             {loading ? "Memproses Data..." : "Aktivasi Akun Sekarang"}
                         </button>
@@ -124,7 +124,7 @@ function Register() {
                     <div className="mt-8 pt-6 border-t border-slate-200 text-center">
                         <p className="text-sm text-slate-600 font-medium">
                             Sudah punya identitas?{' '}
-                            <Link to="/login" className="text-emerald-700 font-bold hover:text-emerald-600 hover:underline transition">
+                            <Link to="/login" className="text-sipentar-green-dark font-bold hover:text-sipentar-green hover:underline transition">
                                 Masuk di sini
                             </Link>
                         </p>

@@ -51,7 +51,7 @@ const DashboardLayout = ({
         <div className="h-16 flex items-center gap-3 px-6 border-b border-slate-200 shrink-0">
           <img src="/logosipentar.png" alt="Logo Sipentar" className="w-8 h-8 rounded-md object-cover border border-slate-200" />
           <div>
-            <h1 className="font-outfit text-lg font-black text-slate-900 tracking-tight leading-none">SIPENTAR<span className="text-blue-600">.</span></h1>
+            <h1 className="font-outfit text-lg font-black text-slate-900 tracking-tight leading-none">SIPENTAR<span className="text-sipentar-blue">.</span></h1>
           </div>
         </div>
 
@@ -66,18 +66,18 @@ const DashboardLayout = ({
                 onClick={() => setActiveMainTab(item.id)}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-md transition-colors relative group ${
                   isActive 
-                    ? 'bg-blue-50 text-blue-700 font-bold' 
+                    ? 'bg-sipentar-blue-50 text-sipentar-blue-dark font-bold' 
                     : 'text-slate-600 hover:bg-slate-100 font-medium'
                 }`}
               >
-                {isActive && <div className="absolute left-0 top-1/2 -translate-y-1/2 h-full w-1 rounded-r-full bg-blue-600"></div>}
-                <svg className={`w-5 h-5 ${isActive ? 'text-blue-600' : 'text-slate-400 group-hover:text-slate-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {isActive && <div className="absolute left-0 top-1/2 -translate-y-1/2 h-full w-1 rounded-r-full bg-sipentar-blue"></div>}
+                <svg className={`w-5 h-5 ${isActive ? 'text-sipentar-blue' : 'text-slate-400 group-hover:text-slate-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={isActive ? "2.5" : "2"} d={item.icon} />
                 </svg>
                 <span className="text-sm tracking-wide">{item.label}</span>
                 
                 {item.badge > 0 && (
-                  <span className={`ml-auto flex h-5 min-w-[20px] items-center justify-center rounded-full px-1.5 text-[10px] font-bold ${isActive ? 'bg-blue-600 text-white' : 'bg-slate-200 text-slate-700'}`}>
+                  <span className={`ml-auto flex h-5 min-w-[20px] items-center justify-center rounded-full px-1.5 text-[10px] font-bold ${isActive ? 'bg-sipentar-blue text-white' : 'bg-slate-200 text-slate-700'}`}>
                     {item.badge}
                   </span>
                 )}
@@ -141,7 +141,7 @@ const DashboardLayout = ({
           <div className="flex items-center gap-4 ml-auto">
             {/* Search Placeholder (Visual only for now) */}
             <div className="hidden md:flex relative">
-              <input type="text" placeholder="Cari ID laporan..." className="w-64 pl-9 pr-4 py-1.5 text-sm bg-slate-100 border-transparent rounded-md focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none" />
+              <input type="text" placeholder="Cari ID laporan..." className="w-64 pl-9 pr-4 py-1.5 text-sm bg-slate-100 border-transparent rounded-md focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-sipentar-blue-100 transition-all outline-none" />
               <svg className="w-4 h-4 text-slate-400 absolute left-3 top-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
             </div>
 
@@ -165,7 +165,7 @@ const DashboardLayout = ({
                 <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-slate-200 overflow-hidden z-50">
                   <div className="px-4 py-3 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
                     <h3 className="text-xs font-bold text-slate-800 uppercase tracking-widest">Notifikasi</h3>
-                    {unreadCount > 0 && <span className="text-[10px] font-bold text-white px-2 py-0.5 rounded-full bg-blue-600">{unreadCount} Baru</span>}
+                    {unreadCount > 0 && <span className="text-[10px] font-bold text-white px-2 py-0.5 rounded-full bg-sipentar-blue">{unreadCount} Baru</span>}
                   </div>
                   <div className="max-h-[300px] overflow-y-auto">
                     {notifications.length === 0 ? (
@@ -176,9 +176,9 @@ const DashboardLayout = ({
                     ) : (
                       <ul className="divide-y divide-slate-100">
                         {notifications.map((notif) => (
-                          <li key={notif.id} onClick={() => handleNotificationClick(notif)} className={`p-4 hover:bg-slate-50 transition-colors cursor-pointer ${!notif.is_read ? 'bg-blue-50/30' : ''}`}>
+                          <li key={notif.id} onClick={() => handleNotificationClick(notif)} className={`p-4 hover:bg-slate-50 transition-colors cursor-pointer ${!notif.is_read ? 'bg-sipentar-blue-50/30' : ''}`}>
                             <div className="flex gap-3">
-                              <div className={`mt-1 w-2 h-2 rounded-full shrink-0 ${!notif.is_read ? 'bg-blue-600' : 'bg-transparent'}`}></div>
+                              <div className={`mt-1 w-2 h-2 rounded-full shrink-0 ${!notif.is_read ? 'bg-sipentar-blue' : 'bg-transparent'}`}></div>
                               <div>
                                 <p className={`text-sm ${!notif.is_read ? 'font-bold text-slate-800' : 'font-medium text-slate-600'}`}>{notif.message}</p>
                                 <p className="text-[10px] font-bold text-slate-400 mt-1">
@@ -216,7 +216,7 @@ const DashboardLayout = ({
               <button
                 key={item.id}
                 onClick={() => setActiveMainTab(item.id)}
-                className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${isActive ? 'text-blue-600' : 'text-slate-500'}`}
+                className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${isActive ? 'text-sipentar-blue' : 'text-slate-500'}`}
               >
                 <div className="relative p-1">
                   <svg className="w-6 h-6" fill={isActive ? "currentColor" : "none"} viewBox="0 0 24 24" stroke="currentColor">

@@ -65,7 +65,7 @@ function KelolaWarga() {
                 <tr key={user.id} className="hover:bg-slate-50 transition-colors">
                   <td className="px-4 py-3 sm:px-6 sm:py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                      <div className="w-10 h-10 rounded-full bg-sipentar-green-100 text-sipentar-green-dark flex items-center justify-center font-bold">
                         {user.name.charAt(0).toUpperCase()}
                       </div>
                       <div>
@@ -81,7 +81,7 @@ function KelolaWarga() {
                   </td>
                   <td className="px-4 py-3 sm:px-6 sm:py-4 text-center whitespace-nowrap">
                     {user.is_verified ? (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sipentar-green-50 text-sipentar-green-dark border border-emerald-200 text-xs font-bold">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50"></span>
                         Terverifikasi
                       </span>
@@ -95,7 +95,7 @@ function KelolaWarga() {
                   <td className="px-4 py-3 sm:px-6 sm:py-4 text-center">
                     <button
                       onClick={() => handleVerify(user.id, user.is_verified)}
-                      className={`inline-flex items-center justify-center w-full px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${user.is_verified ? 'bg-white border border-slate-300 text-slate-600 hover:bg-slate-50 hover:text-rose-600' : 'bg-emerald-600 text-white shadow-sm shadow-emerald-600/30 hover:bg-emerald-700'}`}
+                      className={`inline-flex items-center justify-center w-full px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${user.is_verified ? 'bg-white border border-slate-300 text-slate-600 hover:bg-slate-50 hover:text-rose-600' : 'bg-sipentar-green text-white shadow-sm shadow-emerald-600/30 hover:bg-sipentar-green-dark'}`}
                     >
                       {user.is_verified ? 'Cabut Verifikasi' : 'Verifikasi Sekarang'}
                     </button>

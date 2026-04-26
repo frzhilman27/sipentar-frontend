@@ -64,7 +64,7 @@ function Laporan({ onReportAdded }) {
   return (
     <div className="bg-white rounded-2xl shadow-md border border-slate-200 p-8 sm:p-10 relative overflow-hidden transition-all duration-300">
       <div className="flex flex-col sm:flex-row sm:items-center gap-5 mb-8 relative z-10">
-        <div className="w-14 h-14 shrink-0 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center border border-emerald-200">
+        <div className="w-14 h-14 shrink-0 rounded-xl bg-sipentar-green-100 text-sipentar-green-dark flex items-center justify-center border border-emerald-200">
           <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M11 5H6a2 2 0 00-2-2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
         </div>
         <div>
@@ -82,7 +82,7 @@ function Laporan({ onReportAdded }) {
             value={judul}
             onChange={(e) => setJudul(e.target.value)}
             required
-            className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 focus:bg-white outline-none transition-all text-slate-900 font-medium placeholder-slate-400"
+            className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-sipentar-green/30 focus:border-emerald-500 focus:bg-white outline-none transition-all text-slate-900 font-medium placeholder-slate-400"
           />
         </div>
 
@@ -94,7 +94,7 @@ function Laporan({ onReportAdded }) {
             value={isi}
             onChange={(e) => setIsi(e.target.value)}
             required
-            className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 focus:bg-white outline-none transition-all resize-y text-slate-900 font-medium leading-relaxed placeholder-slate-400"
+            className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-sipentar-green/30 focus:border-emerald-500 focus:bg-white outline-none transition-all resize-y text-slate-900 font-medium leading-relaxed placeholder-slate-400"
           ></textarea>
         </div>
 
@@ -104,16 +104,16 @@ function Laporan({ onReportAdded }) {
             {/* Decorative dashed border that highlights on hover */}
             <div className={`absolute inset-0 border-2 border-dashed rounded-xl transition-colors duration-300 pointer-events-none ${image ? 'border-emerald-500' : 'border-slate-300 group-hover/upload:border-emerald-400'}`}></div>
 
-            <div className={`relative flex flex-col items-center justify-center px-6 py-8 rounded-xl transition-all duration-300 overflow-hidden ${image ? 'bg-emerald-50' : 'bg-slate-50 hover:bg-slate-100'}`}>
+            <div className={`relative flex flex-col items-center justify-center px-6 py-8 rounded-xl transition-all duration-300 overflow-hidden ${image ? 'bg-sipentar-green-50' : 'bg-slate-50 hover:bg-slate-100'}`}>
 
               {!image ? (
                 <>
-                  <div className="w-14 h-14 mb-3 rounded-full bg-white text-slate-400 shadow-sm border border-slate-200 flex items-center justify-center group-hover/upload:text-emerald-500 group-hover/upload:border-emerald-200 transition-all duration-300 transform">
+                  <div className="w-14 h-14 mb-3 rounded-full bg-white text-slate-400 shadow-sm border border-slate-200 flex items-center justify-center group-hover/upload:text-sipentar-green-light group-hover/upload:border-emerald-200 transition-all duration-300 transform">
                     <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                   </div>
                   <div className="text-center z-10 w-full max-w-sm">
                     <p className="text-sm font-bold text-slate-700 mb-1 transition-colors">
-                      <span className="text-emerald-600 cursor-pointer group-hover/upload:underline">Pilih Dokumen Foto</span> atau seret ke sini
+                      <span className="text-sipentar-green cursor-pointer group-hover/upload:underline">Pilih Dokumen Foto</span> atau seret ke sini
                     </p>
                     <p className="text-[10px] font-bold tracking-wider uppercase text-slate-500 mt-1">Mendukung resolusi tinggi JPG, PNG, WEBP</p>
                   </div>
@@ -137,7 +137,7 @@ function Laporan({ onReportAdded }) {
                   </div>
                   <div className="bg-white px-4 py-2 rounded-lg shadow-sm border border-emerald-200 transition-colors">
                     <p className="text-xs font-bold text-slate-800 truncate max-w-[200px]">{image.name}</p>
-                    <p className="text-[10px] font-bold text-emerald-600 mt-0.5 uppercase tracking-widest">Siap Dilampirkan</p>
+                    <p className="text-[10px] font-bold text-sipentar-green mt-0.5 uppercase tracking-widest">Siap Dilampirkan</p>
                   </div>
                 </div>
               )}
@@ -150,7 +150,7 @@ function Laporan({ onReportAdded }) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full sm:w-auto px-8 py-3 bg-emerald-700 hover:bg-emerald-800 text-white font-bold tracking-wide rounded-xl shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full sm:w-auto px-8 py-3 bg-sipentar-green-dark hover:bg-emerald-800 text-white font-bold tracking-wide rounded-xl shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {loading ? (
               <>

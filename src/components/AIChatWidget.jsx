@@ -81,7 +81,7 @@ const AIChatWidget = () => {
       <div className={`transition-all duration-300 transform ${isOpen ? 'scale-0 opacity-0 pointer-events-none' : 'scale-100 opacity-100'}`}>
         <button 
           onClick={toggleChat}
-          className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-full p-3 sm:p-4 shadow-lg shadow-emerald-500/40 border-2 border-emerald-50 flex items-center justify-center transition-transform hover:scale-110 group"
+          className="bg-sipentar-green hover:bg-sipentar-green-dark text-white rounded-full p-3 sm:p-4 shadow-lg shadow-emerald-500/40 border-2 border-emerald-50 flex items-center justify-center transition-transform hover:scale-110 group"
           title="Tanya SipentarBot AI"
         >
           <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -125,7 +125,7 @@ const AIChatWidget = () => {
         <div className="flex-1 p-4 overflow-y-auto min-h-[300px] max-h-[400px] bg-slate-50/50 space-y-4">
           {messages.map((msg) => (
             <div key={msg.id} className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2`}>
-              <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 shadow-sm text-sm ${msg.isUser ? 'bg-emerald-600 text-white rounded-br-sm' : msg.isError ? 'bg-red-50 text-red-700 border border-red-100 rounded-bl-sm' : 'bg-white text-slate-800 border border-slate-200 rounded-bl-sm'}`}>
+              <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 shadow-sm text-sm ${msg.isUser ? 'bg-sipentar-green text-white rounded-br-sm' : msg.isError ? 'bg-red-50 text-red-700 border border-red-100 rounded-bl-sm' : 'bg-white text-slate-800 border border-slate-200 rounded-bl-sm'}`}>
                 {msg.isUser ? msg.text : formatText(msg.text)}
               </div>
             </div>
@@ -151,12 +151,12 @@ const AIChatWidget = () => {
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Tanya tentang infrastruktur..." 
               disabled={isLoading}
-              className="w-full bg-slate-100 border-transparent text-slate-800 text-sm rounded-xl pl-4 pr-12 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:bg-white transition-all disabled:opacity-50"
+              className="w-full bg-slate-100 border-transparent text-slate-800 text-sm rounded-xl pl-4 pr-12 py-3 focus:outline-none focus:ring-2 focus:ring-sipentar-green/50 focus:bg-white transition-all disabled:opacity-50"
             />
             <button 
               type="submit" 
               disabled={!inputValue.trim() || isLoading}
-              className="absolute right-1 p-2 text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 disabled:bg-slate-300 disabled:text-slate-500 transition-colors shadow-sm"
+              className="absolute right-1 p-2 text-white bg-sipentar-green rounded-lg hover:bg-sipentar-green-dark disabled:bg-slate-300 disabled:text-slate-500 transition-colors shadow-sm"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />

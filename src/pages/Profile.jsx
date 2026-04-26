@@ -188,12 +188,12 @@ function Profile({ isEmbedded = false }) {
     // Theme configurations
     const themeParams = {
         primaryColor: isUser ? "emerald" : "amber",
-        primaryBg: isUser ? "bg-emerald-700" : "bg-amber-600",
+        primaryBg: isUser ? "bg-sipentar-green-dark" : "bg-amber-600",
         primaryHover: isUser ? "hover:bg-emerald-800" : "hover:bg-amber-700",
-        textHighlight: isUser ? "text-emerald-700" : "text-amber-700",
-        bgLight: isUser ? "bg-emerald-100" : "bg-amber-100",
-        bgBadge: isUser ? "bg-emerald-50" : "bg-amber-50",
-        ringColor: isUser ? "focus:ring-emerald-500/30" : "focus:ring-amber-500/30",
+        textHighlight: isUser ? "text-sipentar-green-dark" : "text-amber-700",
+        bgLight: isUser ? "bg-sipentar-green-100" : "bg-amber-100",
+        bgBadge: isUser ? "bg-sipentar-green-50" : "bg-amber-50",
+        ringColor: isUser ? "focus:ring-sipentar-green/30" : "focus:ring-amber-500/30",
         borderColor: isUser ? "focus:border-emerald-500" : "focus:border-amber-500"
     };
 
@@ -273,15 +273,15 @@ function Profile({ isEmbedded = false }) {
                                     {/* Kelola Profil Button */}
                                     <button
                                         onClick={() => { handleTabChange("profil"); setProfileMessage({ type: '', text: '' }); }}
-                                        className="group flex items-center justify-between w-full px-5 sm:px-6 py-4 sm:py-5 bg-white rounded-2xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 shadow-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-emerald-500/10"
+                                        className="group flex items-center justify-between w-full px-5 sm:px-6 py-4 sm:py-5 bg-white rounded-2xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 shadow-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-sipentar-green/10"
                                     >
                                         <div className="flex items-center gap-4 sm:gap-5">
-                                            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center group-hover:text-emerald-600 group-hover:border-emerald-200 border border-slate-200 shadow-sm transition-colors shrink-0">
+                                            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-slate-100 text-slate-500 rounded-xl flex items-center justify-center group-hover:text-sipentar-green group-hover:border-emerald-200 border border-slate-200 shadow-sm transition-colors shrink-0">
                                                 <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                                             </div>
-                                            <span className="text-base sm:text-[17px] font-bold text-slate-700 group-hover:text-emerald-700 transition-colors text-left">Kelola Identitas Profil</span>
+                                            <span className="text-base sm:text-[17px] font-bold text-slate-700 group-hover:text-sipentar-green-dark transition-colors text-left">Kelola Identitas Profil</span>
                                         </div>
-                                        <svg className="w-5 h-5 text-slate-400 group-hover:translate-x-1 group-hover:text-emerald-600 transition-all duration-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
+                                        <svg className="w-5 h-5 text-slate-400 group-hover:translate-x-1 group-hover:text-sipentar-green transition-all duration-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
                                     </button>
 
                                     {/* Pengaturan Button */}
@@ -331,7 +331,7 @@ function Profile({ isEmbedded = false }) {
 
                                     <div className="p-0 relative z-10">
                                         {profileMessage.text && (
-                                            <div className={`m-6 p-4 rounded-xl flex items-center text-sm shadow-sm border ${profileMessage.type === 'success' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-red-50 text-red-700 border-red-200'}`}>
+                                            <div className={`m-6 p-4 rounded-xl flex items-center text-sm shadow-sm border ${profileMessage.type === 'success' ? 'bg-sipentar-green-50 text-sipentar-green-dark border-emerald-200' : 'bg-red-50 text-red-700 border-red-200'}`}>
                                                 <p className="font-bold">{profileMessage.text}</p>
                                             </div>
                                         )}
@@ -413,7 +413,7 @@ function Profile({ isEmbedded = false }) {
                                                             </button>
                                                         )}
 
-                                                        <label className="absolute bottom-0 -right-2 w-9 h-9 bg-white border border-slate-200 text-emerald-600 shadow-sm rounded-full flex items-center justify-center cursor-pointer hover:bg-slate-50 transition-colors z-20">
+                                                        <label className="absolute bottom-0 -right-2 w-9 h-9 bg-white border border-slate-200 text-sipentar-green shadow-sm rounded-full flex items-center justify-center cursor-pointer hover:bg-slate-50 transition-colors z-20">
                                                             <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="currentColor"><path d="M4 8V6a2 2 0 012-2h1.5l1.65-2h5.7l1.65 2H18a2 2 0 012 2v2M4 8h16M4 8v10a2 2 0 002 2h12a2 2 0 002-2V8m-9 9a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" /></svg>
                                                             <input type="file" className="hidden" accept="image/*" onChange={handleImageChange} />
                                                         </label>
@@ -492,15 +492,15 @@ function Profile({ isEmbedded = false }) {
                                 <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-6 overflow-hidden animate-in slide-in-from-right-8 fade-in duration-500">
                                     <button
                                         onClick={() => handleTabChange("pengaturan_akun")}
-                                        className="group flex items-center justify-between w-full px-6 py-6 bg-slate-50 rounded-2xl border border-slate-200 hover:border-slate-300 hover:bg-slate-100 transition-all duration-300 text-left focus:outline-none focus:ring-4 focus:ring-emerald-500/10 shadow-sm"
+                                        className="group flex items-center justify-between w-full px-6 py-6 bg-slate-50 rounded-2xl border border-slate-200 hover:border-slate-300 hover:bg-slate-100 transition-all duration-300 text-left focus:outline-none focus:ring-4 focus:ring-sipentar-green/10 shadow-sm"
                                     >
                                         <div className="flex items-center gap-5">
-                                            <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-500 group-hover:text-emerald-700 transition-colors shadow-sm">
+                                            <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-500 group-hover:text-sipentar-green-dark transition-colors shadow-sm">
                                                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                                             </div>
                                             <span className="text-[17px] font-bold text-slate-700 group-hover:text-emerald-800 transition-colors">Manajemen Sandi & Akun</span>
                                         </div>
-                                        <svg className="w-5 h-5 text-slate-400 group-hover:translate-x-1 group-hover:text-emerald-600 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
+                                        <svg className="w-5 h-5 text-slate-400 group-hover:translate-x-1 group-hover:text-sipentar-green transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
                                     </button>
                                 </div>
                             )}
@@ -545,7 +545,7 @@ function Profile({ isEmbedded = false }) {
                                     </div>
                                     <div className="p-0 relative z-10">
                                         {passwordMessage.text && (
-                                            <div className={`m-6 p-4 rounded-xl flex items-center text-sm border ${passwordMessage.type === 'success' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-red-50 text-red-700 border-red-200'}`}>
+                                            <div className={`m-6 p-4 rounded-xl flex items-center text-sm border ${passwordMessage.type === 'success' ? 'bg-sipentar-green-50 text-sipentar-green-dark border-emerald-200' : 'bg-red-50 text-red-700 border-red-200'}`}>
                                                 <p className="font-bold">{passwordMessage.text}</p>
                                             </div>
                                         )}

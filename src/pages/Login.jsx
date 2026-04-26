@@ -29,11 +29,11 @@ function Login() {
     : "from-amber-600 to-orange-700 shadow-amber-500/30";
 
   const inputFocusRing = isUser
-    ? "focus:ring-emerald-500/20 focus:border-emerald-500"
+    ? "focus:ring-sipentar-green/20 focus:border-emerald-500"
     : "focus:ring-amber-500/20 focus:border-amber-500";
 
   const buttonStyle = isUser
-    ? "bg-emerald-700 hover:bg-emerald-800 shadow-emerald-700/30"
+    ? "bg-sipentar-green-dark hover:bg-emerald-800 shadow-emerald-700/30"
     : "bg-amber-600 hover:bg-amber-700 shadow-amber-600/30";
 
   const handleLogin = async (e) => {
@@ -91,7 +91,7 @@ function Login() {
           <div className="text-center mb-6 sm:mb-8">
             <img src="/logosipentar.png" alt="Logo Sipentar" className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl mx-auto object-cover shadow-md mb-4 sm:mb-5 ring-2 ring-white ring-offset-2 ${isUser ? 'ring-offset-emerald-50' : 'ring-offset-amber-50'}`} />
             <h2 className="font-outfit text-2xl font-extrabold tracking-tight text-slate-900">Portal Sipentar</h2>
-            <p className={`text-xs font-bold mt-1.5 uppercase tracking-widest ${isUser ? 'text-emerald-700' : 'text-amber-600'}`}>
+            <p className={`text-xs font-bold mt-1.5 uppercase tracking-widest ${isUser ? 'text-sipentar-green-dark' : 'text-amber-600'}`}>
               {isUser ? "Akses Warga Desa" : "Divisi Administrator"}
             </p>
           </div>
@@ -102,7 +102,7 @@ function Login() {
               type="button"
               onClick={() => handleRoleSwitch("user")}
               className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all duration-300 ${isUser
-                ? "bg-white text-emerald-700 shadow-sm ring-1 ring-slate-200"
+                ? "bg-white text-sipentar-green-dark shadow-sm ring-1 ring-slate-200"
                 : "text-slate-500 hover:text-slate-700"
                 }`}
             >
@@ -185,7 +185,7 @@ function Login() {
             {isUser ? (
               <p className="text-sm text-slate-600 font-medium">
                 Warga baru mendaftar?{' '}
-                <Link to="/register" className="text-emerald-700 font-bold hover:text-emerald-600 hover:underline transition">
+                <Link to="/register" className="text-sipentar-green-dark font-bold hover:text-sipentar-green hover:underline transition">
                   Buat Akses Pelapor
                 </Link>
               </p>

@@ -28,7 +28,7 @@ function Home() {
               <img src="/logosipentar.png" alt="Logo Sipentar" className="w-10 h-10 rounded-lg object-cover border border-slate-200 shadow-sm bg-white" />
               <div className="flex flex-col">
                 <span className="text-xl font-black tracking-tight text-slate-900 leading-none">
-                  SIPENTAR<span className="text-blue-600">.</span>
+                  SIPENTAR<span className="text-sipentar-blue">.</span>
                 </span>
                 <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mt-0.5">Portal Layanan Publik</span>
               </div>
@@ -36,9 +36,9 @@ function Home() {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-8">
-              <a href="#beranda" className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors">Beranda</a>
-              <a href="#tentang" className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors">Tentang Sistem</a>
-              <a href="#alur" className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors">Alur Pelaporan</a>
+              <a href="#beranda" className="text-sm font-bold text-slate-600 hover:text-sipentar-blue transition-colors">Beranda</a>
+              <a href="#tentang" className="text-sm font-bold text-slate-600 hover:text-sipentar-blue transition-colors">Tentang Sistem</a>
+              <a href="#alur" className="text-sm font-bold text-slate-600 hover:text-sipentar-blue transition-colors">Alur Pelaporan</a>
             </div>
 
             {/* Action Buttons */}
@@ -46,7 +46,7 @@ function Home() {
               <Link to="/login" className="text-sm font-bold text-slate-600 hover:text-slate-900 transition-colors">
                 Masuk
               </Link>
-              <Link to="/register" className="text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 px-6 py-2.5 rounded-md transition-colors shadow-sm">
+              <Link to="/register" className="text-sm font-bold text-white bg-sipentar-blue hover:bg-sipentar-blue-dark px-6 py-2.5 rounded-md transition-colors shadow-sm">
                 Daftar Akun
               </Link>
             </div>
@@ -71,12 +71,12 @@ function Home() {
         {/* Mobile Menu Dropdown */}
         <div className={`md:hidden absolute top-full left-0 right-0 bg-white border-b border-slate-200 shadow-lg transition-all duration-300 ease-in-out origin-top ${isMobileMenuOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0 pointer-events-none'}`}>
           <div className="px-4 py-6 flex flex-col gap-4">
-            <a href="#beranda" className="text-slate-700 font-bold text-base hover:text-blue-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Beranda</a>
-            <a href="#tentang" className="text-slate-700 font-bold text-base hover:text-blue-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Tentang Sistem</a>
-            <a href="#alur" className="text-slate-700 font-bold text-base hover:text-blue-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Alur Pelaporan</a>
+            <a href="#beranda" className="text-slate-700 font-bold text-base hover:text-sipentar-blue transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Beranda</a>
+            <a href="#tentang" className="text-slate-700 font-bold text-base hover:text-sipentar-blue transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Tentang Sistem</a>
+            <a href="#alur" className="text-slate-700 font-bold text-base hover:text-sipentar-blue transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Alur Pelaporan</a>
             <div className="h-px bg-slate-100 my-2"></div>
-            <Link to="/login" className="text-blue-700 font-bold text-base text-center border border-blue-200 bg-blue-50 py-3 rounded-md hover:bg-blue-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Masuk Ke Akun</Link>
-            <Link to="/register" className="text-center bg-blue-600 text-white font-bold text-base py-3 rounded-md hover:bg-blue-700 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Mendaftar Sekarang</Link>
+            <Link to="/login" className="text-sipentar-blue-dark font-bold text-base text-center border border-blue-200 bg-sipentar-blue-50 py-3 rounded-md hover:bg-sipentar-blue-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Masuk Ke Akun</Link>
+            <Link to="/register" className="text-center bg-sipentar-blue text-white font-bold text-base py-3 rounded-md hover:bg-sipentar-blue-dark transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Mendaftar Sekarang</Link>
           </div>
         </div>
       </div>
@@ -88,16 +88,16 @@ function Home() {
         <div className="absolute inset-0 z-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#cbd5e1 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
 
         <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-bold tracking-widest uppercase mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sipentar-blue-50 border border-blue-100 text-sipentar-blue-dark text-xs font-bold tracking-widest uppercase mb-8">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-sipentar-blue"></span>
             </span>
             Sistem Informasi Pengaduan Pintar
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.15] mb-6">
-            Tata Kelola Desa Berbasis <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-blue-500">Data & Transparansi.</span>
+            Tata Kelola Desa Berbasis <span className="text-transparent bg-clip-text bg-gradient-to-r from-sipentar-blue-dark to-sipentar-blue">Data & Transparansi.</span>
           </h1>
 
           <p className="text-base sm:text-lg lg:text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl font-medium">
@@ -106,7 +106,7 @@ function Home() {
 
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <Link to="/register" className="w-full sm:w-auto">
-              <button className="w-full px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white text-base font-bold rounded-md transition-colors flex items-center justify-center gap-2 shadow-sm">
+              <button className="w-full px-8 py-4 bg-sipentar-blue hover:bg-sipentar-blue-dark text-white text-base font-bold rounded-md transition-colors flex items-center justify-center gap-2 shadow-sm">
                 Buat Laporan Baru
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
               </button>
@@ -142,7 +142,7 @@ function Home() {
           <div className="grid lg:grid-cols-3 gap-6">
             
             <div className="bg-slate-50 border border-slate-200 p-8 rounded-xl">
-               <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-blue-600 mb-6 border border-slate-200 shadow-sm">
+               <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-sipentar-blue mb-6 border border-slate-200 shadow-sm">
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                </div>
                <h3 className="text-xl font-bold text-slate-900 mb-3">Keamanan Data (NIK)</h3>
@@ -152,7 +152,7 @@ function Home() {
             </div>
 
             <div className="bg-slate-50 border border-slate-200 p-8 rounded-xl">
-               <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-blue-600 mb-6 border border-slate-200 shadow-sm">
+               <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-sipentar-blue mb-6 border border-slate-200 shadow-sm">
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                </div>
                <h3 className="text-xl font-bold text-slate-900 mb-3">Akses 24/7 Tanpa Henti</h3>
@@ -162,7 +162,7 @@ function Home() {
             </div>
 
             <div className="bg-slate-50 border border-slate-200 p-8 rounded-xl">
-               <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-blue-600 mb-6 border border-slate-200 shadow-sm">
+               <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-sipentar-blue mb-6 border border-slate-200 shadow-sm">
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
                </div>
                <h3 className="text-xl font-bold text-slate-900 mb-3">Pemantauan Terintegrasi</h3>
@@ -189,7 +189,7 @@ function Home() {
 
             {/* Step 1 */}
             <div className="relative z-10 flex flex-col items-center text-center">
-              <div className="w-24 h-24 bg-white rounded-full border-8 border-slate-50 shadow-sm flex items-center justify-center text-2xl font-black text-blue-600 mb-6">
+              <div className="w-24 h-24 bg-white rounded-full border-8 border-slate-50 shadow-sm flex items-center justify-center text-2xl font-black text-sipentar-blue mb-6">
                 1
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Pencatatan Data</h3>
@@ -198,7 +198,7 @@ function Home() {
 
             {/* Step 2 */}
             <div className="relative z-10 flex flex-col items-center text-center">
-              <div className="w-24 h-24 bg-white rounded-full border-8 border-slate-50 shadow-sm flex items-center justify-center text-2xl font-black text-blue-600 mb-6">
+              <div className="w-24 h-24 bg-white rounded-full border-8 border-slate-50 shadow-sm flex items-center justify-center text-2xl font-black text-sipentar-blue mb-6">
                 2
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Verifikasi & Penanganan</h3>
@@ -207,7 +207,7 @@ function Home() {
 
             {/* Step 3 */}
             <div className="relative z-10 flex flex-col items-center text-center">
-              <div className="w-24 h-24 bg-white rounded-full border-8 border-slate-50 shadow-sm flex items-center justify-center text-2xl font-black text-blue-600 mb-6">
+              <div className="w-24 h-24 bg-white rounded-full border-8 border-slate-50 shadow-sm flex items-center justify-center text-2xl font-black text-sipentar-blue mb-6">
                 3
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Penyelesaian Laporan</h3>

@@ -148,8 +148,8 @@ function Dashboard() {
         const el = document.getElementById(`report-${report.id}`);
         if (el) {
           el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          el.classList.add('ring-4', 'ring-emerald-500', 'transition-all', 'duration-1000');
-          setTimeout(() => el.classList.remove('ring-4', 'ring-emerald-500'), 2500);
+          el.classList.add('ring-4', 'ring-sipentar-green', 'transition-all', 'duration-1000');
+          setTimeout(() => el.classList.remove('ring-4', 'ring-sipentar-green'), 2500);
         }
       }, 300);
     }
@@ -282,8 +282,8 @@ function Dashboard() {
             <div className="flex items-center gap-4 group">
               <img src="/logosipentar.png" alt="Logo Sipentar" className={`w-10 h-10 rounded-xl object-cover shadow-sm border ${role === 'admin' ? 'border-amber-700/50' : 'border-emerald-800/50'}`} />
               <div>
-                <h1 className="font-outfit text-2xl font-black text-slate-900 tracking-tight leading-tight">Sipentar<span className={role === 'admin' ? 'text-amber-600' : 'text-emerald-700'}>.</span></h1>
-                <p className={`text-[10px] font-extrabold tracking-[0.2em] uppercase ${role === 'admin' ? 'text-amber-700' : 'text-emerald-700'}`}>Desa Lamaran Tarung</p>
+                <h1 className="font-outfit text-2xl font-black text-slate-900 tracking-tight leading-tight">Sipentar<span className={role === 'admin' ? 'text-amber-600' : 'text-sipentar-green-dark'}>.</span></h1>
+                <p className={`text-[10px] font-extrabold tracking-[0.2em] uppercase ${role === 'admin' ? 'text-amber-700' : 'text-sipentar-green-dark'}`}>Desa Lamaran Tarung</p>
               </div>
             </div>
 
@@ -292,7 +292,7 @@ function Dashboard() {
               <div className="relative" ref={notifRef}>
                 <button
                   onClick={toggleNotifications}
-                  className="relative p-2.5 rounded-full text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                  className="relative p-2.5 rounded-full text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-all focus:outline-none focus:ring-2 focus:ring-sipentar-green/50"
                 >
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
                   {unreadCount > 0 && (
@@ -308,7 +308,7 @@ function Dashboard() {
                   <div className="fixed sm:absolute inset-x-4 top-20 sm:inset-auto sm:top-auto sm:right-0 sm:mt-4 sm:w-96 bg-white rounded-xl shadow-2xl border border-slate-200 overflow-hidden transform origin-top sm:origin-top-right transition-all z-50">
                     <div className="px-6 py-4 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
                       <h3 className="text-sm font-bold text-slate-800 uppercase">Pemberitahuan</h3>
-                      {unreadCount > 0 && <span className={`text-[10px] font-bold uppercase tracking-wider text-white px-3 py-1 rounded-full ${role === 'admin' ? 'bg-amber-600' : 'bg-emerald-600'}`}>{unreadCount} Baru</span>}
+                      {unreadCount > 0 && <span className={`text-[10px] font-bold uppercase tracking-wider text-white px-3 py-1 rounded-full ${role === 'admin' ? 'bg-amber-600' : 'bg-sipentar-green'}`}>{unreadCount} Baru</span>}
                     </div>
                     <div className="max-h-[360px] overflow-y-auto">
                       {notifications.length === 0 ? (
@@ -322,7 +322,7 @@ function Dashboard() {
                       ) : (
                         <ul className="divide-y divide-slate-100">
                           {notifications.map((notif) => (
-                            <li key={notif.id} onClick={() => handleNotificationClick(notif)} className={`p-4 hover:bg-slate-50 transition-colors cursor-pointer group ${!notif.is_read ? 'bg-blue-50/30' : ''}`}>
+                            <li key={notif.id} onClick={() => handleNotificationClick(notif)} className={`p-4 hover:bg-slate-50 transition-colors cursor-pointer group ${!notif.is_read ? 'bg-sipentar-blue-50/30' : ''}`}>
                               <div className="flex gap-3">
                                 <div className={`mt-1.5 w-2 h-2 rounded-full shrink-0 ${!notif.is_read ? (role === 'admin' ? 'bg-amber-500' : 'bg-emerald-500') : 'bg-slate-300'}`}></div>
                                 <div>
@@ -346,7 +346,7 @@ function Dashboard() {
               <div className="flex items-center gap-3 sm:gap-4">
                 <div className="hidden sm:flex flex-col items-end mr-1">
                   <p className="text-sm font-bold text-slate-800 leading-tight">{name || "Pengguna"}</p>
-                  <p className={`text-[10px] font-bold uppercase tracking-widest ${role === 'admin' ? 'text-amber-600' : 'text-emerald-700'}`}>{role}</p>
+                  <p className={`text-[10px] font-bold uppercase tracking-widest ${role === 'admin' ? 'text-amber-600' : 'text-sipentar-green-dark'}`}>{role}</p>
                 </div>
 
                 {/* Avatar / Profile Picture in Header */}
@@ -362,7 +362,7 @@ function Dashboard() {
                       className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border-2 shadow-sm transition-transform hover:scale-105 ${role === 'admin' ? 'border-amber-200' : 'border-emerald-200'}`}
                     />
                   ) : (
-                    <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-sm border-2 transition-transform hover:scale-105 ${role === 'admin' ? 'bg-amber-100 text-amber-700 border-amber-200' : 'bg-emerald-100 text-emerald-700 border-emerald-200'}`}>
+                    <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-sm border-2 transition-transform hover:scale-105 ${role === 'admin' ? 'bg-amber-100 text-amber-700 border-amber-200' : 'bg-sipentar-green-100 text-sipentar-green-dark border-emerald-200'}`}>
                       {name ? name.charAt(0).toUpperCase() : 'U'}
                     </div>
                   )}
@@ -372,7 +372,7 @@ function Dashboard() {
                 <div className="flex gap-1.5 sm:gap-2 bg-slate-100 p-1.5 rounded-lg border border-slate-200 ml-1">
                   <button
                     onClick={() => setActiveMainTab("profil")}
-                    className="p-1.5 text-slate-500 hover:text-emerald-700 hover:bg-white rounded-md transition-all"
+                    className="p-1.5 text-slate-500 hover:text-sipentar-green-dark hover:bg-white rounded-md transition-all"
                     title="Kelola Akun Pribadi"
                   >
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
@@ -397,7 +397,7 @@ function Dashboard() {
           <div className="hidden sm:flex border-b border-slate-200 mb-8 overflow-x-auto no-scrollbar gap-2 sm:gap-6">
             <button
               onClick={() => setActiveMainTab('beranda')}
-              className={`px-4 sm:px-6 py-4 font-bold text-sm sm:text-base whitespace-nowrap border-b-[3px] transition-colors flex items-center gap-2 ${activeMainTab === 'beranda' ? (role === 'admin' ? 'border-amber-600 text-amber-700' : 'border-emerald-600 text-emerald-700') : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}
+              className={`px-4 sm:px-6 py-4 font-bold text-sm sm:text-base whitespace-nowrap border-b-[3px] transition-colors flex items-center gap-2 ${activeMainTab === 'beranda' ? (role === 'admin' ? 'border-amber-600 text-amber-700' : 'border-emerald-600 text-sipentar-green-dark') : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
               Semua Laporan
@@ -406,7 +406,7 @@ function Dashboard() {
             {role === 'user' && (
               <button
                 onClick={() => setActiveMainTab('histori')}
-                className={`px-4 sm:px-6 py-4 font-bold text-sm sm:text-base whitespace-nowrap border-b-[3px] transition-colors flex items-center gap-2 ${activeMainTab === 'histori' ? 'border-emerald-600 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}
+                className={`px-4 sm:px-6 py-4 font-bold text-sm sm:text-base whitespace-nowrap border-b-[3px] transition-colors flex items-center gap-2 ${activeMainTab === 'histori' ? 'border-emerald-600 text-sipentar-green-dark' : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 Laporan Saya
@@ -416,7 +416,7 @@ function Dashboard() {
             {role === 'user' && (
               <button
                 onClick={() => setActiveMainTab('pengaduan')}
-                className={`px-4 sm:px-6 py-4 font-bold text-sm sm:text-base whitespace-nowrap border-b-[3px] transition-colors flex items-center gap-2 ${activeMainTab === 'pengaduan' ? 'border-emerald-600 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}
+                className={`px-4 sm:px-6 py-4 font-bold text-sm sm:text-base whitespace-nowrap border-b-[3px] transition-colors flex items-center gap-2 ${activeMainTab === 'pengaduan' ? 'border-emerald-600 text-sipentar-green-dark' : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2-2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                 Buat Pengaduan
@@ -443,7 +443,7 @@ function Dashboard() {
 
             <button
               onClick={() => setActiveMainTab('profil')}
-              className={`px-4 sm:px-6 py-4 font-bold text-sm sm:text-base whitespace-nowrap border-b-[3px] transition-colors flex items-center gap-2 ${activeMainTab === 'profil' ? (role === 'admin' ? 'border-amber-600 text-amber-700' : 'border-emerald-600 text-emerald-700') : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}
+              className={`px-4 sm:px-6 py-4 font-bold text-sm sm:text-base whitespace-nowrap border-b-[3px] transition-colors flex items-center gap-2 ${activeMainTab === 'profil' ? (role === 'admin' ? 'border-amber-600 text-amber-700' : 'border-emerald-600 text-sipentar-green-dark') : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
               Profil Akun
@@ -460,7 +460,7 @@ function Dashboard() {
 
                     <div className="relative p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-8">
                       <div className="text-center sm:text-left z-10 w-full">
-                        <span className={`inline-block px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest mb-4 border ${role === 'admin' ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-emerald-100 text-emerald-800 border-emerald-200'}`}>
+                        <span className={`inline-block px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest mb-4 border ${role === 'admin' ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-sipentar-green-100 text-emerald-800 border-emerald-200'}`}>
                           {role === 'admin' ? 'Portal Kelurahan' : 'Ruang Warga'}
                         </span>
                         <h2 className="font-outfit text-3xl sm:text-4xl font-black text-slate-900 mb-3 tracking-tight">
@@ -472,7 +472,7 @@ function Dashboard() {
                         </p>
                       </div>
                       <div className="hidden lg:flex shrink-0 z-10 w-32 h-32 opacity-90 items-center justify-center bg-white rounded-2xl border border-slate-200 shadow-sm">
-                        <svg className={`w-16 h-16 ${role === 'admin' ? 'text-amber-600' : 'text-emerald-700'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className={`w-16 h-16 ${role === 'admin' ? 'text-amber-600' : 'text-sipentar-green-dark'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                         </svg>
                       </div>
@@ -493,7 +493,7 @@ function Dashboard() {
                   </div>
 
                   <div className="bg-white rounded-xl p-6 shadow-sm border border-emerald-100">
-                    <div className="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-700 mb-3">
+                    <div className="w-10 h-10 rounded-lg bg-sipentar-green-100 flex items-center justify-center text-sipentar-green-dark mb-3">
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     </div>
                     <p className="text-slate-500 font-bold text-xs mb-1 uppercase tracking-wider">Diselesaikan</p>
@@ -568,7 +568,7 @@ function Dashboard() {
 
                           {/* Avatar & Info Pelapor */}
                           <div className="flex items-center sm:items-start gap-3 sm:gap-4 shrink-0 sm:w-56 pb-3 sm:pb-0 border-b border-slate-100 sm:border-0">
-                            <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-slate-100 flex items-center justify-center text-lg font-black border border-slate-200 shrink-0 ${role === 'admin' ? 'text-amber-700' : 'text-emerald-700'}`}>
+                            <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-slate-100 flex items-center justify-center text-lg font-black border border-slate-200 shrink-0 ${role === 'admin' ? 'text-amber-700' : 'text-sipentar-green-dark'}`}>
                               {r.name.charAt(0).toUpperCase()}
                             </div>
                             <div>
@@ -635,7 +635,7 @@ function Dashboard() {
 
                             {/* Status & Kendali Admin Bottom Bar */}
                             <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row justify-between sm:items-center gap-3">
-                              <span className={`inline-flex items-center w-fit px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-bold tracking-widest uppercase border ${r.status === 'Selesai' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : r.status === 'Diproses' ? 'bg-cyan-50 text-cyan-700 border-cyan-200' : 'bg-amber-50 text-amber-700 border-amber-200'}`}>
+                              <span className={`inline-flex items-center w-fit px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-bold tracking-widest uppercase border ${r.status === 'Selesai' ? 'bg-sipentar-green-50 text-sipentar-green-dark border-emerald-200' : r.status === 'Diproses' ? 'bg-cyan-50 text-cyan-700 border-cyan-200' : 'bg-amber-50 text-amber-700 border-amber-200'}`}>
                                 {r.status === 'Menunggu' && <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mr-2 shrink-0"></span>}
                                 {r.status === 'Diproses' && <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 mr-2 shrink-0"></span>}
                                 {r.status === 'Selesai' && <svg className="w-3 h-3 mr-1.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>}
@@ -647,7 +647,7 @@ function Dashboard() {
                                   <select
                                     value={r.status}
                                     onChange={(e) => handleStatusSelect(r.id, e.target.value)}
-                                    className={`appearance-none bg-slate-50 border border-slate-300 text-slate-800 text-[11px] sm:text-xs font-bold rounded-lg focus:ring-2 outline-none cursor-pointer block w-full pl-3 pr-8 py-2.5 sm:py-2 ${role === 'admin' ? 'focus:ring-amber-500/30' : 'focus:ring-emerald-500/30'}`}
+                                    className={`appearance-none bg-slate-50 border border-slate-300 text-slate-800 text-[11px] sm:text-xs font-bold rounded-lg focus:ring-2 outline-none cursor-pointer block w-full pl-3 pr-8 py-2.5 sm:py-2 ${role === 'admin' ? 'focus:ring-amber-500/30' : 'focus:ring-sipentar-green/30'}`}
                                   >
                                     <option value="Menunggu">Tertunda</option>
                                     <option value="Diproses">Diproses</option>
@@ -691,7 +691,7 @@ function Dashboard() {
           <div className="flex justify-around items-center h-16">
             <button
               onClick={() => setActiveMainTab('beranda')}
-              className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors ${activeMainTab === 'beranda' ? (role === 'admin' ? 'text-amber-600' : 'text-emerald-700') : 'text-slate-400 hover:text-slate-600'}`}
+              className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors ${activeMainTab === 'beranda' ? (role === 'admin' ? 'text-amber-600' : 'text-sipentar-green-dark') : 'text-slate-400 hover:text-slate-600'}`}
             >
               <svg className="w-6 h-6" fill={activeMainTab === 'beranda' ? "currentColor" : "none"} viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={activeMainTab === 'beranda' ? "0" : "2"} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
               <span className="text-[10px] font-bold tracking-wide">Beranda</span>
@@ -700,7 +700,7 @@ function Dashboard() {
             {role === 'user' && (
               <button
                 onClick={() => setActiveMainTab('histori')}
-                className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors ${activeMainTab === 'histori' ? 'text-emerald-700' : 'text-slate-400 hover:text-slate-600'}`}
+                className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors ${activeMainTab === 'histori' ? 'text-sipentar-green-dark' : 'text-slate-400 hover:text-slate-600'}`}
               >
                 <svg className="w-6 h-6" fill={activeMainTab === 'histori' ? "currentColor" : "none"} viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={activeMainTab === 'histori' ? "0" : "2"} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 <span className="text-[10px] font-bold tracking-wide">Histori</span>
@@ -715,7 +715,7 @@ function Dashboard() {
                 <div className={`absolute -top-5 bg-gradient-to-br from-emerald-500 to-emerald-700 text-white rounded-full p-3 shadow-lg border-4 border-slate-50 transition-transform ${activeMainTab === 'pengaduan' ? 'scale-110 shadow-emerald-500/40' : 'hover:scale-105'}`}>
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M11 5H6a2 2 0 00-2-2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                 </div>
-                <span className={`text-[10px] font-bold tracking-wide mt-7 ${activeMainTab === 'pengaduan' ? 'text-emerald-700' : 'text-slate-400'}`}>Aduan</span>
+                <span className={`text-[10px] font-bold tracking-wide mt-7 ${activeMainTab === 'pengaduan' ? 'text-sipentar-green-dark' : 'text-slate-400'}`}>Aduan</span>
               </button>
             )}
 
@@ -739,7 +739,7 @@ function Dashboard() {
 
             <button
               onClick={() => setActiveMainTab('profil')}
-              className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors ${activeMainTab === 'profil' ? (role === 'admin' ? 'text-amber-600' : 'text-emerald-700') : 'text-slate-400 hover:text-slate-600'}`}
+              className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors ${activeMainTab === 'profil' ? (role === 'admin' ? 'text-amber-600' : 'text-sipentar-green-dark') : 'text-slate-400 hover:text-slate-600'}`}
             >
               <svg className="w-6 h-6" fill={activeMainTab === 'profil' ? "currentColor" : "none"} viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={activeMainTab === 'profil' ? "0" : "2"} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
               <span className="text-[10px] font-bold tracking-wide">Profil</span>

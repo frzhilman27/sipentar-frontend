@@ -155,8 +155,8 @@ function AdminDashboard() {
         const el = document.getElementById(`report-${report.id}`);
         if (el) {
           el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          el.classList.add('ring-4', 'ring-emerald-500', 'transition-all', 'duration-1000');
-          setTimeout(() => el.classList.remove('ring-4', 'ring-emerald-500'), 2500);
+          el.classList.add('ring-4', 'ring-sipentar-green', 'transition-all', 'duration-1000');
+          setTimeout(() => el.classList.remove('ring-4', 'ring-sipentar-green'), 2500);
         }
       }, 300);
     }
@@ -331,9 +331,9 @@ function AdminDashboard() {
       {showHistoryModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden relative">
-            <div className="px-6 py-5 border-b border-slate-200 flex justify-between items-center bg-emerald-50">
+            <div className="px-6 py-5 border-b border-slate-200 flex justify-between items-center bg-sipentar-green-50">
               <h3 className="font-bold text-lg text-emerald-900">Linimasa Riwayat Laporan</h3>
-              <button onClick={() => setShowHistoryModal(false)} className="text-emerald-500 hover:text-emerald-700 transition-colors">
+              <button onClick={() => setShowHistoryModal(false)} className="text-sipentar-green-light hover:text-sipentar-green-dark transition-colors">
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             </div>
@@ -348,7 +348,7 @@ function AdminDashboard() {
                     <div key={h.id} className="relative pl-6">
                       <div className={`absolute -left-[9px] top-1 w-4 h-4 rounded-full border-2 border-white ${h.status === 'Menunggu' ? 'bg-amber-400' : h.status === 'Diproses' ? 'bg-cyan-500' : 'bg-emerald-500'}`}></div>
                       <p className="text-xs font-bold text-slate-500 mb-1">{new Date(h.created_at).toLocaleString('id-ID')}</p>
-                      <p className="text-sm font-semibold text-slate-800 bg-slate-50 border border-slate-100 rounded-lg p-2.5 inline-block">Status berubah menjadi <span className={h.status === 'Selesai' ? 'text-emerald-600' : 'text-cyan-600'}>{h.status}</span></p>
+                      <p className="text-sm font-semibold text-slate-800 bg-slate-50 border border-slate-100 rounded-lg p-2.5 inline-block">Status berubah menjadi <span className={h.status === 'Selesai' ? 'text-sipentar-green' : 'text-cyan-600'}>{h.status}</span></p>
                     </div>
                   ))}
                 </div>
@@ -369,7 +369,7 @@ function AdminDashboard() {
               <div className="mb-8 border-b border-slate-200 pb-6">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div className="w-full">
-                    <span className={`inline-block px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-widest mb-3 ${role === 'admin' ? 'bg-blue-50 text-blue-700' : 'bg-slate-100 text-slate-600'}`}>
+                    <span className={`inline-block px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-widest mb-3 ${role === 'admin' ? 'bg-sipentar-blue-50 text-sipentar-blue-dark' : 'bg-slate-100 text-slate-600'}`}>
                       {role === 'admin' ? 'Pusat Kendali Admin' : 'Dasbor Penduduk'}
                     </span>
                     <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mb-2">
@@ -396,7 +396,7 @@ function AdminDashboard() {
               </div>
 
               <div className="bg-white rounded-xl p-6 shadow-sm border border-emerald-100">
-                <div className="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-700 mb-3">
+                <div className="w-10 h-10 rounded-lg bg-sipentar-green-100 flex items-center justify-center text-sipentar-green-dark mb-3">
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 </div>
                 <p className="text-slate-500 font-bold text-xs mb-1 uppercase tracking-wider">Diselesaikan</p>
@@ -479,7 +479,7 @@ function AdminDashboard() {
                       <div className="flex-1">
                         <div className="flex justify-between items-start mb-2 gap-4">
                            <h4 className="font-bold text-base text-slate-900">{r.judul}</h4>
-                           <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold tracking-widest uppercase border ${r.status === 'Selesai' ? 'bg-green-50 text-green-700 border-green-200' : r.status === 'Diproses' ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-slate-100 text-slate-600 border-slate-200'}`}>
+                           <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold tracking-widest uppercase border ${r.status === 'Selesai' ? 'bg-green-50 text-sipentar-green-dark border-sipentar-green-100' : r.status === 'Diproses' ? 'bg-sipentar-blue-50 text-sipentar-blue-dark border-blue-200' : 'bg-slate-100 text-slate-600 border-slate-200'}`}>
                              {r.status}
                            </span>
                         </div>
@@ -490,7 +490,7 @@ function AdminDashboard() {
                           {r.image_url && (
                             <button
                               onClick={() => setSelectedImage(r.image_url.startsWith('data:image') ? r.image_url : `${IMAGE_BASE_URL}/uploads/${r.image_url}`)}
-                              className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded"
+                              className="inline-flex items-center gap-1.5 text-xs font-bold text-sipentar-blue hover:text-blue-800 transition-colors bg-sipentar-blue-50 hover:bg-sipentar-blue-100 px-3 py-1.5 rounded"
                             >
                               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                               Lihat Lampiran Warga
@@ -504,7 +504,7 @@ function AdminDashboard() {
                                 const urls = Array.isArray(r.admin_evidence_urls) ? r.admin_evidence_urls : [r.admin_evidence_urls];
                                 setSelectedImage(urls[0].startsWith('data:image') ? urls[0] : `${IMAGE_BASE_URL}/uploads/${urls[0]}`);
                               }}
-                              className="inline-flex items-center gap-1.5 text-xs font-bold text-green-700 hover:text-green-900 transition-colors bg-green-50 hover:bg-green-100 px-3 py-1.5 rounded border border-green-200"
+                              className="inline-flex items-center gap-1.5 text-xs font-bold text-sipentar-green-dark hover:text-green-900 transition-colors bg-green-50 hover:bg-green-100 px-3 py-1.5 rounded border border-sipentar-green-100"
                             >
                               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                               Lihat Bukti Penanganan
@@ -523,7 +523,7 @@ function AdminDashboard() {
                                 <select
                                     value={r.status}
                                     onChange={(e) => handleStatusSelect(r.id, e.target.value)}
-                                    className={`appearance-none bg-slate-50 border border-slate-300 text-slate-800 text-xs font-bold rounded focus:ring-2 outline-none cursor-pointer block w-full pl-3 pr-8 py-2 ${role === 'admin' ? 'focus:ring-blue-500/30' : 'focus:ring-green-500/30'}`}
+                                    className={`appearance-none bg-slate-50 border border-slate-300 text-slate-800 text-xs font-bold rounded focus:ring-2 outline-none cursor-pointer block w-full pl-3 pr-8 py-2 ${role === 'admin' ? 'focus:ring-sipentar-blue/30' : 'focus:ring-green-500/30'}`}
                                 >
                                     <option value="Menunggu">Tertunda</option>
                                     <option value="Diproses">Diproses</option>
