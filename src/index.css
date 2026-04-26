@@ -5,12 +5,12 @@
     --font-sans: 'Inter', sans-serif;
     --font-outfit: 'Outfit', sans-serif; /* Adding Outfit for premium headings */
 
-    /* Sipentar Logo Colors */
-    --color-sipentar-blue: #008cd1;
-    --color-sipentar-blue-light: #33a3da;
-    --color-sipentar-blue-dark: #0070a7;
-    --color-sipentar-blue-50: #f0f9ff;
-    --color-sipentar-blue-100: #e0f2fe;
+    /* Sipentar Logo Colors - Updated Primary */
+    --color-sipentar-blue: #1A56DB;
+    --color-sipentar-blue-light: #4A7AF0;
+    --color-sipentar-blue-dark: #113A94;
+    --color-sipentar-blue-50: #eff6ff;
+    --color-sipentar-blue-100: #dbeafe;
 
     --color-sipentar-green: #a5cd39;
     --color-sipentar-green-light: #b7d75d;

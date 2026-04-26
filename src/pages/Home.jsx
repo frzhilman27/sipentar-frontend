@@ -17,7 +17,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-blue-200 flex flex-col relative overflow-x-hidden">
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-800 flex flex-col relative overflow-x-hidden">
 
       {/* 1. SOLID NAVBAR */}
       <div className={`fixed w-full z-50 top-0 transition-all duration-300 ${isScrolled ? 'bg-white shadow-sm border-b border-slate-200' : 'bg-slate-50'}`}>
@@ -36,9 +36,9 @@ function Home() {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-8">
-              <a href="#beranda" className="text-sm font-bold text-slate-600 hover:text-sipentar-blue transition-colors">Beranda</a>
-              <a href="#tentang" className="text-sm font-bold text-slate-600 hover:text-sipentar-blue transition-colors">Tentang Sistem</a>
-              <a href="#alur" className="text-sm font-bold text-slate-600 hover:text-sipentar-blue transition-colors">Alur Pelaporan</a>
+              <a href="#layanan" className="text-sm font-bold text-slate-600 hover:text-sipentar-blue transition-colors">Layanan</a>
+              <a href="#keamanan" className="text-sm font-bold text-slate-600 hover:text-sipentar-blue transition-colors">Keamanan</a>
+              <a href="#kontak" className="text-sm font-bold text-slate-600 hover:text-sipentar-blue transition-colors">Kontak</a>
             </div>
 
             {/* Action Buttons */}
@@ -46,15 +46,15 @@ function Home() {
               <Link to="/login" className="text-sm font-bold text-slate-600 hover:text-slate-900 transition-colors">
                 Masuk
               </Link>
-              <Link to="/register" className="text-sm font-bold text-white bg-sipentar-blue hover:bg-sipentar-blue-dark px-6 py-2.5 rounded-md transition-colors shadow-sm">
-                Daftar Akun
+              <Link to="/register" className="text-sm font-bold text-white bg-sipentar-blue hover:bg-sipentar-blue-dark px-6 py-2.5 rounded-lg transition-colors shadow-sm">
+                Mulai Sekarang
               </Link>
             </div>
 
             {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center">
               <button
-                className="p-2 text-slate-600 hover:bg-slate-100 rounded-md transition-colors focus:outline-none"
+                className="p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors focus:outline-none"
                 aria-label="Menu"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
@@ -71,165 +71,126 @@ function Home() {
         {/* Mobile Menu Dropdown */}
         <div className={`md:hidden absolute top-full left-0 right-0 bg-white border-b border-slate-200 shadow-lg transition-all duration-300 ease-in-out origin-top ${isMobileMenuOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0 pointer-events-none'}`}>
           <div className="px-4 py-6 flex flex-col gap-4">
-            <a href="#beranda" className="text-slate-700 font-bold text-base hover:text-sipentar-blue transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Beranda</a>
-            <a href="#tentang" className="text-slate-700 font-bold text-base hover:text-sipentar-blue transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Tentang Sistem</a>
-            <a href="#alur" className="text-slate-700 font-bold text-base hover:text-sipentar-blue transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Alur Pelaporan</a>
+            <a href="#layanan" className="text-slate-700 font-bold text-base hover:text-sipentar-blue transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Layanan</a>
+            <a href="#keamanan" className="text-slate-700 font-bold text-base hover:text-sipentar-blue transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Keamanan</a>
+            <a href="#kontak" className="text-slate-700 font-bold text-base hover:text-sipentar-blue transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Kontak</a>
             <div className="h-px bg-slate-100 my-2"></div>
-            <Link to="/login" className="text-sipentar-blue-dark font-bold text-base text-center border border-blue-200 bg-sipentar-blue-50 py-3 rounded-md hover:bg-sipentar-blue-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Masuk Ke Akun</Link>
-            <Link to="/register" className="text-center bg-sipentar-blue text-white font-bold text-base py-3 rounded-md hover:bg-sipentar-blue-dark transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Mendaftar Sekarang</Link>
+            <Link to="/login" className="text-sipentar-blue-dark font-bold text-base text-center border border-blue-200 bg-sipentar-blue-50 py-3 rounded-lg hover:bg-sipentar-blue-100 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Masuk Ke Akun</Link>
+            <Link to="/register" className="text-center bg-sipentar-blue text-white font-bold text-base py-3 rounded-lg hover:bg-sipentar-blue-dark transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Mulai Sekarang</Link>
           </div>
         </div>
       </div>
 
       {/* 2. HERO SECTION - Clean Typography Focused */}
       <section id="beranda" className="relative pt-32 pb-24 md:pt-48 md:pb-32 flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 bg-slate-50">
-        
-        {/* Minimal grid background pattern */}
-        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#cbd5e1 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+        <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center">
+          
+          {/* Desktop Headline */}
+          <h1 className="hidden md:block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.15] mb-6">
+            Masa Depan Tata Kelola <br/><span className="text-sipentar-blue">Pemerintahan Desa.</span>
+          </h1>
 
-        <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sipentar-blue-50 border border-blue-100 text-sipentar-blue-dark text-xs font-bold tracking-widest uppercase mb-8">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-sipentar-blue"></span>
-            </span>
-            Sistem Informasi Pengaduan Pintar
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.15] mb-6">
-            Tata Kelola Desa Berbasis <span className="text-transparent bg-clip-text bg-gradient-to-r from-sipentar-blue-dark to-sipentar-blue">Data & Transparansi.</span>
+          {/* Mobile Headline */}
+          <h1 className="md:hidden text-4xl font-black text-slate-900 tracking-tight leading-tight mb-6">
+            Tata Kelola Desa Berbasis <span className="text-sipentar-blue">Data & Transparansi.</span>
           </h1>
 
           <p className="text-base sm:text-lg lg:text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl font-medium">
-            Wadah penyampaian aspirasi dan pengaduan masyarakat Desa Lamaran Tarung secara terpadu. Sistematis, tercatat, dan mudah dipantau secara langsung.
+            Platform digital terintegrasi untuk pelayanan publik, visualisasi data, dan manajemen administrasi desa yang efisien.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-16">
             <Link to="/register" className="w-full sm:w-auto">
-              <button className="w-full px-8 py-4 bg-sipentar-blue hover:bg-sipentar-blue-dark text-white text-base font-bold rounded-md transition-colors flex items-center justify-center gap-2 shadow-sm">
-                Buat Laporan Baru
+              <button className="w-full px-8 py-4 bg-sipentar-blue hover:bg-sipentar-blue-dark text-white text-base font-bold rounded-lg transition-colors flex items-center justify-center gap-2 shadow-sm">
+                <span className="hidden md:inline">Mulai Sekarang</span>
+                <span className="md:hidden">Buat Laporan Baru</span>
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
               </button>
             </Link>
             <Link to="/login" className="w-full sm:w-auto">
-              <button className="w-full px-8 py-4 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 text-base font-bold rounded-md transition-colors flex items-center justify-center gap-2 shadow-sm">
+              <button className="w-full px-8 py-4 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 text-base font-bold rounded-lg transition-colors flex items-center justify-center gap-2 shadow-sm">
                 Akses Dasbor Warga
               </button>
             </Link>
           </div>
+
+          {/* Desktop Hero Image - Mockup placeholder */}
+          <div className="hidden md:block w-full max-w-4xl mx-auto bg-slate-200 rounded-xl overflow-hidden shadow-2xl border border-slate-300 aspect-video relative">
+             <div className="absolute inset-0 flex items-center justify-center text-slate-400 bg-slate-800">
+               <span className="font-bold text-lg tracking-widest">[GAMBAR GEDUNG PEMERINTAHAN MODERN]</span>
+             </div>
+          </div>
         </div>
       </section>
 
-      {/* 3. TENTANG SISTEM SECTION - Enterprise Cards */}
-      <section id="tentang" className="py-20 sm:py-32 bg-white border-y border-slate-200 relative z-10">
+      {/* 3. FITUR / SECTIONS */}
+      <section id="layanan" className="py-20 sm:py-32 bg-white border-y border-slate-200 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="mb-16 md:flex justify-between items-end border-b border-slate-200 pb-8">
               <div>
                 <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight mb-4">
-                  Infrastruktur Informasi Desa
+                  Sistem Informasi Terpadu
                 </h2>
                 <p className="text-slate-600 text-lg max-w-2xl font-medium">
-                  SIPENTAR dirancang untuk mengeliminasi birokrasi berbelit dan menggantinya dengan alur pendataan digital yang efisien.
+                  Modul komprehensif untuk mendukung operasional pemerintahan desa modern.
                 </p>
-              </div>
-              <div className="mt-6 md:mt-0 hidden md:block text-right">
-                <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Platform Version</p>
-                <p className="text-slate-800 font-bold">2.0.1 Enterprise</p>
               </div>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-6">
+          {/* Desktop Sections & Mobile Cards */}
+          <div className="grid md:grid-cols-3 gap-8">
             
-            <div className="bg-slate-50 border border-slate-200 p-8 rounded-xl">
+            <div className="bg-slate-50 border border-slate-200 p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-sipentar-blue mb-6 border border-slate-200 shadow-sm">
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
                </div>
-               <h3 className="text-xl font-bold text-slate-900 mb-3">Keamanan Data (NIK)</h3>
-               <p className="text-slate-600 text-sm leading-relaxed font-medium">
-                 Verifikasi pengguna menggunakan Nomor Induk Kependudukan (NIK) terdaftar untuk memastikan validitas pelapor dan menghindari duplikasi data atau pelaporan palsu.
+               <h3 className="text-xl font-bold text-slate-900 mb-3">Layanan Pemerintahan Terpadu</h3>
+               <p className="text-slate-600 text-sm leading-relaxed font-medium md:hidden font-bold mb-1">Data Security</p>
+               <p className="text-slate-600 text-sm leading-relaxed">
+                 Akses berbagai layanan administrasi, pengajuan surat menyurat, dan pelaporan langsung dari satu pintu.
                </p>
             </div>
 
-            <div className="bg-slate-50 border border-slate-200 p-8 rounded-xl">
-               <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-sipentar-blue mb-6 border border-slate-200 shadow-sm">
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-               </div>
-               <h3 className="text-xl font-bold text-slate-900 mb-3">Akses 24/7 Tanpa Henti</h3>
-               <p className="text-slate-600 text-sm leading-relaxed font-medium">
-                 Pusat pangkalan data menerima masukan dan laporan kapanpun secara real-time, bebas dari kendala batasan jam operasional kantor kelurahan konvensional.
-               </p>
-            </div>
-
-            <div className="bg-slate-50 border border-slate-200 p-8 rounded-xl">
+            <div className="bg-slate-50 border border-slate-200 p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-sipentar-blue mb-6 border border-slate-200 shadow-sm">
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
                </div>
-               <h3 className="text-xl font-bold text-slate-900 mb-3">Pemantauan Terintegrasi</h3>
-               <p className="text-slate-600 text-sm leading-relaxed font-medium">
-                 Setiap tiket pelaporan dapat dilacak status penanganannya secara langsung melalui dasbor personal warga, dari tahap tinjauan hingga dokumentasi hasil akhir.
+               <h3 className="text-xl font-bold text-slate-900 mb-3">Visualisasi Data</h3>
+               <p className="text-slate-600 text-sm leading-relaxed font-medium md:hidden font-bold mb-1">24/7 Access</p>
+               <p className="text-slate-600 text-sm leading-relaxed">
+                 Pemantauan metrik laporan, demografi, dan status pelayanan dalam bentuk grafik analitik yang mudah dipahami.
                </p>
             </div>
 
-          </div>
-        </div>
-      </section>
-
-      {/* 4. ALUR PELAPORAN - Clean Steps */}
-      <section id="alur" className="py-20 sm:py-32 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-16">
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight mb-4 text-center">Standar Operasional Prosedur</h2>
-            <p className="text-slate-600 text-lg font-medium text-center max-w-3xl mx-auto">Tiga tahapan sistematis dalam pemrosesan aduan masyarakat untuk menjaga transparansi kerja.</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 relative">
-            {/* Connecting Line */}
-            <div className="hidden md:block absolute top-12 left-1/6 right-1/6 h-0.5 bg-slate-200 z-0"></div>
-
-            {/* Step 1 */}
-            <div className="relative z-10 flex flex-col items-center text-center">
-              <div className="w-24 h-24 bg-white rounded-full border-8 border-slate-50 shadow-sm flex items-center justify-center text-2xl font-black text-sipentar-blue mb-6">
-                1
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Pencatatan Data</h3>
-              <p className="text-slate-600 text-sm leading-relaxed font-medium">Warga mengunggah detail masalah beserta foto bukti aktual ke dalam sistem menggunakan akun terverifikasi.</p>
+            <div className="bg-slate-50 border border-slate-200 p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow" id="keamanan">
+               <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-sipentar-blue mb-6 border border-slate-200 shadow-sm">
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+               </div>
+               <h3 className="text-xl font-bold text-slate-900 mb-3">Keamanan Tingkat Tinggi</h3>
+               <p className="text-slate-600 text-sm leading-relaxed font-medium md:hidden font-bold mb-1">Integrated Monitoring</p>
+               <p className="text-slate-600 text-sm leading-relaxed">
+                 Proteksi data warga dengan enkripsi berlapis, verifikasi identitas, dan audit log riwayat aktivitas secara real-time.
+               </p>
             </div>
 
-            {/* Step 2 */}
-            <div className="relative z-10 flex flex-col items-center text-center">
-              <div className="w-24 h-24 bg-white rounded-full border-8 border-slate-50 shadow-sm flex items-center justify-center text-2xl font-black text-sipentar-blue mb-6">
-                2
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Verifikasi & Penanganan</h3>
-              <p className="text-slate-600 text-sm leading-relaxed font-medium">Aparatur desa memeriksa validitas laporan di dasbor admin dan merubah status menjadi 'Diproses' untuk memulai eksekusi lapangan.</p>
-            </div>
-
-            {/* Step 3 */}
-            <div className="relative z-10 flex flex-col items-center text-center">
-              <div className="w-24 h-24 bg-white rounded-full border-8 border-slate-50 shadow-sm flex items-center justify-center text-2xl font-black text-sipentar-blue mb-6">
-                3
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Penyelesaian Laporan</h3>
-              <p className="text-slate-600 text-sm leading-relaxed font-medium">Laporan ditutup dengan melampirkan dokumentasi pengerjaan yang transparan, dapat dilihat kembali melalui rekam jejak sistem.</p>
-            </div>
           </div>
         </div>
       </section>
 
       {/* 5. FOOTER - Corporate Minimal */}
-      <footer className="bg-slate-900 text-slate-300 py-16 border-t border-slate-800">
+      <footer className="bg-slate-900 text-slate-300 py-16 border-t border-slate-800" id="kontak">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 border-b border-slate-800 pb-12">
             <div className="col-span-1 md:col-span-2">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 rounded bg-white flex items-center justify-center p-1">
+                <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center p-1">
                   <img src="/logosipentar.png" alt="Logo Sipentar Footer" className="w-full h-full object-cover" />
                 </div>
                 <span className="text-xl font-black text-white tracking-tight">SIPENTAR.</span>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed max-w-sm font-medium">
-                Pusat aduan dan layanan digital Pemerintah Desa Lamaran Tarung. Mendukung tata kelola pemerintahan desa yang akuntabel.
+                Pusat aduan dan layanan digital Pemerintah Desa. Mendukung tata kelola pemerintahan desa yang akuntabel.
               </p>
             </div>
 
@@ -238,30 +199,47 @@ function Home() {
               <ul className="space-y-3 text-sm font-medium">
                 <li><Link to="/login" className="text-slate-400 hover:text-white transition-colors">Portal Login</Link></li>
                 <li><Link to="/register" className="text-slate-400 hover:text-white transition-colors">Registrasi Penduduk</Link></li>
-                <li><a href="#alur" className="text-slate-400 hover:text-white transition-colors">Dokumentasi Alur</a></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="text-xs font-bold text-white uppercase tracking-widest mb-5">Pusat Bantuan</h4>
+              <h4 className="text-xs font-bold text-white uppercase tracking-widest mb-5">Kontak & Bantuan</h4>
               <ul className="space-y-3 text-sm font-medium text-slate-400">
-                <li>Balai Desa Lamaran Tarung</li>
-                <li>Kec. Cantigi, Kab. Indramayu</li>
-                <li className="pt-2 text-blue-400 font-bold">admin@lamarantarung.desa.id</li>
+                <li>Balai Desa</li>
+                <li>Kecamatan, Kabupaten</li>
+                <li className="pt-2 text-sipentar-blue-light font-bold">admin@desa.id</li>
               </ul>
             </div>
           </div>
 
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-slate-500">
             <p>
-              &copy; {new Date().getFullYear()} Pemerintah Desa Lamaran Tarung. Seluruh Hak Cipta Dilindungi.
+              &copy; {new Date().getFullYear()} Pemerintah Desa. Seluruh Hak Cipta Dilindungi.
             </p>
             <div className="flex gap-4">
-              <span>Sistem Pengaduan Pintar v2.0.1</span>
+              <span>Sipentar Portal v3.0</span>
             </div>
           </div>
         </div>
       </footer>
+
+      {/* Mobile Bottom Navigation */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200">
+        <div className="flex justify-around items-center h-16 pb-safe">
+          <a href="#beranda" className="flex flex-col items-center justify-center w-full h-full space-y-1 text-sipentar-blue">
+             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+             <span className="text-[10px] font-bold tracking-wide">Beranda</span>
+          </a>
+          <Link to="/login" className="flex flex-col items-center justify-center w-full h-full space-y-1 text-slate-500">
+             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+             <span className="text-[10px] font-bold tracking-wide">Laporan</span>
+          </Link>
+          <Link to="/register" className="flex flex-col items-center justify-center w-full h-full space-y-1 text-slate-500">
+             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+             <span className="text-[10px] font-bold tracking-wide">Daftar</span>
+          </Link>
+        </div>
+      </div>
 
     </div>
   );
