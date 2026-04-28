@@ -6,9 +6,9 @@
     --font-outfit: 'Outfit', sans-serif; /* Adding Outfit for premium headings */
 
     /* Sipentar Logo Colors - Updated Primary */
-    --color-sipentar-blue: #1A56DB;
+    --color-sipentar-blue: #1A56DB; /* Royal Blue */
     --color-sipentar-blue-light: #4A7AF0;
-    --color-sipentar-blue-dark: #113A94;
+    --color-sipentar-blue-dark: #113A94; /* Navy Blue */
     --color-sipentar-blue-50: #eff6ff;
     --color-sipentar-blue-100: #dbeafe;
 
@@ -41,13 +41,23 @@ body {
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* Base text color for the premium dark vibe */
-    color: #f8fafc;
-    background-color: #0f172a;
+    /* Clean pure white base for the premium minimalist vibe */
+    color: #0f172a;
+    background-color: #f8fafc;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Outfit', sans-serif;
+}
+
+/* Custom Soft Utilities for Premium UI */
+@layer utilities {
+  .shadow-soft {
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.04);
+  }
+  .shadow-soft-sm {
+    box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.03);
+  }
 }
 
 /* Custom Scrollbar for Premium Feel */
@@ -56,14 +66,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-track {
-    background: #0f172a; /* Dark track */
+    background: #f1f5f9; /* Light track */
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #334155;
-    border-radius: 4px;
+    background: #cbd5e1;
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #475569;
+    background: #94a3b8;
 }
