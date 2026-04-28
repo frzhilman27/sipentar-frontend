@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../services/api";
 
-import villageBg from '../assets/village-bg.png';
-
 function Login() {
   const navigate = useNavigate();
   // State untuk melacak Portal yang aktif (warga atau admin)
@@ -16,25 +14,17 @@ function Login() {
   // Penyesuaian tema warna & input berdasarkan role aktif
   const isUser = roleTarget === "user";
 
-  // Custom Dynamic Styling based on role, matching Premium Village Theme
-  const selectionColor = isUser ? "selection:bg-emerald-200" : "selection:bg-amber-200";
-  const bgImage = `url(${villageBg})`;
-
-  const glareGradient = isUser
-    ? "from-transparent via-emerald-400 to-transparent"
-    : "from-transparent via-amber-400 to-transparent";
-
-  const iconGradient = isUser
-    ? "from-emerald-600 to-teal-700 shadow-emerald-500/30"
-    : "from-amber-600 to-orange-700 shadow-amber-500/30";
+  // Custom Dynamic Styling based on role, matching Premium Theme
+  const selectionColor = isUser ? "selection:bg-blue-200" : "selection:bg-slate-200";
+  const bgImage = `url('/rice_field_bg.png')`;
 
   const inputFocusRing = isUser
-    ? "focus:ring-sipentar-green/20 focus:border-emerald-500"
-    : "focus:ring-amber-500/20 focus:border-amber-500";
+    ? "focus:ring-sipentar-blue/20 focus:border-sipentar-blue"
+    : "focus:ring-slate-500/20 focus:border-slate-600";
 
   const buttonStyle = isUser
-    ? "bg-sipentar-green-dark hover:bg-emerald-800 shadow-emerald-700/30"
-    : "bg-amber-600 hover:bg-amber-700 shadow-amber-600/30";
+    ? "bg-sipentar-blue hover:bg-sipentar-blue-dark shadow-blue-700/30"
+    : "bg-slate-800 hover:bg-slate-900 shadow-slate-800/30";
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -77,10 +67,10 @@ function Login() {
           className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 transform scale-105`}
           style={{ backgroundImage: bgImage }}
         >
-          {/* Blend Overlays: Dark Emerald for Users, Deep Amber/Sepia for Admin */}
-          <div className={`absolute inset-0 transition-colors duration-1000 ${isUser ? 'bg-gradient-to-br from-village-dark-900/80 via-village-emerald-900/60 to-village-dark-900/90 mix-blend-multiply' : 'bg-gradient-to-br from-village-dark-900/80 via-orange-950/60 to-village-dark-900/90 mix-blend-multiply'}`}></div>
+          {/* Blend Overlays: Dark Blue/Slate */}
+          <div className={`absolute inset-0 transition-colors duration-1000 ${isUser ? 'bg-slate-900/60' : 'bg-slate-900/80'}`}></div>
           {/* Dynamic Frosted Base Blur */}
-          <div className={`absolute inset-0 backdrop-blur-[4px] transition-colors duration-1000 ${isUser ? 'bg-village-dark-900/40' : 'bg-village-dark-900/60'}`}></div>
+          <div className={`absolute inset-0 backdrop-blur-[2px] transition-colors duration-1000`}></div>
         </div>
       </div>
 
@@ -89,9 +79,9 @@ function Login() {
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl border border-slate-200 overflow-hidden relative transition-all duration-500 p-6 sm:p-10 w-full">
 
           <div className="text-center mb-6 sm:mb-8">
-            <img src="/logosipentar.png" alt="Logo Sipentar" className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl mx-auto object-cover shadow-md mb-4 sm:mb-5 ring-2 ring-white ring-offset-2 ${isUser ? 'ring-offset-emerald-50' : 'ring-offset-amber-50'}`} />
+            <img src="/logosipentar.png" alt="Logo Sipentar" className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl mx-auto object-cover shadow-md mb-4 sm:mb-5 ring-2 ring-white ring-offset-2 ${isUser ? 'ring-offset-blue-50' : 'ring-offset-slate-50'}`} />
             <h2 className="font-outfit text-2xl font-extrabold tracking-tight text-slate-900">Portal Sipentar</h2>
-            <p className={`text-xs font-bold mt-1.5 uppercase tracking-widest ${isUser ? 'text-sipentar-green-dark' : 'text-amber-600'}`}>
+            <p className={`text-xs font-bold mt-1.5 uppercase tracking-widest ${isUser ? 'text-sipentar-blue' : 'text-slate-600'}`}>
               {isUser ? "Akses Warga Desa" : "Divisi Administrator"}
             </p>
           </div>
@@ -102,7 +92,7 @@ function Login() {
               type="button"
               onClick={() => handleRoleSwitch("user")}
               className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all duration-300 ${isUser
-                ? "bg-white text-sipentar-green-dark shadow-sm ring-1 ring-slate-200"
+                ? "bg-white text-sipentar-blue shadow-sm ring-1 ring-slate-200"
                 : "text-slate-500 hover:text-slate-700"
                 }`}
             >
@@ -112,7 +102,7 @@ function Login() {
               type="button"
               onClick={() => handleRoleSwitch("admin")}
               className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all duration-300 ${!isUser
-                ? "bg-white text-amber-600 shadow-sm ring-1 ring-slate-200"
+                ? "bg-white text-slate-800 shadow-sm ring-1 ring-slate-200"
                 : "text-slate-500 hover:text-slate-700"
                 }`}
             >
@@ -185,13 +175,13 @@ function Login() {
             {isUser ? (
               <p className="text-sm text-slate-600 font-medium">
                 Warga baru mendaftar?{' '}
-                <Link to="/register" className="text-sipentar-green-dark font-bold hover:text-sipentar-green hover:underline transition">
+                <Link to="/register" className="text-sipentar-blue font-bold hover:text-sipentar-blue-dark hover:underline transition">
                   Buat Akses Pelapor
                 </Link>
               </p>
             ) : (
               <p className="text-xs text-slate-500 font-medium tracking-wide">
-                <span className="text-amber-500">⚠️</span> Akses Khusus Aparatur Desa Terdaftar.
+                <span className="text-slate-500">⚠️</span> Akses Khusus Aparatur Desa Terdaftar.
               </p>
             )}
           </div>

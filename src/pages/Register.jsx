@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../services/api";
 
-import villageBg from '../assets/village-bg.png';
-
 function Register() {
     const navigate = useNavigate();
     const [nik, setNik] = useState("");
@@ -34,16 +32,16 @@ function Register() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center relative bg-slate-900 font-sans selection:bg-emerald-200 py-12">
+        <div className="min-h-screen flex items-center justify-center relative bg-slate-900 font-sans selection:bg-blue-200 py-12 overflow-hidden">
             {/* Background Image */}
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat fixed transform scale-105"
-                style={{ backgroundImage: `url(${villageBg})` }}
+                style={{ backgroundImage: `url('/rice_field_bg.png')` }}
             >
-                {/* Premium Emerald/Golden Tint Overlay - darker for contrast */}
-                <div className="absolute inset-0 bg-gradient-to-br from-village-dark-900/80 via-village-emerald-900/60 to-village-dark-900/90 mix-blend-multiply"></div>
+                {/* Premium Dark Tint Overlay */}
+                <div className="absolute inset-0 bg-slate-900/60"></div>
                 {/* Glassmorphism subtle blur layer */}
-                <div className="absolute inset-0 backdrop-blur-[4px] bg-village-dark-900/40"></div>
+                <div className="absolute inset-0 backdrop-blur-[2px]"></div>
             </div>
 
             <div className="relative z-10 w-full max-w-md px-4 py-8 sm:px-4 sm:py-12">
@@ -51,9 +49,9 @@ function Register() {
                 <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl border border-slate-200 p-6 sm:p-10 relative overflow-hidden w-full">
 
                     <div className="text-center mb-6 sm:mb-8 font-jakarta">
-                        <img src="/logosipentar.png" alt="Logo Sipentar" className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl mx-auto object-cover shadow-md mb-4 sm:mb-5 ring-2 ring-white ring-offset-2 ring-offset-emerald-50" />
+                        <img src="/logosipentar.png" alt="Logo Sipentar" className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl mx-auto object-cover shadow-md mb-4 sm:mb-5 ring-2 ring-white ring-offset-2 ring-offset-blue-50" />
                         <h2 className="font-outfit text-2xl font-extrabold text-slate-900 tracking-tight">Registrasi Warga</h2>
-                        <p className="text-xs font-bold text-sipentar-green-dark mt-1.5 uppercase tracking-widest">Aktivasi Identitas Sipentar</p>
+                        <p className="text-xs font-bold text-sipentar-blue mt-1.5 uppercase tracking-widest">Aktivasi Identitas Sipentar</p>
                     </div>
 
                     {error && (
@@ -69,7 +67,7 @@ function Register() {
                             <input
                                 type="number"
                                 placeholder="16 Digit NIK KTP Resmi..."
-                                className="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-4 focus:ring-sipentar-green/20 focus:border-emerald-500 text-slate-900 placeholder-slate-400 outline-none transition bg-white shadow-sm font-medium"
+                                className="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-4 focus:ring-sipentar-blue/20 focus:border-sipentar-blue text-slate-900 placeholder-slate-400 outline-none transition bg-white shadow-sm font-medium"
                                 value={nik}
                                 onChange={(e) => setNik(e.target.value)}
                                 required
@@ -81,7 +79,7 @@ function Register() {
                             <input
                                 type="text"
                                 placeholder="Misal: Bapak Ahmad"
-                                className="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-4 focus:ring-sipentar-green/20 focus:border-emerald-500 text-slate-900 placeholder-slate-400 outline-none transition bg-white shadow-sm font-medium"
+                                className="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-4 focus:ring-sipentar-blue/20 focus:border-sipentar-blue text-slate-900 placeholder-slate-400 outline-none transition bg-white shadow-sm font-medium"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 required
@@ -93,7 +91,7 @@ function Register() {
                             <input
                                 type="email"
                                 placeholder="ahmad@domain.com"
-                                className="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-4 focus:ring-sipentar-green/20 focus:border-emerald-500 text-slate-900 placeholder-slate-400 outline-none transition bg-white shadow-sm font-medium"
+                                className="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-4 focus:ring-sipentar-blue/20 focus:border-sipentar-blue text-slate-900 placeholder-slate-400 outline-none transition bg-white shadow-sm font-medium"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
@@ -105,7 +103,7 @@ function Register() {
                             <input
                                 type="password"
                                 placeholder="••••••••"
-                                className="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-4 focus:ring-sipentar-green/20 focus:border-emerald-500 text-slate-900 placeholder-slate-400 outline-none transition bg-white shadow-sm font-medium"
+                                className="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-4 focus:ring-sipentar-blue/20 focus:border-sipentar-blue text-slate-900 placeholder-slate-400 outline-none transition bg-white shadow-sm font-medium"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
@@ -115,7 +113,7 @@ function Register() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full mt-6 bg-sipentar-green-dark hover:bg-emerald-800 text-white font-bold py-3.5 rounded-xl transition-all shadow-md shadow-emerald-700/30 disabled:opacity-50 transform active:scale-95"
+                            className="w-full mt-6 bg-sipentar-blue hover:bg-sipentar-blue-dark text-white font-bold py-3.5 rounded-xl transition-all shadow-md shadow-blue-700/30 disabled:opacity-50 transform active:scale-95"
                         >
                             {loading ? "Memproses Data..." : "Aktivasi Akun Sekarang"}
                         </button>
@@ -124,7 +122,7 @@ function Register() {
                     <div className="mt-8 pt-6 border-t border-slate-200 text-center">
                         <p className="text-sm text-slate-600 font-medium">
                             Sudah punya identitas?{' '}
-                            <Link to="/login" className="text-sipentar-green-dark font-bold hover:text-sipentar-green hover:underline transition">
+                            <Link to="/login" className="text-sipentar-blue font-bold hover:text-sipentar-blue-dark hover:underline transition">
                                 Masuk di sini
                             </Link>
                         </p>
