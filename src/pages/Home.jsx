@@ -82,10 +82,10 @@ function Home() {
       </div>
 
       {/* 2. HERO SECTION - Clean Typography Focused */}
-      <section id="beranda" className="relative pt-32 pb-24 md:pt-48 md:pb-32 flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/rice_field_bg.png')" }}>
+      <section id="beranda" className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat pt-20" style={{ backgroundImage: "url('/rice_field_bg.png')" }}>
         <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>
-        <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center">
-          <img src="/logosipentar.png" alt="Logo" className="w-24 h-24 mb-6 shadow-lg rounded-2xl border-4 border-white/20 bg-white/10 backdrop-blur-md p-2" />
+        <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center mt-10">
+          <img src="/logosipentar.png" alt="Logo" className="w-24 h-24 mb-6 drop-shadow-2xl" />
           
           {/* Desktop Headline */}
           <h1 className="hidden md:block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.15] mb-6">
@@ -117,8 +117,8 @@ function Home() {
           </div>
 
           {/* Desktop Hero Image - Mockup placeholder */}
-          <div className="hidden md:flex w-full max-w-4xl mx-auto bg-white/10 backdrop-blur-lg rounded-xl overflow-hidden shadow-2xl border border-white/20 aspect-video relative items-center justify-center mt-8">
-             <img src="/logosipentar.png" alt="Logo Sipentar" className="w-48 h-48 opacity-80 drop-shadow-2xl" />
+          <div className="hidden md:flex w-full max-w-4xl mx-auto relative items-center justify-center mt-16 mb-8">
+             <img src="/logosipentar.png" alt="Logo Sipentar" className="w-64 h-64 drop-shadow-2xl opacity-90" />
           </div>
         </div>
       </section>
