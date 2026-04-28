@@ -82,43 +82,43 @@ function Home() {
       </div>
 
       {/* 2. HERO SECTION - Clean Typography Focused */}
-      <section id="beranda" className="relative pt-32 pb-24 md:pt-48 md:pb-32 flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 bg-slate-50">
+      <section id="beranda" className="relative pt-32 pb-24 md:pt-48 md:pb-32 flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/rice_field_bg.png')" }}>
+        <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>
         <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center">
+          <img src="/logosipentar.png" alt="Logo" className="w-24 h-24 mb-6 shadow-lg rounded-2xl border-4 border-white/20 bg-white/10 backdrop-blur-md p-2" />
           
           {/* Desktop Headline */}
-          <h1 className="hidden md:block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.15] mb-6">
-            Masa Depan Tata Kelola <br/><span className="text-sipentar-blue">Pemerintahan Desa.</span>
+          <h1 className="hidden md:block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.15] mb-6">
+            Masa Depan Tata Kelola <br/><span className="text-blue-400 drop-shadow-md">Pemerintahan Desa.</span>
           </h1>
 
           {/* Mobile Headline */}
-          <h1 className="md:hidden text-4xl font-black text-slate-900 tracking-tight leading-tight mb-6">
-            Tata Kelola Desa Berbasis <span className="text-sipentar-blue">Data & Transparansi.</span>
+          <h1 className="md:hidden text-4xl font-black text-white tracking-tight leading-tight mb-6">
+            Tata Kelola Desa Berbasis <span className="text-blue-400 drop-shadow-md">Data & Transparansi.</span>
           </h1>
 
-          <p className="text-base sm:text-lg lg:text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl font-medium">
+          <p className="text-base sm:text-lg lg:text-xl text-slate-200 mb-10 leading-relaxed max-w-2xl font-medium drop-shadow-sm">
             Platform digital terintegrasi untuk pelayanan publik, visualisasi data, dan manajemen administrasi desa yang efisien.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-16">
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-16 relative z-10">
             <Link to="/register" className="w-full sm:w-auto">
-              <button className="w-full px-8 py-4 bg-sipentar-blue hover:bg-sipentar-blue-dark text-white text-base font-bold rounded-lg transition-colors flex items-center justify-center gap-2 shadow-sm">
+              <button className="w-full px-8 py-4 bg-sipentar-blue hover:bg-sipentar-blue-dark text-white text-base font-bold rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg border border-transparent hover:border-blue-400">
                 <span className="hidden md:inline">Mulai Sekarang</span>
                 <span className="md:hidden">Buat Laporan Baru</span>
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
               </button>
             </Link>
             <Link to="/login" className="w-full sm:w-auto">
-              <button className="w-full px-8 py-4 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 text-base font-bold rounded-lg transition-colors flex items-center justify-center gap-2 shadow-sm">
+              <button className="w-full px-8 py-4 bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-md text-base font-bold rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg">
                 Akses Dasbor Warga
               </button>
             </Link>
           </div>
 
           {/* Desktop Hero Image - Mockup placeholder */}
-          <div className="hidden md:block w-full max-w-4xl mx-auto bg-slate-200 rounded-xl overflow-hidden shadow-2xl border border-slate-300 aspect-video relative">
-             <div className="absolute inset-0 flex items-center justify-center text-slate-400 bg-slate-800">
-               <span className="font-bold text-lg tracking-widest">[GAMBAR GEDUNG PEMERINTAHAN MODERN]</span>
-             </div>
+          <div className="hidden md:flex w-full max-w-4xl mx-auto bg-white/10 backdrop-blur-lg rounded-xl overflow-hidden shadow-2xl border border-white/20 aspect-video relative items-center justify-center mt-8">
+             <img src="/logosipentar.png" alt="Logo Sipentar" className="w-48 h-48 opacity-80 drop-shadow-2xl" />
           </div>
         </div>
       </section>
