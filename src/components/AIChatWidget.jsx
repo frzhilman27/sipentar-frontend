@@ -47,15 +47,26 @@ const AIChatWidget = () => {
         // Note: we can send history here if we want the AI to remember, but for now we keep it simple
       });
 
+      const reply = response.data?.reply;
+      if (!reply) {
+        throw new Error('Jawaban AI kosong');
+      }
       setMessages([
         ...newMessages,
-        { id: Date.now() + 1, text: response.data.reply, isUser: false }
+        { id: Date.now() + 1, text: reply, isUser: false }
       ]);
     } catch (error) {
-      console.error('Chat error:', error);
+      console.error('Chat error:', error?.response?.data || error);
+      const status = error.response?.status;
+      let errorText = error.response?.data?.error
+        || error.response?.data?.message
+        || 'Maaf, sistem AI sedang sibuk atau ada gangguan jaringan. Silakan coba lagi nanti.';
+      if (status === 401) {
+        errorText = 'Sesi Anda habis. Silakan logout lalu login kembali untuk menggunakan SipentarBot.';
+      }
       setMessages([
         ...newMessages,
-        { id: Date.now() + 1, text: 'Maaf, sistem AI sedang sibuk atau ada gangguan jaringan. Silakan coba lagi nanti.', isUser: false, isError: true }
+        { id: Date.now() + 1, text: errorText, isUser: false, isError: true }
       ]);
     } finally {
       setIsLoading(false);
