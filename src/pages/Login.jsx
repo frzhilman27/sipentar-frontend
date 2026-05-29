@@ -11,12 +11,20 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    const trimmedNik = identifier.trim();
+    const trimmedPassword = password.trim();
+
+    if (!trimmedNik || !trimmedPassword) {
+      setError("NIK dan kata sandi wajib diisi.");
+      return;
+    }
+
     setLoading(true);
     setError("");
     try {
       const res = await api.post("/auth/login", {
-        identifier,
-        password,
+        identifier: trimmedNik,
+        password: trimmedPassword,
         role_target: "user"
       });
 

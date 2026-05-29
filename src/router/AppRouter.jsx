@@ -31,8 +31,8 @@ function AppRouter() {
           <Route path="/register" element={<Register />} />
 
           {/* Protected Dashboard Pages — Warga Only */}
-          <Route path="/user/dashboard" element={<ProtectedRoute><UserDashboard /></ProtectedRoute>} />
-          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path="/user/dashboard" element={<ProtectedRoute roleRequired="user"><UserDashboard /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute roleRequired="user"><Profile /></ProtectedRoute>} />
 
           {/* 404 — Catch-all */}
           <Route path="*" element={<NotFound />} />

@@ -7,7 +7,10 @@ function generateIdempotencyKey() {
   return `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 }
 
-function Laporan({ onReportAdded }) {
+const MAX_MEDIA_FILES = 5;
+const MIN_ISI_LENGTH = 10;
+
+function Laporan({ onReportAdded, isVerified = false, verificationLoading = false }) {
   const [jenisLaporan, setJenisLaporan] = useState("Jalan Rusak");
   const [rt, setRt] = useState("01");
   const [rw, setRw] = useState("01");
@@ -56,8 +59,34 @@ function Laporan({ onReportAdded }) {
       setMedia(prev => prev.filter((_, i) => i !== index));
   };
 
+  const handleMediaChange = (fileList) => {
+    const files = Array.from(fileList || []);
+    const allowedTypes = /^(image\/(jpeg|png|webp)|video\/(mp4|webm|ogg))$/i;
+    const valid = files.filter(f => allowedTypes.test(f.type));
+    if (valid.length < files.length) {
+      alert("Format file tidak didukung. Gunakan JPG, PNG, WEBP, MP4, WEBM, atau OGG.");
+    }
+    if (valid.length > MAX_MEDIA_FILES) {
+      alert(`Maksimal ${MAX_MEDIA_FILES} file per laporan.`);
+      setMedia(valid.slice(0, MAX_MEDIA_FILES));
+      return;
+    }
+    setMedia(valid);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!verificationLoading && !isVerified) {
+      alert("Akun Anda belum diverifikasi oleh Admin. Tidak dapat membuat laporan.");
+      return;
+    }
+
+    const trimmedIsi = isi.trim();
+    if (!trimmedIsi || trimmedIsi.length < MIN_ISI_LENGTH) {
+      alert(`Rincian kronologi wajib diisi minimal ${MIN_ISI_LENGTH} karakter.`);
+      return;
+    }
 
     // Guard: prevent double-click submissions
     if (isSubmittingRef.current || loading || cooldown > 0) return;
@@ -88,6 +117,12 @@ function Laporan({ onReportAdded }) {
               return;
           }
         } catch (err) {
+          if (err.response?.status === 503 || err.response?.data?.isValid === false) {
+            alert(err.response?.data?.error || "Validasi foto gagal. Silakan coba lagi.");
+            setLoading(false);
+            isSubmittingRef.current = false;
+            return;
+          }
           console.warn("AI Validation failed, proceeding anyway", err);
         }
       }
@@ -116,11 +151,15 @@ function Laporan({ onReportAdded }) {
     } catch (err) {
       const status = err.response?.status;
       const message = err.response?.data?.error;
-      if (status === 409) {
+      if (status === 403) {
+        alert("⚠️ " + (message || "Akun Anda belum diverifikasi oleh Admin. Tidak dapat membuat laporan."));
+      } else if (status === 409) {
         alert("⚠️ " + (message || "Laporan serupa sudah pernah dikirimkan. Silakan cek daftar laporan Anda."));
       } else if (status === 429) {
         alert("⏳ " + (message || "Harap tunggu beberapa menit sebelum mengirim laporan serupa."));
         startCooldown(60); // Longer cooldown on rate-limit
+      } else if (status === 400) {
+        alert("⚠️ " + (message || "Data laporan tidak valid."));
       } else {
         alert(message || "Gagal kirim laporan");
       }
@@ -129,6 +168,22 @@ function Laporan({ onReportAdded }) {
       isSubmittingRef.current = false;
     }
   };
+
+  if (!verificationLoading && !isVerified) {
+    return (
+      <div className="bg-white rounded-2xl shadow-md border border-amber-200 p-8 sm:p-10 text-center">
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-50 flex items-center justify-center text-amber-600">
+          <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+        </div>
+        <h3 className="text-xl font-bold text-slate-900 mb-2">Form Pengaduan Terkunci</h3>
+        <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+          Akun Anda belum diverifikasi oleh perangkat desa. Setelah diverifikasi, Anda dapat mengirim laporan infrastruktur melalui formulir ini.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white rounded-2xl shadow-md border border-slate-200 p-8 sm:p-10 relative overflow-hidden transition-all duration-300">
@@ -196,6 +251,7 @@ function Laporan({ onReportAdded }) {
             value={isi}
             onChange={(e) => setIsi(e.target.value)}
             required
+            minLength={MIN_ISI_LENGTH}
             className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-sipentar-blue/30 focus:border-blue-500 focus:bg-white outline-none transition-all resize-y text-slate-900 font-medium leading-relaxed placeholder-slate-400"
           ></textarea>
         </div>
@@ -216,13 +272,13 @@ function Laporan({ onReportAdded }) {
                     <p className="text-sm font-bold text-slate-700 mb-1 transition-colors">
                       <span className="text-sipentar-blue cursor-pointer group-hover/upload:underline">Pilih Foto/Video</span> atau seret ke sini
                     </p>
-                    <p className="text-[10px] font-bold tracking-wider uppercase text-slate-500 mt-1">Bisa lebih dari 1 file (JPG, PNG, WEBP, MP4, WEBM)</p>
+                    <p className="text-[10px] font-bold tracking-wider uppercase text-slate-500 mt-1">Maks. {MAX_MEDIA_FILES} file (JPG, PNG, WEBP, MP4, WEBM)</p>
                   </div>
-                  <input type="file" multiple className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm,video/ogg" onChange={(e) => setMedia(Array.from(e.target.files))} />
+                  <input type="file" multiple className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm,video/ogg" onChange={(e) => handleMediaChange(e.target.files)} />
                 </>
               ) : (
                 <div className="w-full z-10 flex flex-col items-center">
-                  <input type="file" multiple className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm,video/ogg" onChange={(e) => setMedia(Array.from(e.target.files))} />
+                  <input type="file" multiple className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm,video/ogg" onChange={(e) => handleMediaChange(e.target.files)} />
                   
                   <div className="flex flex-wrap justify-center gap-4 mb-4 relative z-30">
                     {previewUrls.map((url, i) => (

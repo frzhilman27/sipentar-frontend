@@ -24,8 +24,16 @@ function Register() {
 
     const handleRegister = async (e) => {
         e.preventDefault();
-        if (nik.length !== 16) {
+        if (!nik.trim() || !name.trim() || !email.trim() || !password) {
+            setError("NIK, nama, email, dan password wajib diisi.");
+            return;
+        }
+        if (nik.length !== 16 || !/^\d{16}$/.test(nik)) {
             setError("NIK harus persis 16 digit angka.");
+            return;
+        }
+        if (password.length < 6) {
+            setError("Password minimal 6 karakter.");
             return;
         }
 

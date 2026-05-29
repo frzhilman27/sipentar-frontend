@@ -145,7 +145,9 @@ function UserDashboard() {
       setHistoryData(res.data);
     } catch (err) {
       console.error(err);
-      alert("Gagal memuat riwayat laporan.");
+      const msg = err.response?.data?.error || "Gagal memuat riwayat laporan.";
+      alert(msg);
+      if (err.response?.status === 403) setShowHistoryModal(false);
     } finally {
       setHistoryLoading(false);
     }
@@ -157,6 +159,28 @@ function UserDashboard() {
   };
 
   const userReports = reports; // Backend now returns only the logged-in user's reports
+  const isVerified = userProfileData?.is_verified === true;
+  const verificationLoading = userProfileData === null;
+
+  const VerificationBanner = () => {
+    if (verificationLoading || isVerified) return null;
+    return (
+      <div className="mb-6 rounded-xl border border-amber-300 bg-amber-50 p-4 sm:p-5 flex gap-4 items-start shadow-sm">
+        <div className="shrink-0 w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center">
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+        </div>
+        <div>
+          <p className="font-bold text-amber-900 text-sm sm:text-base">Akun Belum Diverifikasi Admin</p>
+          <p className="text-xs sm:text-sm text-amber-800 mt-1 leading-relaxed">
+            Anda belum dapat mengirim laporan pengaduan. Silakan datang ke balai desa atau tunggu admin memverifikasi akun Anda melalui menu Kelola Warga.
+          </p>
+        </div>
+      </div>
+    );
+  };
+
   const pendingCount = userReports.filter(r => r.status === 'Menunggu').length;
   const processCount = userReports.filter(r => r.status === 'Diproses').length;
   const completedCount = userReports.filter(r => r.status === 'Selesai').length;
@@ -238,6 +262,8 @@ function UserDashboard() {
       )}
 
       <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+
+        <VerificationBanner />
         
         {activeMainTab === 'beranda' && (
           <div className="space-y-6 md:space-y-8">
@@ -249,7 +275,7 @@ function UserDashboard() {
                <div className="relative z-10">
                  <h2 className="text-2xl font-black mb-2">Halo, {name.split(' ')[0]}!</h2>
                  <p className="text-sm text-blue-100 mb-6 font-medium">Ada layanan yang bisa kami bantu hari ini?</p>
-                 <button onClick={() => setActiveMainTab('pengaduan')} className="bg-white text-sipentar-blue px-5 py-2.5 rounded-lg font-bold text-sm shadow-sm inline-flex items-center gap-2">
+                 <button onClick={() => setActiveMainTab('pengaduan')} disabled={!isVerified && !verificationLoading} className="bg-white text-sipentar-blue px-5 py-2.5 rounded-lg font-bold text-sm shadow-sm inline-flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
                    Buat Laporan Baru
                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" /></svg>
                  </button>
@@ -419,7 +445,11 @@ function UserDashboard() {
 
         {activeMainTab === 'pengaduan' && role === 'user' && (
           <div className="max-w-3xl mx-auto">
-            <Laporan onReportAdded={() => { fetchReports(); setActiveMainTab('histori'); }} />
+            <Laporan
+              isVerified={isVerified}
+              verificationLoading={verificationLoading}
+              onReportAdded={() => { fetchReports(); setActiveMainTab('histori'); }}
+            />
           </div>
         )}
 
