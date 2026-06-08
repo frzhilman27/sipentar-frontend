@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import Laporan from "./Laporan";
+import LayananSurat from "./LayananSurat";
 import Profile from "./Profile";
 import AIChatWidget from "../components/AIChatWidget";
 import DashboardLayout from "../layouts/DashboardLayout";
@@ -15,6 +16,7 @@ function UserDashboard() {
   const [activeMainTab, setActiveMainTab] = useState("beranda");
   const notifRef = useRef(null);
   const [userProfileData, setUserProfileData] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
   
   // History Modal States
   const [showHistoryModal, setShowHistoryModal] = useState(false);
@@ -186,6 +188,12 @@ function UserDashboard() {
   const completedCount = userReports.filter(r => r.status === 'Selesai').length;
   const activeReports = userReports.filter(r => r.status === 'Diproses' || r.status === 'Selesai');
 
+  const filteredReports = userReports.filter(r => 
+    r.judul?.toLowerCase().includes((searchQuery || '').toLowerCase()) ||
+    r.isi?.toLowerCase().includes((searchQuery || '').toLowerCase()) ||
+    r.status?.toLowerCase().includes((searchQuery || '').toLowerCase())
+  );
+
   return (
     <DashboardLayout
       role={role}
@@ -200,6 +208,8 @@ function UserDashboard() {
       handleNotificationClick={handleNotificationClick}
       logout={logout}
       pendingReportsCount={0}
+      searchQuery={searchQuery}
+      onSearchChange={setSearchQuery}
     >
       {/* Image Modal */}
       {selectedImage && (
@@ -386,7 +396,7 @@ function UserDashboard() {
             </div>
             
             <div className="flex flex-col gap-4">
-               {userReports.length === 0 ? (
+               {filteredReports.length === 0 ? (
                   <div className="bg-white rounded-xl border border-slate-100 p-12 flex flex-col items-center justify-center text-center shadow-sm">
                     <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
                       <svg className="w-8 h-8 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
@@ -395,7 +405,7 @@ function UserDashboard() {
                     <p className="text-slate-500 text-sm max-w-sm">Anda belum pernah membuat laporan. Laporan yang Anda buat akan muncul di sini.</p>
                   </div>
                ) : (
-                  userReports.map(r => (
+                  filteredReports.map(r => (
                     <div key={r.id} id={`report-${r.id}`} className="bg-white border border-slate-100 p-5 flex flex-col sm:flex-row gap-4 sm:gap-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
                       <div className="flex-1">
                         <div className="flex justify-between items-start mb-2 gap-4">
@@ -455,6 +465,15 @@ function UserDashboard() {
 
         {activeMainTab === 'profil' && (
           <Profile isEmbedded={true} />
+        )}
+
+        {activeMainTab === 'layanan_surat' && role === 'user' && (
+          <div className="max-w-3xl mx-auto">
+            <LayananSurat
+              isVerified={isVerified}
+              verificationLoading={verificationLoading}
+            />
+          </div>
         )}
       </div>
 

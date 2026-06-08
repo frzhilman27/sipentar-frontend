@@ -55,8 +55,11 @@ function Home() {
     totalWarga: "...",
     laporanSelesai: "...",
     layananAktif: "...",
-    rtRw: "4/24"
+    suratSelesai: "0",
+    suratAktif: "0",
+    rtRw: "27/9"
   });
+  const [pengumuman, setPengumuman] = useState([]);
 
   // Handle scroll for navbar shadow
   useEffect(() => {
@@ -67,17 +70,19 @@ function Home() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Fetch stats from backend
+  // Fetch stats and pengumuman from backend
   useEffect(() => {
-    const fetchStats = async () => {
+    const fetchData = async () => {
       try {
-        const response = await api.get("/public/stats");
-        setStats(response.data);
+        const resStats = await api.get("/public/stats");
+        setStats(resStats.data);
+        const resPengumuman = await api.get("/public/pengumuman");
+        setPengumuman(resPengumuman.data);
       } catch (err) {
-        console.error("Gagal mengambil data statistik:", err);
+        console.error("Gagal mengambil data publik:", err);
       }
     };
-    fetchStats();
+    fetchData();
   }, []);
 
   const toggleFaq = (index) => {
@@ -203,7 +208,7 @@ function Home() {
             {[
               { label: "Total Warga", value: stats.totalWarga, icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" },
               { label: "Laporan Selesai", value: stats.laporanSelesai, icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" },
-              { label: "Layanan Aktif", value: stats.layananAktif, icon: "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" },
+              { label: "Surat & Layanan", value: stats.suratAktif, icon: "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" },
               { label: "RT/RW", value: stats.rtRw, icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" },
             ].map((stat, idx) => (
               <div key={idx} className="bg-white p-6 rounded-2xl shadow-soft-sm border border-slate-100 flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300">
@@ -324,29 +329,30 @@ function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { tag: "Pengumuman", date: "Baru", title: "Sipentar Hadir untuk Layanan Pelaporan Infrastruktur Desa", image: "/logosipentar.png" },
-              { tag: "Kegiatan", date: "Informasi", title: "Kerja Bakti Rutin Perbaikan Saluran Air Desa", image: "/rice_field_bg.png" },
-              { tag: "Pemberitahuan", date: "Info", title: "Pastikan Data NIK dan KK Anda Sudah Terdaftar di Sistem", image: "/logosipentar.png" }
-            ].map((news, idx) => (
-              <AnimatedSection key={idx} delay={`delay-[${idx * 100}ms]`}>
+            {pengumuman.length > 0 ? pengumuman.map((news, idx) => (
+              <AnimatedSection key={news.id} delay={`delay-[${idx * 100}ms]`}>
                 <div className="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-soft-sm hover:shadow-lg transition-all group cursor-pointer h-full flex flex-col">
                   <div className="h-48 overflow-hidden bg-slate-100 relative">
-                    <img src={news.image} alt={news.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src="/logosipentar.png" alt={news.judul} className="w-full h-full object-contain p-8 group-hover:scale-105 transition-transform duration-500 bg-sipentar-blue/5" />
                     <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-md text-xs font-bold text-sipentar-blue shadow-sm">
-                      {news.tag}
+                      {news.kategori}
                     </div>
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
-                    <span className="text-xs font-medium text-slate-500 mb-2 block">{news.date}</span>
-                    <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-sipentar-blue transition-colors line-clamp-2">{news.title}</h3>
+                    <span className="text-xs font-medium text-slate-500 mb-2 block">
+                      {new Date(news.created_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
+                    </span>
+                    <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-sipentar-blue transition-colors line-clamp-2">{news.judul}</h3>
+                    <p className="text-sm text-slate-600 line-clamp-2 mb-4">{news.isi}</p>
                     <div className="mt-auto pt-4 border-t border-slate-100 flex items-center text-sm font-bold text-sipentar-blue">
                       Baca Selengkapnya <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
                     </div>
                   </div>
                 </div>
               </AnimatedSection>
-            ))}
+            )) : (
+              <div className="col-span-3 text-center py-10 text-slate-500">Belum ada pengumuman terbaru.</div>
+            )}
           </div>
           <button className="md:hidden mt-8 w-full py-3 flex items-center justify-center gap-2 text-sipentar-blue bg-sipentar-blue-50 rounded-lg font-bold hover:bg-sipentar-blue-100 transition-colors">
             Lihat Semua Berita
@@ -425,15 +431,15 @@ function Home() {
               <ul className="space-y-3 text-sm font-medium text-slate-400">
                 <li className="flex items-start gap-3">
                   <svg className="w-5 h-5 text-slate-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                  <span>Kantor Balai Desa,<br/>Kecamatan, Kabupaten</span>
+                  <span>Kantor Balai Desa Lamaran Tarung,<br/>Kec. Cantigi, Kab. Indramayu</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <svg className="w-5 h-5 text-slate-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                  <span className="text-sipentar-blue-light font-bold">admin@desa.id</span>
+                  <span className="text-sipentar-blue-light font-bold">pemdes.lamarantarung@gmail.com</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <svg className="w-5 h-5 text-slate-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
-                  <span>(021) 1234-5678</span>
+                  <span>0812-3456-7890 (WA Admin)</span>
                 </li>
               </ul>
             </div>
@@ -444,9 +450,9 @@ function Home() {
               &copy; {new Date().getFullYear()} Pemerintah Desa. Seluruh Hak Cipta Dilindungi.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="hover:text-white transition-colors">Kebijakan Privasi</a>
-              <a href="#" className="hover:text-white transition-colors">Syarat Ketentuan</a>
-              <span className="pl-4 border-l border-slate-700">Sipentar Portal v3.5</span>
+              <span className="cursor-pointer hover:text-white transition-colors" onClick={() => alert("Halaman Kebijakan Privasi sedang dalam pengembangan.")}>Kebijakan Privasi</span>
+              <span className="cursor-pointer hover:text-white transition-colors" onClick={() => alert("Halaman Syarat Ketentuan sedang dalam pengembangan.")}>Syarat Ketentuan</span>
+              <span className="pl-4 border-l border-slate-700">Sipentar Portal v4.0</span>
             </div>
           </div>
         </div>
