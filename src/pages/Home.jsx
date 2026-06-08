@@ -450,8 +450,8 @@ function Home() {
               &copy; {new Date().getFullYear()} Pemerintah Desa. Seluruh Hak Cipta Dilindungi.
             </p>
             <div className="flex gap-4">
-              <span className="cursor-pointer hover:text-white transition-colors" onClick={() => alert("Halaman Kebijakan Privasi sedang dalam pengembangan.")}>Kebijakan Privasi</span>
-              <span className="cursor-pointer hover:text-white transition-colors" onClick={() => alert("Halaman Syarat Ketentuan sedang dalam pengembangan.")}>Syarat Ketentuan</span>
+              <Link to="/privacy" className="cursor-pointer hover:text-white transition-colors">Kebijakan Privasi</Link>
+              <Link to="/terms" className="cursor-pointer hover:text-white transition-colors">Syarat Ketentuan</Link>
               <span className="pl-4 border-l border-slate-700">Sipentar Portal v4.0</span>
             </div>
           </div>

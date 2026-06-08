@@ -9,6 +9,8 @@ const Login = lazy(() => import("../pages/Login"));
 const Register = lazy(() => import("../pages/Register"));
 const UserDashboard = lazy(() => import("../pages/UserDashboard"));
 const Profile = lazy(() => import("../pages/Profile"));
+const PrivacyPolicy = lazy(() => import("../pages/PrivacyPolicy"));
+const Terms = lazy(() => import("../pages/Terms"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 
 // Loading fallback component
@@ -29,6 +31,8 @@ function AppRouter() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<Terms />} />
 
           {/* Protected Dashboard Pages — Warga Only */}
           <Route path="/user/dashboard" element={<ProtectedRoute roleRequired="user"><UserDashboard /></ProtectedRoute>} />
